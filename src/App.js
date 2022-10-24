@@ -136,7 +136,7 @@ function App() {
     
     //arr.push({x: second.x, y: second.y, state: !second.scroll ? 'y' : 'x'});
     
-    console.log(arr);
+    //console.log(arr);
     return arr;
   }
 
