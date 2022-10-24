@@ -94,6 +94,8 @@ function App() {
     let curY = first.y;
 
     arr.push({x: curX, y: curY, state: !first.scroll ? 'y' : 'x'});
+    
+
 
     if(deltaX === 0 ){ 
       //console.log('its x')
@@ -134,7 +136,7 @@ function App() {
     
     //arr.push({x: second.x, y: second.y, state: !second.scroll ? 'y' : 'x'});
     
-    //console.log(arr);
+    console.log(arr);
     return arr;
   }
 
