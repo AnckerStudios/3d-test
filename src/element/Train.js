@@ -10,21 +10,43 @@ function Train({pos = [0,0,0], mtrx=[]}) {
   let startCell = {x:0,y:0};
   let startPos = new Vector3(0,0,0);
   let curPos = new Vector2(0,0);
-  let curCell = new Vector3(0,0,0);
+  let curCell = {x:0,y:0};
+  let nextCell = {x:0,y:0};
   let targetPos = new Vector3(0,0,0);
   let targetCell = {x:0,y:0};
-  let dir = {x:0,y:0}
+  let dir = {x:1,y:0}
   let iteration = 0;
   let isStopped = false;
+  let newX, newY;
   useFrame((state, delta) => {
     if(!isStopped){
+      console.log('gooo')
       if(iteration === 0){
+        console.log('1')
 
-      }else{
+        curCell.x = nextCell.x;
+        curCell.y = nextCell.y;
+
+        getNextDir(curCell.x, curCell.y);
+
+        newX = curCell.x + dir.x;
+        newY = curCell.y + dir.y;
+        console.log("newXY "+ newX + ' '+ newY)
+        if(newX < 0 || newX > mtrx.length-1 || newY < 0 || newY > mtrx[0].length-1){
+          console.log('aaaaaaaaaaaaaaaaaa')
+          isStopped = true;
+        }else{
+          console.log('2')
+          nextCell = {x:newX, y:newY};
+          iteration = 20;
+        }
         
+      }else{
+        ref.current.position.x += speed * dir.x;
+        ref.current.position.y += speed * dir.y;
+        ref.current.rotation.z += speed * dir.y
+        iteration--;
       }
-      ref.current.position.x += speed * dir.x;
-      ref.current.position.y += speed * dir.y;
     }
     })
 
@@ -33,41 +55,52 @@ function Train({pos = [0,0,0], mtrx=[]}) {
 //     console.log(vector);
 //     return vector;
 //   }
-  function getNextCell(x,y){
-    let newX = x+(direction[0] ? 1 : -1);
-    let newY = y+(direction[1] ? 1 : -1);
-
-    if(newX < 0 || newX > mtrx.length || newY < 0 || newY > mtrx[0].length){
-      isStopped = true;
-      return mtrx[x][y];
+  function getNextDir(x,y){
+    console.log('mtrx[x][y].state')
+    let state;
+    console.log(mtrx[x][y])
+    for(let s in mtrx[x][y].state){
+      state = s;
     }
-    return mtrx[newX][y];
-    switch(mtrx[x][y].state){
+    switch(state){
       case 'x':
-        return [x+(direction[0] ? 1 : -1),0]
+        dir = {x: dir.x === 1 ? 1 : -1,y: 0}
+        break;
       case 'y':
-        return [0,y+(direction[1] ? 1 : -1)]
+        dir = {x: 0,y: dir.y === 1 ? 1 : -1}
+        break;
       case 'dx':
-         
       case 'dy':
-          
-      case 'rx_top':
-         
-      case 'rx_down':
-          
-      case 'rx_left':
-          
-      case 'rx_right':
-          
-      case 'ry_top':
-          
-      case 'ry_down':
-          
-      case 'ry_left':
-          
-      case 'ry_right':
           break;
+      case 'rx_top':
+        dir = {x: 1,y: 1}
+        break;
+      case 'rx_down':
+        dir = {x: 1,y: -1}
+        break;
+      case 'rx_left':
+        dir = {x: -1,y: -1}
+        break;
+      case 'rx_right':
+        dir = {x: 1,y: 1}
+        break;
+      case 'ry_top':
+        dir = {x: 1,y: -1}
+        break;
+      case 'ry_down':
+        dir = {x: 1,y: -1}
+        break;
+      case 'ry_left':
+        dir = {x: 0,y: 1}
+        break;
+      case 'ry_right':
+        dir = {x: 1,y: -1}
+        break;
+      default:
+        dir = {x:0,y:0}
+        break;
   }
+
 }
   return (
     <group dispose={null}>

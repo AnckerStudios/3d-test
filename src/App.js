@@ -196,7 +196,7 @@ function App() {
             <pointLight position={[-3,0,2]}/>
             <Preview mtrx={previewMtrx} objSet={objSettings} prev={true}/>
             <Preview mtrx={fieldMtrx} objSet={objSettings} prev={false}/>
-            {trainGo && <Train />}
+            {trainGo && <Train mtrx={fieldMtrx} />}
             {/* {<Ctest mtrx={changeArr} objSettings={objSettings} prevMtrx={previewMtrx}/>} */}
             
             {fieldMtrx.map(cx => (cx.map(cy => (
