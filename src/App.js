@@ -93,7 +93,11 @@ function App() {
     let curX = first.x;
     let curY = first.y;
 
-    if(deltaX === 0){
+    arr.push({x: curX, y: curY, state: !first.scroll ? 'y' : 'x'});
+    
+
+
+    if(deltaX === 0 ){ 
       //console.log('its x')
       if(!first.scroll && !second.scroll){
         console.log('its ++x')
@@ -104,7 +108,7 @@ function App() {
         }
         arr.push({x: curX, y: curY, state: 'y'});
       }
-    }else if(deltaY === 0){
+    }else if(deltaY === 0 ){ 
       //console.log('its y')
 
       if(first.scroll && second.scroll){
@@ -129,6 +133,10 @@ function App() {
     }
     arr.push({x: curX, y: curY, state: testSwich(-ix, -iy, second.scroll)});
   }
+    
+    //arr.push({x: second.x, y: second.y, state: !second.scroll ? 'y' : 'x'});
+    
+    //console.log(arr);
     return arr;
   }
 
@@ -148,6 +156,7 @@ function App() {
   function editMtrx(mtrx, change){
     let copy = Object.assign([], mtrx);
     for(let item of change){
+      if((item.x>=0 && item.y>=0) && (item.x<objSettings.x && item.y<objSettings.y))
       copy[item.x][item.y].state[item.state] = true;
     }
     //console.log("dsdasdasdasdasdasdada")
