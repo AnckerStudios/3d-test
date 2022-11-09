@@ -48,7 +48,7 @@ function Cell(props) {
             {/* <RailCell model={model}/> */}
             {<mesh position={[model.x,model.y,0]}  onPointerEnter={() => mouseEnter()} onPointerLeave={() => mouseLeave()}>
                 <planeGeometry/>
-                <meshLambertMaterial attach="material" color={model.state ? 'hotpink' : 'orange'}/>
+                <meshLambertMaterial attach="material" color={model.state ? '#678dbf' : 'orange'}/>
             </mesh>}
         </>
     );

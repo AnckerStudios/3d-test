@@ -4,14 +4,9 @@ import { useLoader } from '@react-three/fiber';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { Matrix4, Object3D } from "three";
 
-function RailL({ arr = [], count = 16, color = 'white'}) {
+function Plate({ arr = [], count = 16, color = 'white'}) {
     const ref = useRef();
-    const {nodes, materials} = useGLTF("/rail_type_l.glb");
 
-    const positions = nodes.Model.geometry.attributes.position.array;
-    const normals = nodes.Model.geometry.attributes.normal.array;
-    const colors = nodes.Model.geometry.attributes.uv.array;
-    const indices = nodes.Model.geometry.index.array
 
     const temp = new Object3D();
     const empty = new Matrix4();
@@ -44,32 +39,7 @@ function RailL({ arr = [], count = 16, color = 'white'}) {
     }
     return (
         <instancedMesh ref={ref} args={[null, null, count]} >
-            <bufferGeometry>
-            <bufferAttribute
-                attach='attributes-position'
-                array={positions}
-                count={positions.length / 3}
-                itemSize={3}
-            />
-            <bufferAttribute
-                attach='attributes-color'
-                array={colors}
-                count={colors.length / 3}
-                itemSize={3}
-            />
-            <bufferAttribute
-                attach='attributes-normal'
-                array={normals}
-                count={normals.length / 3}
-                itemSize={3}
-            />
-            <bufferAttribute
-                attach="index"
-                array={indices}
-                count={indices.length}
-                itemSize={1}
-            />
-            </bufferGeometry>
+            <boxBufferGeometry/>
             <meshPhongMaterial color={color}/>
         </instancedMesh>
     );
@@ -77,4 +47,4 @@ function RailL({ arr = [], count = 16, color = 'white'}) {
 
 useGLTF.preload("/rail_type_l.glb");
 
-export default RailL;
+export default Plate;

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Cell from "./Cell";
+import Plate from "./Plate";
 import RailD from "./RailsTypes/RailD";
 import RailL from "./RailsTypes/RailL";
 import RailR from "./RailsTypes/RailR";
@@ -67,6 +68,7 @@ function Preview({mtrx = [], objSet = {x: 16, y:16}, prev = true}) {
             
             <RailL arr={changesTypeL} count={objSet.x * objSet.y * (prev ? 1 : 2)} color={prev ? 'lime' : 'white'}/>
             <RailR arr={changesTypeR} count={objSet.x * objSet.y * (prev ? 1 : 8)} color={prev ? 'lime' : 'white'}/>
+            
             <RailD arr={changesTypeD} count={objSet.x * objSet.y * (prev ? 1 : 2)} color={prev ? 'lime' : 'white'}/>
         </>
     );
