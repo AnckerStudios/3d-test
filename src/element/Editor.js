@@ -13,7 +13,7 @@ import RailTypeL_old from "./RailsTypes/RailTypeL_old";
 import CameraControl from "./CameraControl";
 import { setCell } from "../logic/EditorLogic";
 
-function Editor({setMtrx, view=true, tool='cursor'}) {
+function Editor({mtrx=[],setMtrx, view=true, tool='cursor'}) {
   const [selectType, setSelectType] = useState('none');
   const [clickedCell, setClickedCell] = useState({first: undefined, second: undefined});
   const [selectedCell, setSelectedCell] = useState({x: undefined, y: undefined, scroll: true});
