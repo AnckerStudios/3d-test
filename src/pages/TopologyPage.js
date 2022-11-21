@@ -3,6 +3,17 @@ import React, { useEffect, useRef, useState } from "react";
 
 
 function TopologyPage() {
+    function load(){
+        axios.get('http://localhost:8080/api/field', {
+           
+          })
+          .then(function (response) {
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
     return (
         <div className="mx-auto w-full max-w-5xl ">
             <div className="w-full bg-slate-0 flex-col">
@@ -17,9 +28,9 @@ function TopologyPage() {
                         <div className="m-2 ">
                             Enim et commodo culpa aliqua ullamco sit ut duis occaecat. Ex aliqua reprehenderit anim quis veniam mollit eiusmod incididunt aliqua commodo mollit voluptate ut. Nulla do sit commodo commodo. Irure id dolore ipsum id consectetur ex nulla nisi culpa voluptate quis consequat enim.                             
                         </div>
-                        <div className=" border hover:bg-white rounded-xl  m-2 flex justify-center">
+                        <button className=" border hover:bg-white rounded-xl  m-2 flex justify-center" onClick={() => load()}>
                             <a className=" m-2 ">button</a>
-                        </div>
+                        </button>
                     </div>
             
             

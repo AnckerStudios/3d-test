@@ -37,6 +37,7 @@ function Ground({mousePos, objSet = {x: 16, y:16}, enterFunk = true}) {
     },[])
 
     const [instanceId, setInstanceId] = useState();
+    const [isFirstLeave, setIsFirstLeave] = useState(true);
     useEffect(() => {
         let mouse = new THREE.Vector2(mousePos.x, mousePos.y);
         ts.raycaster.setFromCamera(mouse, ts.camera);
@@ -44,6 +45,7 @@ function Ground({mousePos, objSet = {x: 16, y:16}, enterFunk = true}) {
         const intersection = ts.raycaster.intersectObject(ref.current);
         
         if (intersection.length > 0) {
+          setIsFirstLeave(true);
           const newInstanceId = intersection[0].instanceId;
           
           if(newInstanceId !== instanceId){
@@ -52,7 +54,11 @@ function Ground({mousePos, objSet = {x: 16, y:16}, enterFunk = true}) {
             enterFunk(Math.floor(newInstanceId/objSet.x),newInstanceId % objSet.x);
           } 
         }else{
-          enterFunk(undefined,undefined);
+          if(isFirstLeave){
+            console.log('432');
+            enterFunk(undefined,undefined);
+            setIsFirstLeave(false);
+          }
         }
       }, [mousePos]);
   

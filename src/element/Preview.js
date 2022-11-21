@@ -8,7 +8,7 @@ import RailR from "./RailsTypes/RailR";
 import RailType from "./RailsTypes/RailType";
 
 function Preview({mtrx = [], objSet = {x: 16, y:16}, prev = true, err=false}) {
-    console.log('dd')
+    //console.log('dd')
 
 
     const [changesTypeL, setChangesTypeL] = useState([]);

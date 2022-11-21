@@ -19,9 +19,9 @@ function TopologyEditor() {
   const [mtrx, setMtrx] = useState(false);
 
   function save(){
-    axios.post('http://localhost:8080/api/field', {
-        mtrx: mtrx,
-        mes: 'ты поймал?'
+    axios.post('http://localhost:8080/api/topology', {
+        title: 'lox',
+        body: mtrx
       })
       .then(function (response) {
         console.log(response);
