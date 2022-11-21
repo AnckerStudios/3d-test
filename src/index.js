@@ -5,11 +5,14 @@ import App from './App';
 import TopologyPage from './pages/TopologyPage';
 import Manul from './pages/Manul';
 import TopologyEditor from './element/TopologyEditor';
+import { BrowserRouter } from 'react-router-dom';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <Manul />
+    <BrowserRouter>
+        <App />
+    </BrowserRouter>
 );
 
 
