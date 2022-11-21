@@ -16,6 +16,8 @@ function Preview({mtrx = [], objSet = {x: 16, y:16}, prev = true, err=false}) {
     const [changesTypeR, setChangesTypeR] = useState([]);
     const [changesPlate, setChangesPlate] = useState([]);
     useEffect(()=>{
+        console.log('ssssss')
+        console.log(mtrx)
         let changesL = [];
         let changesD = [];
         let changesR = [];

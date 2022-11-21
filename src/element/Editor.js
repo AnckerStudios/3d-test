@@ -18,15 +18,15 @@ function Editor({mtrx=[],setMtrx, view=true, tool='cursor'}) {
   const [clickedCell, setClickedCell] = useState({first: undefined, second: undefined});
   const [selectedCell, setSelectedCell] = useState({x: undefined, y: undefined, scroll: true});
   const [scroll, setScroll] = useState(0);
-  let objSettings = {x:50, y:50}
+  let objSettings = {x:mtrx.length, y:mtrx[0].length}
   const [changeArr, setChangeArr] = useState([]);
-  const [fieldMtrx, setFieldMtrx] = useState(createMtrx(objSettings.x,objSettings.y));
+  const [fieldMtrx, setFieldMtrx] = useState(mtrx);
   const [previewMtrx, setPreviewMtrx] = useState(createMtrx(objSettings.x,objSettings.y));
   const [trainGo, setTrainGo] = useState(false);
   const [placeErr, setPlaceErr] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
-  useEffect(()=>{setMtrx(fieldMtrx)},[fieldMtrx])
+
 
  
 
@@ -54,18 +54,20 @@ function Editor({mtrx=[],setMtrx, view=true, tool='cursor'}) {
   }
   useEffect(()=>{
     console.log(clickedCell.second);
+    if(clickedCell.first != undefined){
     if(!tool.doubleClick){
       if(clickedCell.first != undefined && placeErr === false){
-        setFieldMtrx(joinMtrx(fieldMtrx, previewMtrx));
+        setMtrx(joinMtrx(mtrx, previewMtrx));
         clearPreview();
       }
       setClickedCell({first: undefined, second: undefined});
         
     }else{
       if(clickedCell.second != undefined && placeErr === false){
-        setFieldMtrx(joinMtrx(fieldMtrx, previewMtrx))
+        setMtrx(joinMtrx(mtrx, previewMtrx))
         clearPreview()
       }
+    }
     }},[clickedCell])
 
   function сellSelection(x,y){
@@ -74,7 +76,7 @@ function Editor({mtrx=[],setMtrx, view=true, tool='cursor'}) {
   }
   useEffect(()=>{
     if(selectedCell.x != undefined && selectedCell.y != undefined){
-      let cellPrev = setCell(selectedCell, fieldMtrx, tool, clickedCell);
+      let cellPrev = setCell(selectedCell, mtrx, tool, clickedCell);
       setPreviewMtrx(cellPrev.arr);
       setPlaceErr(cellPrev.err);
     }
@@ -116,9 +118,11 @@ function Editor({mtrx=[],setMtrx, view=true, tool='cursor'}) {
       document.removeEventListener("mousemove", handleMouse);
     };
   }, []);
+
   useEffect(() => {
     console.log(scroll);
   }, [scroll]);
+
   function scrollWheel(){
     if(scroll < 4)
       setScroll(()=>scroll+1);
@@ -140,11 +144,11 @@ function Editor({mtrx=[],setMtrx, view=true, tool='cursor'}) {
             <pointLight position={[10,15,10]}/>
             <pointLight position={[-3,0,2]}/>
             <Preview mtrx={previewMtrx} objSet={objSettings} prev={true} err={placeErr}/>
-            <Preview mtrx={fieldMtrx} objSet={objSettings} prev={false}/>
+            <Preview mtrx={mtrx} objSet={objSettings} prev={false}/>
             <Ground mousePos={mousePos} objSet={objSettings} enterFunk={сellSelection}/>
             {/* <RailTypeL_old/> */}
             {/* <TestMes/> */}
-            {trainGo && <Train mtrx={fieldMtrx} />}
+            {trainGo && <Train mtrx={mtrx} />}
             {/* {<Ctest mtrx={changeArr} objSettings={objSettings} prevMtrx={previewMtrx}/>} */}
             
             {/* {fieldMtrx.map(cx => (cx.map(cy => (
