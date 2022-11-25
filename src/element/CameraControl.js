@@ -10,17 +10,24 @@ function CameraControl({view, zoom, pos}) {
     const { camera } = useThree()
     
     useEffect(()=>{
-        camera.position.x = view ? 50 : 0
-        camera.position.y = view ? -50 : 10
+        camera.position.x = view ? pos.x : 0
+        camera.position.y = view ? pos.y : 10
         camera.position.z = view ? 50 : 50
         camera.rotation.x = view ? Math.PI/4 : 0
         camera.rotation.y = view ? Math.PI/5 : 0
         camera.rotation.z = view ? Math.PI/6 : 0
+        
       
       },[view])
+
     useEffect(()=>{
-        //camera.zoom
-        
+        camera.position.x = pos.x;
+        camera.position.y = pos.y;
+        camera.position.z = 50
+    },[pos])
+
+    useEffect(()=>{
+        camera.zoom = zoom;
     },[zoom])
     return (
         <></>

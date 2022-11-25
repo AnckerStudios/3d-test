@@ -11,15 +11,19 @@ import Train from "./Train";
 import ViewSwitcher from "./ViewSwitcher";
 
 function ToolList({setTool}) {
+    const [selectedTool, setSelectedTool] = useState(0);
+
+    
     let toolList = [
         {id: 0, name: 'cursor', doubleClick: false},
         {id: 1, name: 'rail', doubleClick: true},
         {id: 2, name: 'plate', doubleClick: false},
         {id: 3, name: 'traffic lights', doubleClick: false}];
     let tools = [];
+    useEffect(()=>{setTool(toolList[selectedTool])},[selectedTool])
     
     for(let i = 0; i < toolList.length; i++){
-        tools.push(<ToolListElement tool={toolList[i]} setTool={setTool}/>);
+        tools.push(<ToolListElement tool={toolList[i]} setTool={setSelectedTool} selectedTool={selectedTool}/>);
     }
 
     return (

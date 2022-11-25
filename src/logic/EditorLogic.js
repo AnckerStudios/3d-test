@@ -3,12 +3,13 @@ export function cellFree(cell, mtrx, tool) {
     let x = cell.x;
     let y = cell.y;
     let scroll = cell.scroll;
-    let err = checkPlace(cell, mtrx, tool.name, cell.scroll);
+    console.log('saaaaaaa', scroll)
+    let err = checkPlace(cell, mtrx, tool.name, scroll);
     console.log('err = '+ err)
     switch(tool.name){
         case 'rail':
             arr[cell.x][cell.y].type = tool.name;
-            arr[cell.x][cell.y].state = cell.scroll ? {x: true} : {y: true};
+            arr[cell.x][cell.y].state = scroll ? {x: true} : {y: true};
             return {arr: arr, err: err};
         case 'plate':
             let xMin = x - (scroll ? 1 : 0); 
@@ -17,7 +18,7 @@ export function cellFree(cell, mtrx, tool) {
             let yMax = y + (!scroll ? 1 : 0);
             
             arr[x][y].type = tool.name;
-            arr[x][y].state = {plate:1};
+            arr[x][y].state = {plate: scroll ? 1 : 0};
            
             if(xMin >= 0 && yMin >= 0 && xMax < arr.length && yMax < arr[x].length){
                 arr[xMin][yMin].type = tool.name;
@@ -29,7 +30,7 @@ export function cellFree(cell, mtrx, tool) {
         case 3:
 
         default:
-            return {arr: arr, err: err}
+            return {arr: arr, err: err};
     }
     
 }
@@ -63,7 +64,7 @@ export function createMtrx(x, y){
     return arr
 }
 
-export function checkPlace(cell, arr, tool, scroll=false) {
+export function checkPlace(cell, arr, tool, scroll) {
     let x = cell.x;
     let y = cell.y;
     switch(tool){
@@ -77,18 +78,28 @@ export function checkPlace(cell, arr, tool, scroll=false) {
             let xMax = x + (scroll ? 1 : 0);
             let yMin = y - (!scroll ? 1 : 0);
             let yMax = y + (!scroll ? 1 : 0);
-            if(xMin < 0 || yMin < 0 || xMax > arr.length || yMax > arr[x].length){
+            if(xMin < 0 || yMin < 0 || xMax >= arr.length || yMax >= arr[0].length){
                 return true;
             }
             if(arr[x][y].type !== 'none' || arr[xMin][yMin].type !== 'none' || arr[xMax][yMax].type !== 'none'){
                 return true;
             }
-            let r1 = arr[xMin-(!scroll ? 1 : 0)][yMin-(scroll ? 1 : 0)].state[(scroll ? 'x' : 'y')];
-            let r2 = arr[x-(!scroll ? 1 : 0)][y-(scroll ? 1 : 0)].state[(scroll ? 'x' : 'y')];
-            let r3 = arr[xMax-(!scroll ? 1 : 0)][yMax-(scroll ? 1 : 0)].state[(scroll ? 'x' : 'y')];
-            let r4 = arr[xMin+(!scroll ? 1 : 0)][yMin+(scroll ? 1 : 0)].state[(scroll ? 'x' : 'y')];
-            let r5 = arr[x+(!scroll ? 1 : 0)][y+(scroll ? 1 : 0)].state[(scroll ? 'x' : 'y')];
-            let r6 = arr[xMax+(!scroll ? 1 : 0)][yMax+(scroll ? 1 : 0)].state[(scroll ? 'x' : 'y')];
+            let r1 = false;
+            let r2 = false;
+            let r3 = false;
+            let r4 = false;
+            let r5 = false;
+            let r6 = false;
+            if(xMin-(!scroll ? 1 : 0) >= 0 && yMin-(scroll ? 1 : 0) >= 0){
+              r1 = arr[xMin-(!scroll ? 1 : 0)][yMin-(scroll ? 1 : 0)].state[(scroll ? 'x' : 'y')];
+              r2 = arr[x-(!scroll ? 1 : 0)][y-(scroll ? 1 : 0)].state[(scroll ? 'x' : 'y')];
+              r3 = arr[xMax-(!scroll ? 1 : 0)][yMax-(scroll ? 1 : 0)].state[(scroll ? 'x' : 'y')];
+            }
+            if(xMin+(!scroll ? 1 : 0) < arr.length && yMin+(scroll ? 1 : 0) < arr[0].length){
+              r4 = arr[xMin+(!scroll ? 1 : 0)][yMin+(scroll ? 1 : 0)].state[(scroll ? 'x' : 'y')];
+              r5 = arr[x+(!scroll ? 1 : 0)][y+(scroll ? 1 : 0)].state[(scroll ? 'x' : 'y')];
+              r6 = arr[xMax+(!scroll ? 1 : 0)][yMax+(scroll ? 1 : 0)].state[(scroll ? 'x' : 'y')];
+            }
             if(!(r1 && r2 && r3) && !(r4 && r5 && r6))
                 return true;
             return false;
@@ -107,10 +118,11 @@ function createWay(first, second){
     let iy = Math.sign(deltaY);
     let curX = first.x;
     let curY = first.y;
-
+    let fscroll = first.scroll;
+    let sscroll = second.scroll;
     if(deltaX === 0){
       //console.log('its x')
-      if(!first.scroll && !second.scroll){
+      if(!fscroll && !sscroll){
         console.log('its ++x')
         while((curY != second.y)){
           //console.log('++++')
@@ -122,7 +134,7 @@ function createWay(first, second){
     }else if(deltaY === 0){
       //console.log('its y')
 
-      if(first.scroll && second.scroll){
+      if(fscroll && sscroll){
         //console.log('its ++y')
         while((curX != second.x)){
           arr.push({x: curX, y: curY, state: 'x'});
@@ -131,9 +143,9 @@ function createWay(first, second){
         arr.push({x: curX, y: curY, state: 'x'});
       }
     }else{
-    curX = first.scroll ? curX + ix : curX;
-    curY = first.scroll ? curY : curY + iy;
-    arr.push({x: curX, y: curY, state: testSwich(ix, iy, first.scroll)});
+    curX = fscroll ? curX + ix : curX;
+    curY = fscroll ? curY : curY + iy;
+    arr.push({x: curX, y: curY, state: testSwich(ix, iy, fscroll)});
     curX = curX + ix;
     curY = curY + iy;
 
@@ -142,7 +154,7 @@ function createWay(first, second){
       curX = curX + ix;
       curY = curY + iy;
     }
-    arr.push({x: curX, y: curY, state: testSwich(-ix, -iy, second.scroll)});
+    arr.push({x: curX, y: curY, state: testSwich(-ix, -iy, sscroll)});
     }
     return arr;
 }

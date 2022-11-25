@@ -14,6 +14,7 @@ function Plate({ arr = [], color = 'white'}) {
             testArr.push(
                 <mesh
                 position={[item.x,item.y,0]}
+                rotation={[0,0,item.rot.z]}
                 geometry={nodes.Model.geometry}>
                     <meshStandardMaterial color={color} />
                 </mesh>

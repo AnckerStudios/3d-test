@@ -17,10 +17,12 @@ function Editor({mtrx=[],setMtrx, view=true, tool='cursor'}) {
   const [selectType, setSelectType] = useState('none');
   const [clickedCell, setClickedCell] = useState({first: undefined, second: undefined});
   const [selectedCell, setSelectedCell] = useState({x: undefined, y: undefined, scroll: true});
-  const [scroll, setScroll] = useState(0);
+  const [scroll, setScroll] = useState(false);
   let objSettings = {x:mtrx.length, y:mtrx[0].length}
   const [changeArr, setChangeArr] = useState([]);
   const [fieldMtrx, setFieldMtrx] = useState(mtrx);
+  const [zoom, setZoom] = useState(20);
+  const [camPos, setCamPos] = useState({x:50, y:-50, z:50});
   const [previewMtrx, setPreviewMtrx] = useState(createMtrx(objSettings.x,objSettings.y));
   const [trainGo, setTrainGo] = useState(false);
   const [placeErr, setPlaceErr] = useState(false);
@@ -42,7 +44,7 @@ function Editor({mtrx=[],setMtrx, view=true, tool='cursor'}) {
   }
 
   function cellClicking(){
-    
+    if(selectedCell.x != undefined && selectedCell.y != undefined){
     if(isFirstClick()){
       setClickedCell({first: selectedCell});
     }
@@ -50,6 +52,7 @@ function Editor({mtrx=[],setMtrx, view=true, tool='cursor'}) {
       setClickedCell({first: clickedCell.first, second: selectedCell});
       
     }
+  }
     console.log('click');
   }
   useEffect(()=>{
@@ -119,27 +122,46 @@ function Editor({mtrx=[],setMtrx, view=true, tool='cursor'}) {
     };
   }, []);
 
-  useEffect(() => {
-    console.log(scroll);
-  }, [scroll]);
-
-  function scrollWheel(){
-    if(scroll < 4)
-      setScroll(()=>scroll+1);
-    else{
-      setScroll(0);
+  function scrollWheel(e){
+   
+    if(tool.name !== 'cursor'){
+      setScroll(!scroll);
+      setSelectedCell({...selectedCell, scroll:!selectedCell.scroll})
+    }else{
+      if(e.altKey){
+        if(e.deltaY === -100){
+          setCamPos({...camPos, y: camPos.y+1, x:camPos.x-1});
+        }else{
+          setCamPos({...camPos, y: camPos.y-1, x:camPos.x+1});
+        }
+      }else if(e.shiftKey){
+        if(e.deltaY === -100){
+          setCamPos({...camPos, y: camPos.y-1, x:camPos.x-1});
+        }else{
+          setCamPos({...camPos, y: camPos.y+1, x:camPos.x+1});
+        }
+      }else{
+        if(e.deltaY === -100){
+          if(zoom < 100)
+            setZoom(zoom+5);
+        }else{
+          if(zoom > 5)
+            setZoom(zoom-5);
+        }
     }
-    setSelectedCell({...selectedCell, scroll:!selectedCell.scroll})
+    
+    }
+    // setSelectedCell({...selectedCell, scroll:!selectedCell.scroll})
   }
   function contextFunk(){
     console.log("context")
   }
   
   return (
-          <Canvas orthographic camera={{position: view ? [50+25,-50+25,50] : [50+8,-50+8,50], zoom: 20, rotation: view ? [Math.PI/4, Math.PI/5, Math.PI/6] : [Math.PI/4, Math.PI/5, 0]}} 
-                  onWheel={(e) => setScroll(e)} onClick={()=>cellClicking()} onContextMenu={()=>contextFunk()}>
+          <Canvas orthographic camera={{position: [50+25, -50+25, 50], zoom: 20, rotation: view ? [Math.PI/4, Math.PI/5, Math.PI/6] : [Math.PI/4, Math.PI/5, 0]}} 
+                  onWheel={(e) => scrollWheel(e)} onClick={()=>cellClicking()} onContextMenu={()=>contextFunk()}>
             <Stats/>
-            <CameraControl view = {view}/>
+            <CameraControl view = {view} zoom = {zoom} pos = {camPos}/>
             <ambientLight intensity={0.5}/>
             <pointLight position={[10,15,10]}/>
             <pointLight position={[-3,0,2]}/>

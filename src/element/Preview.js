@@ -75,8 +75,11 @@ function Preview({mtrx = [], objSet = {x: 16, y:16}, prev = true, err=false}) {
                             changesR.push({x:item.x, y:item.y, rot: {x: 0, y: 0, z: Math.PI/2}, index: ((item.x * row.length + item.y) * (prev ? 1 : 8) + (prev ? 0 : 7))});
                             break;
                         case 'plate':
-                            if(item.state.plate === 1)
-                                changesP.push({x:item.x, y:item.y, state: item.state.plate});
+                            if(item.state.plate === 1){
+                                changesP.push({x:item.x, y:item.y, rot: {x: 0, y: 0, z: 0}, state: item.state.plate});
+                            }else if(item.state.plate === 0){
+                                changesP.push({x:item.x, y:item.y, rot: {x: 0, y: 0, z: Math.PI/2}, state: item.state.plate});
+                            }
                             break;
                       }
                 }
