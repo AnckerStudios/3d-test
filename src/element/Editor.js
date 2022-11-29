@@ -11,7 +11,7 @@ import Train from "./Train";
 import TestMes from "../testComponent/TestMes";
 import RailTypeL_old from "./RailsTypes/RailTypeL_old";
 import CameraControl from "./CameraControl";
-import { setCell } from "../logic/EditorLogic";
+import { setCell, updatePlate } from "../logic/EditorLogic";
 
 function Editor({mtrx=[],setMtrx, view=true, tool='cursor'}) {
   const [selectType, setSelectType] = useState('none');
@@ -27,7 +27,7 @@ function Editor({mtrx=[],setMtrx, view=true, tool='cursor'}) {
   const [trainGo, setTrainGo] = useState(false);
   const [placeErr, setPlaceErr] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-
+  const [plates, setPlates] = useState([]);
 
 
  
@@ -47,6 +47,9 @@ function Editor({mtrx=[],setMtrx, view=true, tool='cursor'}) {
     if(selectedCell.x != undefined && selectedCell.y != undefined){
     if(isFirstClick()){
       setClickedCell({first: selectedCell});
+      if(tool.name === "plate"){
+        setPlates([...plates, {x: selectedCell.x, y: selectedCell.y}]);
+      }
     }
     else{
       setClickedCell({first: clickedCell.first, second: selectedCell});
@@ -55,22 +58,26 @@ function Editor({mtrx=[],setMtrx, view=true, tool='cursor'}) {
   }
     console.log('click');
   }
+
+  useEffect(()=>{setMtrx(updatePlate(plates, mtrx));},[plates])
+
   useEffect(()=>{
     console.log(clickedCell.second);
     if(clickedCell.first != undefined){
     if(!tool.doubleClick){
       if(clickedCell.first != undefined && placeErr === false){
-        setMtrx(joinMtrx(mtrx, previewMtrx));
+        setMtrx(joinMtrx(joinMtrx(mtrx, previewMtrx),updatePlate(plates, mtrx)));
         clearPreview();
       }
       setClickedCell({first: undefined, second: undefined});
         
     }else{
       if(clickedCell.second != undefined && placeErr === false){
-        setMtrx(joinMtrx(mtrx, previewMtrx))
-        clearPreview()
+        setMtrx(joinMtrx(joinMtrx(mtrx, previewMtrx),updatePlate(plates, mtrx)));
+        clearPreview();
       }
     }
+
     }},[clickedCell])
 
   function сellSelection(x,y){

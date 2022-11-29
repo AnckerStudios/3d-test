@@ -181,4 +181,29 @@ function addChanges(arr, change, mtrx){
     //console.log(copy)
     return {arr: copy, err: err};
     //setFieldMtrx(copy);
+}
+
+export function updatePlate(plates, mtrx){
+  let copy = Object.assign([], mtrx);
+  if(plates.length !== 0){
+    for(let plt of plates){
+      let dir = copy[plt.x][plt.y].state.dir;
+      let dx = dir ? 0 : 1;
+      let dy = dir ? 1 : 0;
+      let line1 = null;
+      let line2 = null;
+      if(plt.x-dx > 0 && plt.y-dy > 0){
+        if(copy[plt.x-dx][plt.y-dy].type === "rail" && copy[plt.x-dx][plt.y-dy].state[dir ? "x" : "y"] === true){
+          line1 = {x: plt.x-dx, y: plt.y-dy, number: plates.length+1}
+        }
+      }
+      if(plt.x+dx < copy.length && plt.y+dy < copy[plt.x].length){
+        if(copy[plt.x+dx][plt.y+dy].type === "rail" && copy[plt.x+dx][plt.y+dy].state[dir ? "x" : "y"] === true){
+          line2 = {x: plt.x+dx, y: plt.y+dy, number: plates.length+2}
+        }
+      }
+      copy[plt.x][plt.y].state = {...copy[plt.x][plt.y].state, number: plates.length, line1: line1, line2: line2}
+    }
   }
+  return copy;
+}
