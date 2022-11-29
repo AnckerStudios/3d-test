@@ -1,0 +1,85 @@
+.NewSity{
+    border-width: 1px;
+    border-color: black;
+    padding: 5px;
+    padding-left: 10px;
+    margin-bottom: 30px;
+    position: relative;
+    top:50px;
+    width: 400px;
+    left:50px;
+    border-radius: 5px;
+    font-size: 23px;
+}
+.form2{
+    width: 500px;
+    height: 300px;
+    background-color: #e1e1e6;
+    position: relative;
+    top: 150px;
+    left:500px;
+}
+.lgsity{
+    position: relative;
+    top:15px;
+    font-size: 50px;
+    font-weight: 400;
+    text-align: center;
+}
+.button2{
+    background-color:dimgray;
+    width: 400px;
+    height: 60px;
+    border-radius: 5px;
+    font-size: 30px;
+    font-weight: medium;
+    color:azure;
+    position: relative;
+    top:50px;
+    left: 50px;
+}
+.button2:hover{
+    border-width: 1px;
+    border-color:#4b4a49;
+   
+}
+.button2:focus{
+    outline-color: #4b4a49;
+}
+.button2:active {
+    background:#b39b6e;
+    border-color: #f0f4ed;
+    color: black;
+}
+.head{
+    width: 100%;
+    height: 10px;
+    border-color: #4b4a49;
+    position: relative;
+    top:30px;
+}
+#t1{
+    position: relative;
+    left: 1.5%;
+    cursor:pointer;
+    color:black;
+}
+#t2{
+    position: relative;
+    left: 88%;
+    cursor: pointer;
+    color:black;
+}
+#t1:hover{
+    color: #b2b6ae;
+}
+#t2:hover{
+    color: #b2b6ae;
+}
+#t1:active{
+    color: #000000;
+}
+#t2:active{
+    color: #000000;
+}
+

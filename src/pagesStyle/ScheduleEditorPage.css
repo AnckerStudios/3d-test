@@ -1,0 +1,140 @@
+.table2{
+	border: 1px solid #eee;
+    vertical-align: bottom;
+    max-width: 700px;
+    width: 750px;
+    left:500px;
+    
+
+}
+.table2 th{
+	background: #efefef;
+	border: 1px solid #dddddd;
+    padding: 8px;
+    
+}
+.table2 th+th+th+th{
+	padding: 10px 20px;
+}
+
+
+.table2 td {
+	padding: 10px;
+	border: 1px solid #eee;
+    text-align: center;
+    height: 20px;
+    font-size: 15px;
+}
+.table2 caption{
+    text-align: left;
+    font-size: 30px;
+}
+.table2 tbody tr:nth-child(odd){
+	background: #fff;
+}
+.table2 tbody tr:nth-child(even){
+	background: #F7F7F7;
+}
+.trtab{
+    font-size: small;
+}
+.divsep{
+    
+    position:relative;
+    top: 90px;
+    left: 100px;    
+    height: 500px;
+}
+
+.formsep{
+    background-color:#F7F7F7;
+    width: 500px;
+    height: 530px;
+    padding-left: 60px;
+    padding-right: 30px;
+    position: absolute;
+    left: 750px;
+    top: 45px;
+    font-size: 17px;
+}
+.formsep legend{
+    position: relative;
+    top: -45px;
+    left: -25px;
+    font-size: 30px;
+}
+.formsep label{
+    position: relative;
+    top:-10px;
+}
+#firstlab{
+    position: relative;
+}
+.addsep{
+    width: 160px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+   
+    left: 100px;
+    padding: 5px;
+    margin-left: 30%; 
+    margin-top: -30px;
+    border-color: black;
+    border-width: 1px;
+    border-radius: 4px;
+    cursor:text;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 15px;
+}
+
+.tim{
+    width: 68px;
+    padding: 5px;
+    border-color: black;
+    border-width: 1px;
+    border-radius: 4px;
+    
+    cursor:text;
+    margin-left: 10px;
+    margin-right: 10px;
+    position: relative;
+    padding-left: 12px;
+    font-size: 15px;
+    cursor:text;
+}
+#ti{
+    margin-bottom: 20px;
+}
+
+#h{
+    display: flex;
+    flex-direction: row;
+}
+
+#tpr{
+    position: relative;
+    left:62px;
+
+}
+#totpr{
+    position: relative;
+    left:46px;
+}
+.ex2{
+    background-color: black;
+    color: #dddddd;
+    height: 40px;
+    width: 300px;
+    text-align: left;
+    padding-left: 30px;
+    position:absolute;
+    top:-40px;
+    left:1240px;
+}
+#bb{
+    position: relative;
+    top:-20px;
+    left: 125px;
+}

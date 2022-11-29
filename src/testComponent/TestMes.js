@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 
 
 function TestMes() {
-    const [fieldMtrx, setFieldMtrx] = useState(createMtrx(objSettings.x,objSettings.y));
+    const [fieldMtrx, setFieldMtrx] = useState(createMtrx(16,16));
     function createMtrx(x, y){
         let arr = [];
         for(let i = 0; i < x; i++){
