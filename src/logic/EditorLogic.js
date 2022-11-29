@@ -18,13 +18,11 @@ export function cellFree(cell, mtrx, tool) {
             let yMax = y + (!scroll ? 1 : 0);
             
             arr[x][y].type = tool.name;
-            arr[x][y].state = {plate: scroll ? 1 : 0};
+            arr[x][y].state = {dir: scroll ? true : false};
            
             if(xMin >= 0 && yMin >= 0 && xMax < arr.length && yMax < arr[x].length){
-                arr[xMin][yMin].type = tool.name;
-                arr[xMax][yMax].type = tool.name;
-                arr[xMin][yMin].state = {plate:2};
-                arr[xMax][yMax].state = {plate:2};
+                arr[xMin][yMin].type = "plate edge";
+                arr[xMax][yMax].type = "plate edge";
             }
             return {arr: arr, err: err};
         case 3:
