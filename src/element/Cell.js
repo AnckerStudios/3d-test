@@ -3,7 +3,7 @@ import { PlaneGeometry } from "three";
 import { useLoader } from '@react-three/fiber'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import CellTest from "./CellTest";
-import Plate from "./Plate";
+
 
 
 function Cell(props) {
@@ -48,7 +48,7 @@ function Cell(props) {
             {/* <RailCell model={model}/> */}
             {<mesh position={[model.x,model.y,0]}  onPointerEnter={() => mouseEnter()} onPointerLeave={() => mouseLeave()}>
                 <planeGeometry/>
-                <meshLambertMaterial attach="material" color={model.state ? 'hotpink' : 'orange'}/>
+                <meshLambertMaterial attach="material" color={model.state ? '#678dbf' : 'orange'}/>
             </mesh>}
         </>
     );

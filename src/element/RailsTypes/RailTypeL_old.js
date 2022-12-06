@@ -1,66 +1,86 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useGLTF } from "@react-three/drei";
 import { useLoader } from '@react-three/fiber';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import { Object3D } from "three";
+import { BufferAttribute, BufferGeometry, Matrix4, Mesh, Object3D, Vector3 } from "three";
+import * as BufferGeometryUtils from "three/examples/jsm/utils/BufferGeometryUtils.js";
+import * as THREE from "three";
 
-function RailTypeL_old({ arrChanges = [], objSettings = {x: 16, y:16},arrPrew = []}) {
+function RailTypeL_old({ arr = [], count = 16, color = 'white'}) {
     const ref = useRef();
     const {nodes, materials} = useGLTF("/rail_type_l.glb");
-   
+
+    const [positions,setPos] = useState([]);
+    const [normals ,setNor] = useState([]);
+    const [colors ,setCol] = useState([]);
+    const [indices ,setInd] = useState([]);
+
     const temp = new Object3D();
-    useEffect(()=>{
-        for(let item of arrChanges){
-            temp.position.set(item.x,item.y,0);
-            let rot = getRotation(item.state);
-            temp.rotation.set(rot.x,rot.y,rot.z)
-            temp.updateMatrix();
-            ref.current.setMatrixAt(getIndex(item), temp.matrix);
-        }
-        ref.current.instanceMatrix.needsUpdate = true;
-    },[arrChanges])
 
     useEffect(()=>{
-        for(let item of arrPrew){
-            temp.position.set(item.x,item.y,0);
-            temp.scale.set(1.01,1.01,1.01);
-            let rot = getRotation(item.state);
-            temp.rotation.set(rot.x,rot.y,rot.z);
-            temp.updateMatrix();
-            ref.current.setMatrixAt((item.x * objSettings.x + item.y) * 3, temp.matrix);
-        }
-        ref.current.instanceMatrix.needsUpdate = true;
-    },[arrPrew])
-
-    function getIndex(item){
-        let index = (item.x * objSettings.x + item.y) * 3
-        switch(item.state){
-            case 'x':
-                index += 1;
-                break;
-            case 'y':
-                index += 2;
-                break;
-            default:
-                break;
-        }
-        return index;
-    }
-    function getRotation(state){
-        switch(state){
-            case 'x':
-                return {x: 0, y: 0, z: 0}
-            case 'y':
-                return {x: 0, y: 0, z: Math.PI/2}
-            default:
-                return {x: 0, y: 0, z: 0}
-        }
-    }
-    return (
-        <instancedMesh ref={ref} args={[null, null,  objSettings.x * objSettings.y * 3]} geometry={nodes.Cube008.geometry} >
-            <meshPhongMaterial />
-        </instancedMesh>
+        for(let i = 0; i < count; i++){
+            for(let j = 0; j < count; j++){
+                
+            }
+          }
+          let pos = Array.from(nodes.Model.geometry.attributes.position.array);
+                let norm = Array.from(nodes.Model.geometry.attributes.normal.array);
+                let col = Array.from(nodes.Model.geometry.attributes.uv.array);
+                let indx = Array.from(nodes.Model.geometry.index.array);
+                let geom = new BufferGeometry();
+                geom.setAttribute('position', new THREE.BufferAttribute( pos, 3 ) )
+                geom.setAttribute('normal', new THREE.BufferAttribute( norm, 3 ) )
+                geom.setAttribute('color', new THREE.BufferAttribute( col, 3 ) )
+                geom.setIndex(new THREE.BufferAttribute( indx, 1 ) )
+       
         
+
+        
+        console.log(geom)
+        
+        const geo = [];
+
+        geo.push(geom);
+        geo.push(geom);
+        const mergedGeometry = BufferGeometryUtils.mergeBufferGeometries(geo, false);
+        // setPos(mergedGeometry.attributes.position.array)
+        // setNor(mergedGeometry.attributes.normal.array)
+        // setCol(mergedGeometry.attributes.uv.array)
+        // setInd(mergedGeometry.index.array)
+        console.log(mergedGeometry)
+        
+    },[])
+
+    return (
+        <mesh ref={ref} >
+            {/* <bufferGeometry>
+            <bufferAttribute
+                attach='attributes-position'
+                array={positions}
+                count={positions.length / 3}
+                itemSize={3}
+            />
+            <bufferAttribute
+                attach='attributes-color'
+                array={colors}
+                count={colors.length / 3}
+                itemSize={3}
+            />
+            <bufferAttribute
+                attach='attributes-normal'
+                array={normals}
+                count={normals.length / 3}
+                itemSize={3}
+            />
+            <bufferAttribute
+                attach="index"
+                array={indices}
+                count={indices.length}
+                itemSize={1}
+            />
+            </bufferGeometry>
+            <meshPhongMaterial color={color}/> */}
+        </mesh>
     );
 }
 
