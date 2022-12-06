@@ -1,0 +1,31 @@
+/* Обычный */
+@font-face {
+	font-family: 'Montserrat'; 
+	src: url(/fonts/MONTSERRAT-REGULAR.TTF); 
+}
+/* Жирный */
+@font-face {
+	font-family: 'Montserrat extrabold'; 
+	src: url(/fonts/MONTSERRAT-EXTRABOLD.TTF); 
+}
+/* Полужирный */
+@font-face {
+	font-family: 'Montserrat bold'; 
+	src: url(/fonts/MONTSERRAT-BOLD.TTF); 
+}
+/* Средний */
+@font-face {
+	font-family: 'Montserrat medium'; 
+	src: url(/fonts/MONTSERRAT-MEDIUM.TTF); 
+}
+
+ 
+.text-1 {
+	font-family: 'Montserrat'; 
+	font-size: 20px;
+}
+ 
+.text-2 {
+	font-family: 'Montserrat bold'; 
+	font-size: 20px;
+}

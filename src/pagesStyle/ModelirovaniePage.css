@@ -1,0 +1,192 @@
+.form5{
+    background-color: #efefef;
+    font-size: 20px;
+    width: 630px;
+    position: relative;
+    top: 15px;
+}
+.form5 legend{
+    position: relative;
+    top: 5px;
+    left:6%;
+    font-size: 20px;
+    padding: 5px;
+    
+}
+
+.form5 label{
+    padding-left: 15px;
+    position: relative;
+    top:-10px;
+}
+#end{
+    padding-left: 12px;
+    position: relative;
+    top: 0px;
+}
+#endlabel{
+    top: -30px;
+}
+.form5 button{
+    border-radius: 5px;
+    border-width: 2px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 20px;
+    font-weight: medium;
+    margin: 10px;
+    position: relative;
+    top:-10px;
+    left: 10px;
+}
+#pusk{
+    height: 50px;
+    width: 300px;
+    color: #fffdfd;
+    background-color: black;
+    border-radius: 25px;
+    top: -30px;
+}
+#pusk:hover{
+    border-width: 1px;
+    border-color:#4b4a49;
+   
+}
+#pusk:focus{
+    outline-color: #4b4a49;
+}
+#pusk:active {
+    color: black;
+    background-color: #4b4a49;
+}
+#x1{
+    background-color: black;
+    color: #efefef;
+}
+#x2{
+    background-color: #efefef;
+    color: black;
+}
+#x3{
+    background-color: #efefef;
+    color: black;
+}
+#timer{
+
+    position: relative;
+    left:668px;
+    top: -200px;
+    font-size: 35px;
+    font-weight: bold;
+}
+.table3{
+	border: 1px solid #eee;
+    vertical-align: bottom;
+    max-width: 700px;
+    width: 750px;
+    left:500px;
+    position: absolute;
+    top:2%;
+    left: 54%;
+}
+.table3 th{
+	background: #efefef;
+	border: 1px solid #dddddd;
+    padding: 0px;
+    
+}
+.table3 th+th+th+th{
+	padding: 3px 3px;
+}
+
+.table3 td {
+	border: 1px solid #eee;
+    text-align: center;
+    height: 20px;
+    font-size: 13px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.table3 caption{
+    text-align: left;
+    font-size: 10px;
+}
+.table3 tbody tr:nth-child(odd){
+	background: #fff;
+}
+.table3 tbody tr:nth-child(even){
+	background: #F7F7F7;
+}
+.trtab{
+    font-size:x-small;
+}
+.rec{
+    position: absolute;
+    width: 450px;
+    height: 102px;
+    left: 1196px;
+    top: 542px;
+    background: #D9D9D9;
+    display: flex;
+    flex-direction: row;
+    padding: 25px;
+}
+#sqvare{
+    position: relative;
+    width: 47px;
+    height: 47px;
+    left: 180px;
+
+    background: #101010;
+    border-radius: 10px;
+}
+#treug{
+    border: 22px solid transparent; border-left: 33px solid black;
+    border-radius: 5px;
+    position: relative;
+    width: 50px;
+    height: 45px;
+    left:60px;
+
+}
+.dd{
+    position: relative;
+    width: 17px;
+    height: 45px;
+    left:-60px;
+
+
+    background: #111111;
+    border-radius: 6px;
+}
+.dd2{
+    position: relative;
+    width: 17px;
+    height: 45px;
+    left: -90px;
+    top: -45px;
+    background: #111111;
+    border-radius: 6px;
+}
+#pause{
+    height: 45;
+    width: 66;
+}
+
+#square:hover{
+    background-color:grey;
+}
+.ex4{
+    background-color: black;
+    color: #dddddd;
+    height: 40px;
+    width: 340px;
+    text-align: left;
+    padding-left: 30px;
+    position:absolute;
+    right: 0%;
+    bottom: 6%;
+
+}

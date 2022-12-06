@@ -1,0 +1,52 @@
+.table2{
+	border: 1px solid #eee;
+    vertical-align: bottom;
+    max-width: 700px;
+    width: 750px;
+
+    position: absolute;
+    top:100px;
+    left:280px;
+    
+
+}
+.table2 th{
+	background: #efefef;
+	border: 1px solid #dddddd;
+    padding: 15px;
+    font-size: 16px;
+    
+}
+.table2 th+th+th+th{
+	padding: 10px 50px;
+}
+
+
+.table2 td {
+	padding: 10px;
+	border: 1px solid #eee;
+    text-align: center;
+    height: 20px;
+    font-size: 15px;
+}
+
+.table2 tbody tr:nth-child(odd){
+	background: #fff;
+}
+.table2 tbody tr:nth-child(even){
+	background: #F7F7F7;
+}
+.trtab{
+    font-size: small;
+}
+.ex3{
+    background-color: black;
+    color: #dddddd;
+    height: 40px;
+    width: 300px;
+    text-align: left;
+    padding-left: 30px;
+    position:absolute;
+    top:-40px;
+    left:1240px;
+}

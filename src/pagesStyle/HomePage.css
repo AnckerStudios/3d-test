@@ -1,0 +1,57 @@
+
+
+html{
+    font-size: 20px;
+    font-family: "Montserrat";
+    font-weight: medium;
+}
+.but{
+    background-color:dimgray;
+    width: 350px;
+    height: 50px;
+    margin-top: 30px;
+    border-radius: 5px;
+    font-size: 30px;
+    font-weight: medium;
+    color:azure;
+    }
+.but:hover{
+    border-width: 1px;
+    border-color:#4b4a49;
+   
+}
+.but:focus, input:focus{
+    outline-color: #4b4a49;
+}
+.but:active {
+    background:#b39b6e;
+    border-color: #f0f4ed;
+    color: black;
+}
+.in{
+    width: 350px;
+    height: 40px;
+    border-width: 1px;
+    border-color: black;
+    padding-left: 12px;
+    font-size: 20px;
+    position: relative;
+    top: 0px;
+    left: 120px
+}
+
+.form1 {
+    position: absolute;
+    left: 50%;
+    top: 45%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%) ;
+    text-align: center;
+}
+.lab{
+    text-align:left;
+    position: relative;
+    left: -120px;
+}
+
+

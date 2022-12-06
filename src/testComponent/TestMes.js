@@ -1,21 +1,36 @@
+import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
-import { useGLTF } from "@react-three/drei";
-import { useLoader, useThree } from '@react-three/fiber'
-import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader'
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import { BufferGeometry, DoubleSide, Matrix4, Object3D } from "three";
-import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader'
 
-function TestMes({ view}) {
-    const { camera } = useThree()
-  
-    useEffect(()=>{
-      camera.position.x = view ? 10 : 50
-      },[view])
 
+function TestMes() {
+    const [fieldMtrx, setFieldMtrx] = useState(createMtrx(16,16));
+    function createMtrx(x, y){
+        let arr = [];
+        for(let i = 0; i < x; i++){
+          arr.push([])
+          for(let j = 0; j < y; j++){
+            arr[i].push({id: y*i+j, x: i, y: j, state: {}})
+          }
+        }
+        return arr
+      }
+    function sendMes(){
+        axios.post('http://localhost:8080/api/topology', {
+            title: "Hi",
+            body: fieldMtrx
+          })
+        .then(response => {
+            console.log("response", response.data);
+          })
+          .catch(error => {
+            console.log("error", error);
+          });
+    }
     return (
-        <></>
-       
+        <div className="flex justify-center ">
+            <button className="border rounded bg-yellow-300 px-5 py-2 text-lg font-bold m-5 hover:bg-orange-500" onClick={()=>sendMes()}>Общение</button>
+            
+        </div>
     );
 }
 
