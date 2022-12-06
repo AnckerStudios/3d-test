@@ -15,6 +15,8 @@ function Preview({mtrx = [], objSet = {x: 16, y:16}, prev = true, err=false}) {
     const [changesTypeD, setChangesTypeD] = useState([]);
     const [changesTypeR, setChangesTypeR] = useState([]);
     const [changesPlate, setChangesPlate] = useState([]);
+
+
     useEffect(()=>{
         let changesL = [];
         let changesD = [];
@@ -23,6 +25,7 @@ function Preview({mtrx = [], objSet = {x: 16, y:16}, prev = true, err=false}) {
         for(let row of mtrx){
             for(let item of row){
                 for(let state in item.state){
+
                     switch(state){
                         case 'x':
                             if(item.state.x === true)
