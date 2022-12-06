@@ -27,7 +27,7 @@ function ModelingPage() {
         
          
         <div className=" w-full h-full rounded-xl bg-slate-300 shadow-md relative">
-            <div className=" w-40 h-full absolute  left-4 top-4 flex flex-col  gap-y-4">
+            <div className=" w-40 h-full absolute left-4 top-4 flex flex-col gap-y-4">
                 <div className={` w-full rounded-xl h-20 bg-slate-200 flex-col p-5 justify-center shadow-md flex gap-y-2 relative text-right font-bold`} >
                     {timer}
                 </div>  

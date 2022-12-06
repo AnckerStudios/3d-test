@@ -3,7 +3,7 @@
     vertical-align: bottom;
     max-width: 700px;
     width: 750px;
-    left:500px;
+
     
 
 }
@@ -52,9 +52,8 @@
     height: 530px;
     padding-left: 60px;
     padding-right: 30px;
-    position: absolute;
-    left: 750px;
-    top: 45px;
+
+
     font-size: 17px;
 }
 .formsep legend{

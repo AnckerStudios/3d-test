@@ -1,19 +1,24 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
+import { useParams } from "react-router-dom";
+import ScheduleList from "../components/scheduleComponents/ScheduleList";
+import TopologyListItem from "../element/TopologyListItem";
 
 
 function TopologyPage() {
+    const {id} = useParams();
     function load(){
         axios.get('http://localhost:8080/api/field', {
            
-          })
-          .then(function (response) {
+        })
+        .then(function (response) {
             console.log(response);
-          })
-          .catch(function (error) {
+        })
+        .catch(function (error) {
             console.log(error);
-          });
-      }
+        });
+    }
+
     return (
         <div className="mx-auto w-full max-w-5xl ">
             <div className="w-full bg-slate-0 flex-col">
@@ -36,10 +41,7 @@ function TopologyPage() {
             
                 </div>
                 <div className=" w-full flex flex-col md:flex-row gap-y-2 md:gap-y-0 gap-x-2 p-2">
-                    <div className=" bg-slate-300 rounded-xl h-36 w-full"></div>
-                    
-            
-            
+                    <ScheduleList id={id}/>
                 </div>
             </div>
             
