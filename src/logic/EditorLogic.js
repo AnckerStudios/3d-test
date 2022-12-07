@@ -222,7 +222,7 @@ export function updatePlate(plates, mtrx){
           arr.push({x: plt.x+dx, y: plt.y+dy, number: plates.length+2});
         }
       }
-      copy[plt.x][plt.y].state = {...copy[plt.x][plt.y].state, lines: arr}
+      copy[plt.x][plt.y].state = {...copy[plt.x][plt.y].state, number: plt.number, lines: arr}
     }
   }
   return copy;

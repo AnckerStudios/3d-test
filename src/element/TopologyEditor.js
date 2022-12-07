@@ -28,7 +28,7 @@ function TopologyEditor() {
         }
         })
         .then(function (response) {
-            setMtrx(response.data);
+            setMtrx(response.data.body);
             console.log(response);
         })
         .catch(function (error) {
@@ -53,6 +53,9 @@ function TopologyEditor() {
         console.log(error);
       });
   }
+  function clear(){
+    setMtrx(createMtrx(16,16));
+  }
   return (
     <div className="w-full h-screen flex p-4">
         <div className=" w-full h-full rounded-xl bg-slate-300 shadow-md relative">
@@ -61,6 +64,9 @@ function TopologyEditor() {
             <ViewSwitcher setView={setView}/>
             <button className=" w-24 h-15 absolute  rounded-xl bottom-4 right-4 bg-slate-200 flex shadow-md justify-center font-bold p-1 hover:bg-slate-400" onClick={() => save()}>
                 Save
+            </button>
+            <button className=" w-24 h-15 absolute  rounded-xl bottom-24 right-4 bg-slate-200 flex shadow-md justify-center font-bold p-1 hover:bg-slate-400" onClick={() => clear()}>
+                x
             </button>
         </div>
     </div>
