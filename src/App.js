@@ -35,7 +35,7 @@ function App() {
       <Route path="/modeling" element={<ModelingPage/>}/> 
       <Route path="/modelirovanie" element={<ModelirovaniePage/>}/> 
       <Route path="/topology/:id" element={<TopologyPage/>}/> 
-      <Route path="/create-schedule" element={<ScheduleCreatePage/>}/> 
+      <Route path="/create-schedule/:id" element={<ScheduleCreatePage/>}/> 
       <Route path="/topology-editor/:id" element={<TopologyEditor/>}/> 
     </Routes>
   );

@@ -15,6 +15,7 @@ function AddEntry({schedule, setSchedule, id}) {
             setPlatforms(response.data.plates);
             setInOut(response.data.inOut);
             console.log(response);
+            
         })
         .catch(function (error) {
             console.log(error);

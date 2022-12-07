@@ -5,7 +5,7 @@ import ScheduleTable from '../components/scheduleComponents/ScheduleTable';
 
 
 function ScheduleCreatePage() {
-    
+    const {id} = useParams();
     const [schedule, setSchedule] = useState([]);
 
     function Save(){
@@ -26,7 +26,7 @@ function ScheduleCreatePage() {
     return (
         <div className=' flex p-10 w-full justify-center'>
         <ScheduleTable schedule={schedule}/>
-        <AddEntry schedule={schedule} setSchedule={setSchedule}/>
+        <AddEntry schedule={schedule} setSchedule={setSchedule} id={id}/>
         <button  className='ex2'>Выход</button>
         <button className=" w-24 h-15 absolute  rounded-xl bottom-4 right-4 bg-slate-200 flex shadow-md justify-center font-bold p-1 hover:bg-slate-400" onClick={()=>Save()}>
             save
