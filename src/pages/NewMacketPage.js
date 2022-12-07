@@ -8,7 +8,7 @@ function NewMacketPage() {
         <div>  
             <header className='head'>
             <a href='http://localhost:3000/admin-menu' id = "t1">назад</a>
-            <a href='http://localhost:3000/admin-menu' id = 't2'>домой</a>         
+            <a href='http://localhost:3000/admin-menu' id = 't2'>домой</a>
             </header>    
             <form className='form3'>
                 <legend className='NewMacket'>Настройка макета</legend>

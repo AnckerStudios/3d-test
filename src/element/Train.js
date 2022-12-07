@@ -2,22 +2,13 @@ import React, { useEffect, useRef, useState } from "react";
 import { useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { Vector2, Vector3 } from "three";
-import { centerCell, centerDir, createTrain, dirSwich } from "../logic/ModelingLogic";
+import { centerCell, centerDir, createTrain, createTrainWay, dirSwich } from "../logic/ModelingLogic";
 import Wagon from "./Wagon";
 
 function Train({way=[], timer=0}) {
   const speed = 25;
   const [curPart,setCurPart] = useState(0);
-  let arrDir = [];
-  for(let i = 0; i < way.way.length; i++){
-    if(i !== 0){
-      let coord = centerCell(way.way[i-1],way.way[i]);
-      let dir = centerDir(way.way[i-1].dir,way.way[i].dir);
-      arrDir.push({x: coord.x, y: coord.y, dir: dir});
-    }else{
-      arrDir.push({x: way.way[i].x, y: way.way[i].y, dir: dirSwich(way.way[i].dir )});
-    }
-  }
+  let arrDir = createTrainWay(way);
   const [arrWagons, setArrWagons] = useState(createTrain(way.wagons));
 
   let wagons = [];
@@ -25,32 +16,37 @@ function Train({way=[], timer=0}) {
     wagons.push(<Wagon step={arrWagons[i]}/>);
   }
 
-  const [opacity, setOpacity] = useState(0);
   const [cur,setCur] = useState(0);
   useEffect(()=>{
     if(timer >= way.time){
-      if(cur+1 < way.way.length){
-        if(opacity < 1 && cur === 0){
-          setOpacity((opacity) => opacity+0.05)
-        }
+      
+      if(cur-way.wagons*3 < arrDir.length){
         let arrW = [];
         for(let i = 0; i < way.wagons; i++){
-          let curW;
-          if(cur-3*i < 0){
+          let curW, nextW;
+          let dOpacity = 1/speed;
+          let opacity;
+          if(cur-3*i < 0){ //вынести
             curW = 0;
+            nextW = 0;
+          }else if(cur-3*i >= arrDir.length-1){
+            curW = arrDir.length-1;
+            nextW = arrDir.length-1;
+            opacity = cur-3*i === arrDir.length-1 ? 1 - (dOpacity*curPart) : 0;
           }else{
-            curW = cur-3*i
+            curW = cur-3*i;
+            nextW = curW+1;
+            opacity = curW === 0 ? 0 + (dOpacity*curPart) : 1;
           }
-          let pos = {x:arrDir[curW].x, y:arrDir[curW].y};
-          let dPos = {x: (arrDir[curW+1].x - pos.x)/speed, y: (arrDir[curW+1].y - pos.y)/speed};
 
-          let r1 = arrDir[curW].dir;
-          let dr = (arrDir[curW+1].dir - r1)/speed;
-          if(cur-3*i < 0){
-            arrW.push({pos:{x: pos.x,y: pos.y}, rot: r1});
-          }else{
-            arrW.push({pos:{x: pos.x+(dPos.x*curPart),y: pos.y+(dPos.y*curPart)}, rot: r1+(dr*curPart)});
-          }
+          let pos = {x:arrDir[curW].x, y:arrDir[curW].y};
+          let dPos = {x:(arrDir[nextW].x - pos.x)/speed, y:(arrDir[nextW].y - pos.y)/speed};
+
+          let rot = arrDir[curW].dir;
+          let dRot = (arrDir[nextW].dir - rot)/speed;
+
+          arrW.push({pos:{x: pos.x+(dPos.x*curPart),y: pos.y+(dPos.y*curPart)}, rot: rot+(dRot*curPart), opacity: opacity });
+
           
         }
         setArrWagons(()=>arrW);

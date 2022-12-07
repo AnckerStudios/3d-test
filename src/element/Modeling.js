@@ -2,20 +2,13 @@ import { ArcballControls, DeviceOrientationControls, FirstPersonControls, FlyCon
 import { Canvas, useThree } from "@react-three/fiber";
 
 import { useEffect, useState } from "react";
-import Cell from "./Cell";
-
-
 import Preview from "./Preview";
 import Ground from "./Ground";
 import Train from "./Train";
-import TestMes from "../testComponent/TestMes";
-import RailTypeL_old from "./RailsTypes/RailTypeL_old";
-import CameraControl from "./CameraControl";
-import { setCell, updatePlate } from "../logic/EditorLogic";
+
 
 function Modeling({mtrx=[], ways=[], timer=0}) {
   let objSettings = {x:mtrx.length, y:mtrx[0].length}
-  const [trainGo, setTrainGo] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const handleMouse = (event) => {
     const mouse = {};

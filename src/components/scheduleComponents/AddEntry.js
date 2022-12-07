@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 function AddEntry({schedule, setSchedule, id}) {
 
     useEffect(()=>{
-        axios.get('http://localhost:3000/api/schedule/all', {
+        axios.get('http://localhost:8080/api/topology/plates', {
             params: {
               idTopology: id
             }

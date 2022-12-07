@@ -3,104 +3,132 @@ import React from "react";
 
 
 function ModelirovaniePage() {
-    const hours =[]
-    for(let i =0; i<24;i++){
-        hours.push(
-            <option>{i}</option>
-        )
-    }
-    const min =[]
-    for(let i =0; i<60;i++){
-        min.push(
-            <option>{i}</option>
-        )
-    }
-    const data = [
-        {nplat: "1", nputi: "2", npoezd : "D500A", timepr: "8:00", timeotp: "8:30", marshrut: "Санкт-Петербург-Екатеринбург",type:"п"},
-        {nplat: "1", nputi: "2", npoezd : "333", timepr: "8:00", timeotp: "8:30", marshrut: "город-город2",type:"п"},
-        {nplat: "1", nputi: "2", npoezd : "333", timepr: "8:00", timeotp: "8:30", marshrut: "город-город2",type:"п"},
-        {nplat: "1", nputi: "2", npoezd : "333", timepr: "8:00", timeotp: "8:30", marshrut: "город-город2",type:"п"},
-        {nplat: "1", nputi: "2", npoezd : "333", timepr: "8:00", timeotp: "8:30", marshrut: "город-город2",type:"п"},
-        ]
-        const items = []
-            for(let i = 0; i < data.length; i++){
-                 items.push( <tr>
-                    <td>{data[i].nplat}</td>
-                    <td>{data[i].nputi}</td>
-                    <td>{data[i].npoezd}</td>
-                    <td>{data[i].timeotp}</td>
-                    <td>{data[i].timepr}</td>
-                    <td>{data[i].marshrut}</td>
-                    <td>{data[i].type}</td>
-                </tr>)  
+    let time=React.createRef();
+    let hour=React.createRef(); 
+    let min=React.createRef(); 
+    let minEnd=React.createRef(); 
+    let hourEnd=React.createRef(); 
+    let interval;
+    let h,m;
+    let speed=1000;
+  
+    function start() 
+    {
+      h=hour.current.value;
+      m=min.current.value;
+      if (m<0 || m>60 || h<0 || h>23 || hourEnd.current.value<0 || hourEnd.current.value>23 || hourEnd.current.value < h)
+          {
+              hour.current.value=0;
+              min.current.value=0;
+              hourEnd.current.value = 0;
+              minEnd.current.value = 0;
+              time.current.innerHTML="Некорректный ввод";
+          }
+          else{
+              clearInterval(interval);
+              interval=setInterval(addTime,speed);
             }
-
-        return (
-        
-        <div>  
-            <form className='form5'>
-                <legend className='ff5'>Введите параметры для запуска моделирования</legend>
-                <br/>
-                <label>Начало
-                <span>
-                    <select className = "tim">
-                        {hours}
-                    </select>
-                    <text>:</text>
-                    <select className = "tim">
-                        {min}
-                    </select>
+    }
+  
+    function addTime()
+    {
+           if(((h===hourEnd.current.value) && (m===minEnd.current.value)) || ((h===hourEnd.current.value) && ( m==="0" + minEnd.current.value))|| ((h==="0"+hourEnd.current.value) && ( m==="0" + minEnd.current.value)))
+      {
+          m = m < 10 ? '0'+ m : m;
+          time.current.innerHTML = h + ":" + m;
+          clearInterval(interval);
+      }
+      else 
+      {
+          if(m !== 59)
+          {
+              m = m < 10 ? '0'+ m : m;
+              time.current.innerHTML = h + ":" + m;
+              m++;
+          }
+          else 
+          {
+              time.current.innerHTML = h + ":" + m;
+              m = 0;
+              
+              h++;
+              h = h < 10 ? '0'+ h : h;
+          }
+      }
+            
+    }
+  
+     function pause () {
+          min.current.value = m;
+          hour.current.value =  h;
+          clearInterval(interval);
+    }
+  
+   function stop () {
+          hour.current.value=0;
+          min.current.value=0;
+          hourEnd.current.value=0;
+          minEnd.current.value=0;
+          time.current.innerHTML="00:00";
+          clearInterval(interval);
+    }
+    
+    function x2(){
+      speed=500;
+    }
+    function x1(){
+      speed=1000;
+    }
+    function x3(){
+      speed=250;
+    }
+  
+    return (
+      <div >
+         
+          <section className='form5'>
+                  <legend>Введите параметры для запуска моделирования</legend>
+                  
+                  <section className = 'firstStroka'>
+                      <label className ='lbl'>Начало</label>
+                      <span>
+                          <input type = "number" min ="0" max ="23" className = "tim" ref={hour}/>
+                          <input type = "number" min ="0" max ="60" className = "tim" ref={min}/>
+                      </span>
+                      
+                      <label>Скорость:</label>
+                      <button onClick={x1} id = 'x1'>1X</button>
+                      <button onClick={x2} id = 'x2'>2X</button>
+                      <button onClick={x3} id = 'x3'>3X</button>
+                  </section>
+                  <section className = 'secondStroka'>
+                    <label className = 'lbl2'>Конец</label>
+                    <span  id = 'end'>
+                        <input type = "number" min ="0" max ="23" className = "tim" ref={hourEnd} />
+                        <input type = "number" min ="0" max ="60" className = "tim" ref={minEnd}/>
                     </span>
-                </label>
-                <label>Скорость:</label>
-                <button id = 'x1'>1X</button>
-                <button id = 'x2'>2X</button>
-                <button id = 'x3'>3X</button>
-                <br/>
-                <br/>
-                <label id = "endlabel">Конец
-                <span  id = 'end'>
-                    <select className = "tim">
-                        {hours}
-                    </select>
-                    <text>:</text>
-                    <select className = "tim">
-                        {min}
-                    </select>
-                    </span>
-                </label>
-                <button id = "pusk">Запуск</button>
-            </form>
-            <span id = "timer">Время<br/>
-                00 : 00
-            </span>
-            <table className = "table3">
-            <thead>
-            <tr className='trtab'>
-                <th>№ платф.</th>
-                <th>№ пути</th>
-                <th>№ поезда</th>
-                <th>время<br/>прибытия</th>
-                <th>время<br/>отбытия</th>
-                <th>маршрут</th>
-                <th>тип<br/>поезда</th>
-             </tr>
-            </thead>
-            <tbody>
-                {items}{items}
-            </tbody>
-        </table>
-            <form className='rec'>
-                <button id = "sqvare"></button>
-                <button id = "treug"></button>
-                <button id = 'pause'>
-                    <form className='dd'></form>
-                    <form className='dd2'></form>
-                </button>
-            </form>
-        <button className='ex4'>Выход</button>
-        </div>
-        
+                    
+                    <button onClick={start} id = "pusk">Запуск</button>
+                  </section>
+          </section>
+  
+              <section >
+              <p id = "timer">Время</p>
+              <p id = "timer2" ref = {time} >00:00</p>
+              </section>
+  
+              <section className='rec'>
+                  <button onClick={stop} id = "sqvare"></button>
+                  <button onClick={start} id = "treug"></button>
+                  <button onClick={pause} id = 'pause'>
+                      <section className='dd'/>
+                      <section className='dd2'/>
+                  </button>
+              </section>
+          <button className='ex4'>Выход</button>
+          </div>
+      
     );
-}
-export default ModelirovaniePage; 
+  }
+  
+  export default ModelirovaniePage; 

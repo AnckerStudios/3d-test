@@ -118,42 +118,63 @@ function createWay(first, second){
     let curY = first.y;
     let fscroll = first.scroll;
     let sscroll = second.scroll;
-    if(deltaX === 0){
-      //console.log('its x')
-      if(!fscroll && !sscroll){
-        console.log('its ++x')
-        while((curY != second.y)){
-          //console.log('++++')
-          arr.push({x: curX, y: curY, state: 'y'});
-          curY = curY + iy;
-        }
-        arr.push({x: curX, y: curY, state: 'y'});
-      }
-    }else if(deltaY === 0){
-      //console.log('its y')
-
-      if(fscroll && sscroll){
-        //console.log('its ++y')
-        while((curX != second.x)){
-          arr.push({x: curX, y: curY, state: 'x'});
+    arr.push({x: curX, y: curY, state: fscroll ? 'x' : 'y'});
+    if(fscroll === sscroll){
+      if(fscroll ? Math.abs(deltaX) > Math.abs(deltaY) : Math.abs(deltaX) < Math.abs(deltaY)){
+        if(fscroll ? deltaY === 0 : deltaX === 0){
+          while(fscroll ? (curX != second.x) : (curY != second.y)){
+            arr.push({x: curX, y: curY, state: fscroll ? 'x' : 'y'});
+            curX = fscroll ? curX + ix : curX;
+            curY = fscroll ? curY : curY + iy;
+          }
+        }else{
+          curX = fscroll ? curX + ix : curX;
+          curY = fscroll ? curY : curY + iy;
+          arr.push({x: curX, y: curY, state: testSwich(ix, iy, fscroll)});
           curX = curX + ix;
+          curY = curY + iy;
+      
+          while((curX != second.x) && (curY != second.y)){
+            arr.push({x: curX, y: curY, state: ix === iy ? 'dy' : 'dx'});
+            curX = curX + ix;
+            curY = curY + iy;
+          }
+          arr.push({x: curX, y: curY, state: testSwich(-ix, -iy, sscroll)});
+          while((curX != second.x) || (curY != second.y)){
+            curX = sscroll ? curX + ix : curX;
+            curY = sscroll ? curY : curY + iy;
+            arr.push({x: curX, y: curY, state: sscroll ? 'x' : 'y'});
+          }
         }
-        arr.push({x: curX, y: curY, state: 'x'});
       }
     }else{
-    curX = fscroll ? curX + ix : curX;
-    curY = fscroll ? curY : curY + iy;
-    arr.push({x: curX, y: curY, state: testSwich(ix, iy, fscroll)});
-    curX = curX + ix;
-    curY = curY + iy;
-
-    while((curX != second.x) && (curY != second.y)){
-      arr.push({x: curX, y: curY, state: ix === iy ? 'dy' : 'dx'});
-      curX = curX + ix;
-      curY = curY + iy;
-    }
-    arr.push({x: curX, y: curY, state: testSwich(-ix, -iy, sscroll)});
-    }
+      if(fscroll ? Math.abs(deltaY) > 1 && Math.abs(deltaX) > 1 : Math.abs(deltaX) > 1 && Math.abs(deltaY) > 1){
+        if(fscroll ? Math.abs(deltaX) > Math.abs(deltaY) : Math.abs(deltaX) < Math.abs(deltaY)){
+          for(let i = 0; i < Math.abs(Math.abs(deltaX) - Math.abs(deltaY)); i++){
+            curX = fscroll ? curX + ix : curX;
+            curY = fscroll ? curY : curY + iy;
+            arr.push({x: curX, y: curY, state: fscroll ? 'x' : 'y'});
+          }
+        }
+        curX = fscroll ? curX + ix : curX;
+        curY = fscroll ? curY : curY + iy;
+        arr.push({x: curX, y: curY, state: testSwich(ix, iy, fscroll)});
+        curX = curX + ix;
+        curY = curY + iy;
+      
+        while((curX != second.x) && (curY != second.y)){
+          arr.push({x: curX, y: curY, state: ix === iy ? 'dy' : 'dx'});
+          curX = curX + ix;
+          curY = curY + iy;
+        }
+          arr.push({x: curX, y: curY, state: testSwich(-ix, -iy, sscroll)});
+          while((curX != second.x) || (curY != second.y)){
+              curX = sscroll ? curX + ix : curX;
+              curY = sscroll ? curY : curY + iy;
+              arr.push({x: curX, y: curY, state: sscroll ? 'x' : 'y'});
+          }
+      }
+    } 
     return arr;
 }
 

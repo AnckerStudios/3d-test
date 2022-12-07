@@ -12,8 +12,8 @@ function ToolListElement({setTool, tool, selectedTool}) {
     }
     return (
         <div className={` w-full rounded-xl aspect-square ${selectedTool === tool.id ? ' bg-orange-300' : 'bg-slate-200'} flex-col p-2 shadow-md flex gap-y-2 relative`} onClick={() => selectTool()}>
-            <div className={` w-full h-full rounded-xl  ${selectedTool === tool.id ?  ' bg-amber-700': 'bg-slate-400'}`}>
-                <img src={toolLogo}/>
+            <div className={` w-full h-full rounded-xl  ${selectedTool === tool.id ?  ' bg-amber-700': 'bg-slate-400'} p-4`}>
+                <img src={`./picture/${selectedTool === tool.id ? tool.name+'-select' : tool.name}.png`}/>
             </div>
             <div className="m-auto font-bold flex">{tool.name}
                 
