@@ -123,9 +123,9 @@ function createWay(first, second){
       if(fscroll ? Math.abs(deltaX) > Math.abs(deltaY) : Math.abs(deltaX) < Math.abs(deltaY)){
         if(fscroll ? deltaY === 0 : deltaX === 0){
           while(fscroll ? (curX != second.x) : (curY != second.y)){
-            arr.push({x: curX, y: curY, state: fscroll ? 'x' : 'y'});
             curX = fscroll ? curX + ix : curX;
             curY = fscroll ? curY : curY + iy;
+            arr.push({x: curX, y: curY, state: fscroll ? 'x' : 'y'});
           }
         }else{
           curX = fscroll ? curX + ix : curX;
