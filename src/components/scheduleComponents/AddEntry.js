@@ -101,20 +101,20 @@ function AddEntry({schedule, setSchedule, id}) {
                     </datalist>
                 </label><br/>
                 <label>In
-                    <select className = "addsep" value={entry.cells.in} onChange={(e)=>setEntry({...entry, nputi: e.target.value})}>
+                    <select className = "addsep" value={entry.cells.in} onChange={(e)=>setEntry({...entry, cells: {...entry, in: e.target.value}})}>
                         {inOut?.map(io => {
                             return <option>x: {io.x} y: {io.y}</option>
                         })}
                     </select>
                 </label><br/>
                 <label>Out
-                    <select className = "addsep" value={entry.nputi} onChange={(e)=>setEntry({...entry, nputi: e.target.value})}>
+                    <select className = "addsep" value={entry.cells.out} onChange={(e)=>setEntry({...entry, cells: {...entry, out: e.target.value}})}>
                         {inOut?.map(io => {
                             return <option>x: {io.x} y: {io.y}</option>
                         })}
                     </select>
                 </label><br/>
-                <label>Выберите тип поезда<select className = "addsep" value={entry.type} onChange={(e)=>setEntry({...entry, cells: e.target.value})}>
+                <label>Выберите тип поезда<select className = "addsep" value={entry.type} onChange={(e)=>setEntry({...entry, type: e.target.value})}>
                         {types}
                     </select></label><br/>
                 <button id = "bb" className='cent' onClick={()=>Add()}>Добавить</button>

@@ -214,12 +214,12 @@ export function updatePlate(plates, mtrx){
       let arr = [];
       if(plt.x-dx > 0 && plt.y-dy > 0){
         if(copy[plt.x-dx][plt.y-dy].type === "rail" && copy[plt.x-dx][plt.y-dy].state[dir ? "x" : "y"] === true){
-          arr.push({x: plt.x-dx, y: plt.y-dy, number: plates.length+1});
+          arr.push({x: plt.x-dx, y: plt.y-dy, number: plt.number+1});
         }
       }
       if(plt.x+dx < copy.length && plt.y+dy < copy[plt.x].length){
         if(copy[plt.x+dx][plt.y+dy].type === "rail" && copy[plt.x+dx][plt.y+dy].state[dir ? "x" : "y"] === true){
-          arr.push({x: plt.x+dx, y: plt.y+dy, number: plates.length+2});
+          arr.push({x: plt.x+dx, y: plt.y+dy, number: plt.number+2});
         }
       }
       copy[plt.x][plt.y].state = {...copy[plt.x][plt.y].state, number: plt.number, lines: arr}
