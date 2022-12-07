@@ -48,7 +48,7 @@ function Editor({mtrx=[],setMtrx, view=true, tool='cursor'}) {
     if(isFirstClick()){
       setClickedCell({first: selectedCell});
       if(tool.name === "plate"){
-        setPlates([...plates, {x: selectedCell.x, y: selectedCell.y}]);
+        setPlates([...plates, {x: selectedCell.x, y: selectedCell.y, number: plates.length}]);
       }
     }
     else{

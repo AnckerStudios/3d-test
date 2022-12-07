@@ -101,7 +101,7 @@ function AddEntry({schedule, setSchedule, id}) {
                     </datalist>
                 </label><br/>
                 <label>In
-                    <select className = "addsep" value={entry.nputi} onChange={(e)=>setEntry({...entry, nputi: e.target.value})}>
+                    <select className = "addsep" value={entry.cells.in} onChange={(e)=>setEntry({...entry, nputi: e.target.value})}>
                         {inOut?.map(io => {
                             return <option>x: {io.x} y: {io.y}</option>
                         })}

@@ -2,6 +2,7 @@ import '../pagesStyle/ScheduleEditorPage.css';
 import React, { useState } from "react";
 import AddEntry from '../components/scheduleComponents/AddEntry';
 import ScheduleTable from '../components/scheduleComponents/ScheduleTable';
+import { useParams } from 'react-router-dom';
 
 
 function ScheduleCreatePage() {
