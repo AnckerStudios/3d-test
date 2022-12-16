@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import TopologyListItem from "../element/TopologyListItem";
 
 
-function Monul() {
+function ModelingListPage() {
     const [topologys,setTopologys] = useState([{topologyName:22,idTopology:22}]);
     useEffect(()=>{
         axios.get('http://localhost:8080/api/topology/all')
@@ -42,4 +42,4 @@ function Monul() {
 }
 
 
-export default Monul;
+export default ModelingListPage;

@@ -1,15 +1,60 @@
 import '../pagesStyle/ScheduleEditorPage.css';
-import React from "react";
+import AddEntry from '../components/scheduleComponents/AddEntry';
+import ScheduleTable from '../components/scheduleComponents/ScheduleTable';
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from 'react-router-dom';
+import axios from 'axios';
+import ModalDateSelector from '../components/scheduleComponents/ModalDateSelector';
 
 
 function ScheduleEditorPage() {
- 
+    const {id, topology} = useParams();
+    const [schedule, setSchedule] = useState([]);
     const data = [
-    {nplat: "1", nputi: "2", npoezd : "D500A", timepr: "8:00", timeotp: "8:30", marshrut: "Санкт-Петербург-Екатеринбург",type:"п"},
-    {nplat: "1", nputi: "2", npoezd : "333", timepr: "8:00", timeotp: "8:30", marshrut: "город-город2",type:"п"},
-    {nplat: "1", nputi: "2", npoezd : "333", timepr: "8:00", timeotp: "8:30", marshrut: "город-город2",type:"п"},
-    {nplat: "1", nputi: "2", npoezd : "333", timepr: "8:00", timeotp: "8:30", marshrut: "город-город2",type:"п"},
-    ]
+        {plate: {number: 1, lines:[{x:0,y:0,number:1}]}, plateLine: {x:0,y:0,number:1}, trainName : "D500A", arrivalTime: {h:0,m:0}, departureTime: {h:1,m:0}, marshrut: "Санкт-Петербург-Екатеринбург",typeTrain:"п"},
+        {plate: {number: 1, lines:[{x:0,y:0,number:1}]}, plateLine: {x:0,y:0,number:1}, trainName : "333", arrivalTime: {h:0,m:0}, departureTime: {h:0,m:20}, marshrut: "город-город2",typeTrain:"п"},
+        {plate: {number: 1, lines:[{x:0,y:0,number:1}]}, plateLine: {x:0,y:0,number:1}, trainName : "333", arrivalTime: {h:12,m:0}, departureTime: {h:12,m:20}, marshrut: "город-город2",typeTrain:"п"},
+        {plate: {number: 1, lines:[{x:0,y:0,number:1}]}, plateLine: {x:0,y:0,number:1}, trainName : "333", arrivalTime: {h:8,m:0}, departureTime: {h:8,m:30}, marshrut: "город-город2",typeTrain:"п"},
+        ];
+    const [date, setDate] = useState();
+    useEffect(()=>{
+        console.log(id, topology)
+        if(id === 'create'){
+            
+        }else{
+            axios.get('http://localhost:3000/api/schedule/', {
+                params: {
+                idTopology: id //или дату и id топологии
+                }
+            })
+            .then(function (response) {
+                setSchedule(response.data);
+                console.log(response);
+            })
+            .catch(function (error) {
+                setSchedule(data); //убрать
+                setDate("2.2.22");
+                console.log(error);
+            });
+        }
+    },[])
+
+    function Save(){
+        // axios.post('http://localhost:8080/api/topology', {
+        //     title: 'lox',
+        //     body: mtrx
+        //   })
+        //   .then(function (response) {
+        //     console.log(response);
+        //   })
+        //   .catch(function (error) {
+        //     console.log(mtrx[0][0])
+        //     console.log(mtrx[1][0])
+        //     console.log(error);
+        //   });
+    }
+
+    
     const nplat = ['1','2','3','4']
     const nput = ['1','2','3','4']
     const type = ['Пассаж.','Груз.','Электричка']
@@ -60,77 +105,21 @@ function ScheduleEditorPage() {
         }
 
     return (
-        <div className='divsep'>
-         <table className = "table2">
-            <caption>Расписание</caption>
-            <thead>
-            <tr className='trtab'>
-                <th>№ платф.</th>
-                <th>№ пути</th>
-                <th>№ поезда</th>
-                <th>время<br/>прибытия</th>
-                <th>время<br/>отбытия</th>
-                <th>маршрут</th>
-                <th>тип поезда</th>
-             </tr>
-            </thead>
-            <tbody>
-                {items}{items}{items}
-            </tbody>
-        </table>
-    
-        <form className='formsep'>
-            <fieldset>
-                <legend>Добавить запись</legend>
-                <label id = "firstlab">Выберите платформу<select className = "addsep">
-                        {platforms}
-                    </select></label><br/>
-                <label>Выберите путь<select className = "addsep">
-                        {puty}
-                    </select></label><br/>
-                <label>Введите номер поезда<input className = "addsep text-center"  type = "text" minLength = "1" maxLength = "6"></input></label>
-                <br/>
-                <label>Время прибытия
-                    <span id = "tpr">
-                    <select className = "tim">
-                        {hours}
-                    </select>
-                    <text>:</text>
-                    <select id ="ti" className = "tim">
-                        {min}
-                    </select>
-                    </span>
-                </label> <br/>
-                <label>Время отравления
-                <span id='totpr'>
-                    <select className = "tim">
-                        {hours}
-                    </select>
-                    <text>:</text>
-                    <select className = "tim">
-                        {min}
-                    </select>
-                    </span>
-                </label>
-                <br/><br/>
-                <label>Город отправления<input className = "addsep" placeholder='Введите город...' list='list'/>
-                    <datalist id = 'list'>
-                        {sitys}
-                    </datalist>
-                </label><br/>
-                <label>Город прибытия<input className = "addsep" placeholder='Введите город...' list='list'/>
-                    <datalist id = 'list'>
-                        {sitys}
-                    </datalist>
-                </label><br/>
-                <label>Выберите тип поезда<select className = "addsep">
-                        {types}
-                    </select></label><br/>
-                <button id = "bb" className='cent'>Добавить</button>
-            </fieldset>
-        </form>
+        <>
+        <div className=' flex p-10 w-full justify-center h-full'>
+        {date && <ScheduleTable schedule={schedule}/>}
+        {date && <AddEntry schedule={schedule} setSchedule={setSchedule} id={id}/>}
+        {!date && <ModalDateSelector set={setDate}/>}
         <button  className='ex2'>Выход</button>
+        <button className=" w-24 h-15 absolute  rounded-xl bottom-4 right-4 bg-slate-200 flex shadow-md justify-center font-bold p-1 hover:bg-slate-400" onClick={()=>Save()}>
+            save
+        </button>
+        <Link className=" w-24 h-15 absolute  rounded-xl bottom-24 right-4 bg-slate-200 flex shadow-md justify-center font-bold p-1 hover:bg-slate-400" to={`/modeling/${id}`}>
+            model
+        </Link>
         </div>
+        
+        </>
     );
 }
 export default ScheduleEditorPage; 

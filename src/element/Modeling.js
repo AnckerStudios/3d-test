@@ -23,7 +23,7 @@ function Modeling({mtrx=[], ways=[], timer=0}) {
   }
   let trains = [];
   for(let i = 0; i < ways.length; i++){
-    trains.push(<Train pos={[0,i,0]} way={ways[i]} timer={timer}/>)
+    trains.push(<Train pos={[0,i,0]} train={ways[i]} timer={timer}/>)
   }
   useEffect(() => {
     document.addEventListener("mousemove", handleMouse);

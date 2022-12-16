@@ -8,13 +8,13 @@ function ScheduleTable({schedule}) {
     const items = []
     for(let i = 0; i < schedule.length; i++){
         items.push( <tr>
-            <td>{schedule[i].nplat}</td>
-            <td>{schedule[i].nputi}</td>
-            <td>{schedule[i].npoezd}</td>
-            <td>{schedule[i].timepr.h}:{schedule[i].timepr.m}</td>
-            <td>{schedule[i].timeotp.h}:{schedule[i].timeotp.m}</td>
+            <td>{schedule[i].plate.number}</td>
+            <td>{schedule[i].plateLine.number}</td>
+            <td>{schedule[i].trainName}</td>
+            <td>{schedule[i].arrivalTime.h}:{schedule[i].arrivalTime.m}</td>
+            <td>{schedule[i].departureTime.h}:{schedule[i].departureTime.m}</td>
             <td>{schedule[i].marshrut.otp}-{schedule[i].marshrut.pr}</td>
-            <td>{schedule[i].type}</td>
+            <td>{schedule[i].typeTrain}</td>
         </tr>)  
     }
     
