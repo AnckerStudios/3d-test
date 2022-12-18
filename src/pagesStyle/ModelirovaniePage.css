@@ -1,192 +1,251 @@
-.form5{
-    background-color: #efefef;
-    font-size: 20px;
-    width: 630px;
-    position: relative;
-    top: 15px;
-}
-.form5 legend{
-    position: relative;
-    top: 5px;
-    left:6%;
-    font-size: 20px;
-    padding: 5px;
-    
+.bigdivformmod {
+    width: 100vW;
+    height: 100vh;
+    display: flex;
+    background-color: rgb(245, 253, 254);
+    color: rgb(2, 12, 52);
+    flex-direction: row;
+    justify-content: end;
 }
 
-.form5 label{
+.columndiv {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: space-between;
+}
+
+.divwithform {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+
+.form5 {
+    background-color: #7191b1b0;
+    font-size: 15px;
+    width: fit-content;
+    height: fit-content;
+}
+
+.form5 legend {
+    font-size: 17px;
+    padding: 5px;
+    margin-left: 25px;margin-right: 25px;
+    margin-bottom: 10px;
+
+}
+
+.form5 label {
     padding-left: 15px;
+
+
+}
+.strocktimer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.strocktimer label{
     position: relative;
-    top:-10px;
+    top:5px;
 }
-#end{
-    padding-left: 12px;
-    position: relative;
-    top: 0px;
+.addtime2 {
+
+    width: 130px;
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+    border-color: rgb(2, 12, 52);
+    border-width: 1px;
+    border-radius: 4px;
+    cursor: text;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 15px;
+
+
 }
-#endlabel{
-    top: -30px;
-}
-.form5 button{
+
+
+.form5 button {
     border-radius: 5px;
     border-width: 2px;
     padding-left: 10px;
     padding-right: 10px;
     padding-top: 5px;
     padding-bottom: 5px;
-    font-size: 20px;
-    font-weight: medium;
-    margin: 10px;
-    position: relative;
-    top:-10px;
-    left: 10px;
+    font-size: 10px;
+    margin: 7px;
 }
-#pusk{
-    height: 50px;
-    width: 300px;
-    color: #fffdfd;
-    background-color: black;
-    border-radius: 25px;
-    top: -30px;
-}
-#pusk:hover{
-    border-width: 1px;
-    border-color:#4b4a49;
-   
-}
-#pusk:focus{
-    outline-color: #4b4a49;
-}
-#pusk:active {
-    color: black;
-    background-color: #4b4a49;
-}
-#x1{
-    background-color: black;
-    color: #efefef;
-}
-#x2{
-    background-color: #efefef;
-    color: black;
-}
-#x3{
-    background-color: #efefef;
-    color: black;
-}
-#timer{
 
-    position: relative;
-    left:668px;
-    top: -200px;
+#pusk {
+    height: 35px;
+    width: 180px;
+    color: #fffdfd;
+    background-color: rgb(2, 12, 52);
+    border-radius: 25px;
+    margin-left: 10px;
+
+}
+
+#pusk:hover {
+    border-width: 1px;
+    border-color: rgba(195, 205, 248, 0.595);
+
+}
+
+#pusk:focus {
+    outline-color: rgba(195, 205, 248, 0.595);
+}
+
+#pusk:active {
+    color: rgb(2, 12, 52);
+    background-color: rgba(66, 85, 166, 0.595);
+}
+
+#x1 {
+    background-color: rgb(2, 12, 52);
+    color: #edf0f3d4;
+}
+
+#x2 {
+    background-color: #edf0f3d4;
+    color: rgb(2, 12, 52);
+}
+
+#x3 {
+    background-color: #edf0f3d4;
+    color: rgb(2, 12, 52);
+}
+
+.timer {
     font-size: 35px;
     font-weight: bold;
+    position: absolute;
+    left:20%;
+    top:2%
 }
-.table3{
-	border: 1px solid #eee;
+
+
+.table3 {
+    border: 1px solid #eee;
     vertical-align: bottom;
     max-width: 700px;
-    width: 750px;
-    left:500px;
-    position: absolute;
-    top:2%;
-    left: 54%;
+    width: 700px;
+
 }
-.table3 th{
-	background: #efefef;
-	border: 1px solid #dddddd;
-    padding: 0px;
-    
+
+.table3 th {
+    background:  rgb(5, 23, 95);
+    color: #F7F7F7;
+    border: 1px solid rgba(14, 28, 47, 0.571);
+
 }
-.table3 th+th+th+th{
-	padding: 3px 3px;
+
+.table3 th+th+th+th {
+    padding: 1px 3px;
 }
 
 .table3 td {
-	border: 1px solid #eee;
+    border: 1px solid rgba(14, 28, 47, 0.571);
     text-align: center;
     height: 20px;
     font-size: 13px;
     padding-top: 5px;
     padding-bottom: 5px;
 }
-.table3 caption{
-    text-align: left;
-    font-size: 10px;
+
+.table3 caption {
+    text-align: center;
+    font-size: 20px;
 }
-.table3 tbody tr:nth-child(odd){
-	background: #fff;
+
+.table3 tbody tr:nth-child(odd) {
+    background: #F7F7F7;
 }
-.table3 tbody tr:nth-child(even){
-	background: #F7F7F7;
+
+.table3 tbody tr:nth-child(even) {
+    background: #7191b1b0 ;
 }
-.trtab{
-    font-size:x-small;
+
+.trtab {
+    font-size: x-small;
 }
-.rec{
-    position: absolute;
-    width: 450px;
-    height: 102px;
-    left: 1196px;
-    top: 542px;
-    background: #D9D9D9;
+
+.rec {
+
+    width:280px;
+    height: 50px;
+    background: #d9d9d9;
     display: flex;
     flex-direction: row;
-    padding: 25px;
-}
-#sqvare{
-    position: relative;
-    width: 47px;
-    height: 47px;
-    left: 180px;
+    justify-content:space-around;
+    padding: 7px;
+    margin-bottom: 30px;
+    margin-top: 10px;
+    background-color: #385572b0;
 
-    background: #101010;
-    border-radius: 10px;
 }
-#treug{
-    border: 22px solid transparent; border-left: 33px solid black;
+
+#sqvare {
+    width: 27px;
+    height: 27px;
+    background: #f8f9fe;
     border-radius: 5px;
-    position: relative;
-    width: 50px;
-    height: 45px;
-    left:60px;
+    margin-top: 2px;
 
 }
-.dd{
-    position: relative;
-    width: 17px;
-    height: 45px;
-    left:-60px;
 
+#treug {
+    border: 18px solid transparent;
+    border-left: 19px solid #f8f9fe;
+    border-radius: 7px;
+}
 
-    background: #111111;
+.dd {
+    width: 10px;
+    height: 30px;
+
+    background: #f8f9fe;
     border-radius: 6px;
 }
-.dd2{
-    position: relative;
-    width: 17px;
-    height: 45px;
-    left: -90px;
-    top: -45px;
-    background: #111111;
+
+.dd2 {
+    
+    width: 10px;
+    height: 30px;
+    background: #f8f9fe;
     border-radius: 6px;
-}
-#pause{
-    height: 45;
-    width: 66;
+    margin-left: 6px;
+
 }
 
-#square:hover{
-    background-color:grey;
-}
-.ex4{
-    background-color: black;
-    color: #dddddd;
-    height: 40px;
-    width: 340px;
-    text-align: left;
-    padding-left: 30px;
-    position:absolute;
-    right: 0%;
-    bottom: 6%;
 
+#square:hover {
+    background-color: grey;
+}
+#pause div{
+    display: flex;
+    flex-direction: row;
+}
+.ex4 {
+    font-size: 200%;
+    padding: 5px;
+    padding-right: 30px;
+    padding-left: 20px;
+    margin-top: 10px;
+    color: #021c31;
+}
+.ex4:hover{
+    color: rgb(182, 202, 246) ;
+}
+.ex4:active{
+    color: rgb(101, 99, 255) ;
+}
+.buttonex{
+    position: absolute;
+}
+.divwithtable{
+    margin-top: 30px;
 }
