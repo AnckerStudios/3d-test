@@ -19,7 +19,7 @@ function AddEntry({schedule, setSchedule, id}) {
         })
         .catch(function (error) {
             console.log(error);
-            setPlatforms([{number: 1, lines:[{x:0,y:0,number:1}]},{number: 2, lines:[{x:0,y:0,number:3},{x:0,y:0,number:4}]},{number: 3, lines:[{x:0,y:0,number:5},{x:0,y:0,number:6}]}]);
+            setPlatforms([{number: 7, lines:[{x:0,y:0,number:1}]},{number: 8, lines:[{x:0,y:0,number:3},{x:0,y:0,number:4}]},{number: 4, lines:[{x:0,y:0,number:5},{x:0,y:0,number:6}]}]);
             setInOut([{x:0,y:0,dir:0},{x:15,y:9,dir:0},{x:0,y:3,dir:0},{x:4,y:0,dir:0}]);
         });
     },[])
@@ -27,7 +27,7 @@ function AddEntry({schedule, setSchedule, id}) {
     const [platforms,setPlatforms] = useState();
     const [inOut,setInOut] = useState();
     const type = ['Пассаж.','Груз.','Электричка'];
-    const [entry, setEntry] = useState({plate: {number: 1, lines:[{x:0,y:0,number:1}]}, plateLine: {x:0,y:0,number:1}, trainName: "gg", arrivalTime: '10:23', departureTime:'12:34',departureCity:"Samara" ,arrivalCity:"Moscow" ,typeTrain: "type", in:{x:0,y:0,dir:2}, out:{x:0,y:0,dir:2}});
+    const [entry, setEntry] = useState({plate: {number: 1,dir:true, lines:[{x:0,y:0,number:1}]}, plateLine: {x:0,y:0,number:1}, trainName: "gg", arrivalTime: '10:23', departureTime:'12:34',departureCity:"Samara" ,arrivalCity:"Moscow" ,typeTrain: "type", in:{x:0,y:0,dir:2}, out:{x:0,y:0,dir:2}});
 
     const sity = [{city:"Самара"}, {city:"Москва"},{city:"Санкт-Петербург"},{city:"Оренбург"}, ]
     const sitys = []
@@ -69,11 +69,11 @@ function AddEntry({schedule, setSchedule, id}) {
                 <br/>
                 <label>Время прибытия
                     <span id = "tpr">
-                        <input type="number" min="0" max="23" onChange={(e)=>setEntry({...entry, arrivalTime: {...entry.arrivalTime,h:e.target.value}})}/>
+                        <input type="number" min="0" max="23" /*onChange={(e)=>setEntry({...entry, arrivalTime: {...entry.arrivalTime,h:e.target.value}})}*//>
 
                     <text>:</text>
 
-                        <input type="number" min="0" max="59" onChange={(e)=>setEntry({...entry, arrivalTime: {...entry.arrivalTime,m:e.target.value}})}/>
+                        <input type="number" min="0" max="59" /*onChange={(e)=>setEntry({...entry, arrivalTime: {...entry.arrivalTime,m:e.target.value}})}*//>
  
                     </span>
                 </label> <br/>
@@ -90,12 +90,12 @@ function AddEntry({schedule, setSchedule, id}) {
                 </label>
                 <br/><br/>
                 <label>Город отправления
-                    <input className = "addsep" placeholder='Введите город...' list='list' onChange={(e)=>setEntry({...entry, marshrut: {...entry.marshrut, otp: e.target.value}})}/>
+                    <input className = "addsep" placeholder='Введите город...' list='list' onChange={(e)=>setEntry({...entry, departureCity: e.target.value})}/>
                     <datalist id = 'list'>
                         {sitys}
                     </datalist>
                 </label><br/>
-                <label>Город прибытия<input className = "addsep" placeholder='Введите город...' list='list' onChange={(e)=>setEntry({...entry, marshrut: {...entry.marshrut, pr: e.target.value}})}/>
+                <label>Город прибытия<input className = "addsep" placeholder='Введите город...' list='list' onChange={(e)=>setEntry({...entry, arrivalCity: e.target.value})}/>
                     <datalist id = 'list'>
                         {sitys}
                     </datalist>
@@ -103,7 +103,7 @@ function AddEntry({schedule, setSchedule, id}) {
                 <label>In
                     <select className = "addsep" value={entry.in} onChange={(e)=>setEntry({...entry, in: e.target.value})}>
                         {inOut?.map(io => {
-                            return <option>x: {io.x} y: {io.y}</option>
+                            return <option value={{x:io.x,y:io.y,dir:io.dir}}>x: {io.x} y: {io.y}</option>
                         })}
                     </select>
                 </label><br/>
