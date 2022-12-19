@@ -40,14 +40,11 @@ function ScheduleEditorPage() {
     },[])
 
     function Save(){
-        axios.post('http://localhost:8080/api/schedule/save', {
+        axios.post('http://localhost:8080/api/schedule/save',schedule, {
             params: {
                 idTopology: topology,
                 dateTimeString: date
-              },
-            body:{
-                records: schedule
-            }
+              }
           })
           .then(function (response) {
             console.log(response);
