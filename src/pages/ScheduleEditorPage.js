@@ -45,7 +45,9 @@ function ScheduleEditorPage() {
                 idTopology: topology,
                 dateTimeString: date
               },
-            records: schedule
+            body:{
+                records: schedule
+            }
           })
           .then(function (response) {
             console.log(response);
