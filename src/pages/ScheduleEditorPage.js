@@ -22,7 +22,7 @@ function ScheduleEditorPage() {
         if(id === 'create'){
             
         }else{
-            axios.get('http://localhost:3000/api/schedule/', {
+            axios.get('http://localhost:8080/api/schedule/', {
                 params: {
                 idTopology: id //или дату и id топологии
                 }
@@ -40,7 +40,7 @@ function ScheduleEditorPage() {
     },[])
 
     function Save(){
-        axios.post('http://localhost:3000/api/schedule/save', {
+        axios.post('http://localhost:8080/api/schedule/save', {
             params: {
                 idTopology: topology,
                 dateTimeString: date
@@ -111,7 +111,7 @@ function ScheduleEditorPage() {
         <>
         <div className=' flex p-10 w-full justify-center h-full'>
         {date && <ScheduleTable schedule={schedule}/>}
-        {date && <AddEntry schedule={schedule} setSchedule={setSchedule} id={id}/>}
+        {date && <AddEntry schedule={schedule} setSchedule={setSchedule} id={topology}/>}
         {!date && <ModalDateSelector set={setDate}/>}
         <button  className='ex2'>Выход</button>
         <button className=" w-24 h-15 absolute  rounded-xl bottom-4 right-4 bg-slate-200 flex shadow-md justify-center font-bold p-1 hover:bg-slate-400" onClick={()=>Save()}>
