@@ -74,8 +74,10 @@ function AddEntry({schedule, setSchedule, id}) {
     const [arTime, setArTime] = useState({h:0,m:0});
     const [deTime, setDeTime] = useState({h:0,m:0});
 
-    useEffect(()=>{setEntry({...entry, arrivalTime: `${arTime.h}:${arTime.m}`})},[arTime])
-    useEffect(()=>{setEntry({...entry, departureTime: `${deTime.h}:${deTime.m}`})},[deTime])
+    useEffect(()=>{
+        setEntry({...entry, arrivalTime: `${arTime.h < 10 ? '0'+arTime.h :arTime.h }:${arTime.m < 10 ? '0'+arTime.m :arTime.m }`});
+    },[arTime])
+    useEffect(()=>{setEntry({...entry, departureTime: `${deTime.h < 10 ? '0'+deTime.h :deTime.h }:${deTime.m < 10 ? '0'+deTime.m :deTime.m }`})},[deTime])
     
     return (
         <div className='formsep'>
@@ -103,22 +105,22 @@ function AddEntry({schedule, setSchedule, id}) {
                 <br/>
                 <label>Время прибытия
                     <span id = "tpr">
-                        <input type="number" min="0" max="23" onChange={(e)=>setArTime({...arTime, h: +e.target.value})}/>
+                        <input type="number" min="0" max="23" value={arTime.h} onChange={(e)=>setArTime({...arTime, h: +e.target.value > 23? 23: Math.floor(+e.target.value) })}/>
 
                     :
 
-                        <input type="number" min="0" max="59" onChange={(e)=>setArTime({...arTime, m: +e.target.value})}/>
+                        <input type="number" min="0" max="59" value={arTime.m} onChange={(e)=>setArTime({...arTime, m: +e.target.value > 59? 59: Math.floor(+e.target.value) })}/>
  
                     </span>
                 </label> <br/>
                 <label>Время отравления
                 <span id='totpr'>
 
-                        <input type="number" min="0" max="23" onChange={(e)=>setDeTime({...deTime, h: +e.target.value})}/>
+                        <input type="number" min="0" max="23"  value={deTime.h} onChange={(e)=>setDeTime({...deTime,  h: +e.target.value > 23? 23: Math.floor(+e.target.value)})}/>
 
                     :
  
-                        <input type="number" min="0" max="59" onChange={(e)=>setDeTime({...deTime, m: +e.target.value})}/>
+                        <input type="number" min="0" max="59" value={deTime.m} onChange={(e)=>setDeTime({...deTime, m: +e.target.value > 59? 59: Math.floor(+e.target.value) })}/>
 
                     </span>
                 </label>
