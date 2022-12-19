@@ -40,18 +40,19 @@ function ScheduleEditorPage() {
     },[])
 
     function Save(){
-        // axios.post('http://localhost:8080/api/topology', {
-        //     title: 'lox',
-        //     body: mtrx
-        //   })
-        //   .then(function (response) {
-        //     console.log(response);
-        //   })
-        //   .catch(function (error) {
-        //     console.log(mtrx[0][0])
-        //     console.log(mtrx[1][0])
-        //     console.log(error);
-        //   });
+        axios.post('http://localhost:3000/api/schedule/save', {
+            params: {
+                idTopology: topology,
+                dateTimeString: date
+              },
+            records: schedule
+          })
+          .then(function (response) {
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
     }
 
     
