@@ -11,9 +11,9 @@ function ScheduleTable({schedule}) {
             <td>{schedule[i].plate.number}</td>
             <td>{schedule[i].plateLine.number}</td>
             <td>{schedule[i].trainName}</td>
-            <td>{schedule[i].arrivalTime.h}:{schedule[i].arrivalTime.m}</td>
-            <td>{schedule[i].departureTime.h}:{schedule[i].departureTime.m}</td>
-            <td>{schedule[i].marshrut.otp}-{schedule[i].marshrut.pr}</td>
+            <td>21:05</td>
+            <td>21:05</td>
+            <td>{schedule[i].departureCity}-{schedule[i].arrivalCity}</td>
             <td>{schedule[i].typeTrain}</td>
         </tr>)  
     }
