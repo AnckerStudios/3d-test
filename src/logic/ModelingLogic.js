@@ -41,6 +41,28 @@ export function createTrainWay(way){
     console.log(arrDir);
     return arrDir;
 }
+
+export function createPaths(trains){
+    let paths = [];
+    for(let t = 0; t < trains.length; t++){
+        let trainPath = [];
+        for(let i = 0; i < trains[t].way.length; i++){
+            if(i !== 0){
+                let coord = centerCell(trains[t].way[i-1],trains[t].way[i]);
+                let dir = centerDir(trains[t].way[i-1].dir,trains[t].way[i].dir);
+                trainPath.push({x: coord.x, y: coord.y, dir: dir});
+                if(i === trains[t].way.length-1){
+                    trainPath.push({x: coord.x + dirCoord(trains[t].way[i].dir).x, y: coord.y + dirCoord(trains[t].way[i].dir).y, dir: dir});
+                }
+            }else{
+                trainPath.push({x: trains[t].way[i].x - dirCoord(trains[t].way[i].dir).x, y: trains[t].way[i].y - dirCoord(trains[t].way[i].dir).y, dir: dirSwich(trains[t].way[i].dir)});
+                trainPath.push({x: trains[t].way[i].x - dirCoord(trains[t].way[i].dir).x, y: trains[t].way[i].y - dirCoord(trains[t].way[i].dir).y, dir: dirSwich(trains[t].way[i].dir)});
+            }
+        }   
+        paths.push(trainPath);
+    }
+    return paths;
+}
 export function centerCell(c1, c2){
     let dc = dirCoord(c2.dir);
     let c3 = {x: c2.x + dc.x, y: c2.y + dc.y};
@@ -57,4 +79,21 @@ export function createTrain(size){
         arrWagons.push({pos:{x: 0,y: 0}, rot: 0, opacity: 0});
     }
     return arrWagons;
+}
+
+export function createWagonInfo(len,arrDir){
+    let arr = [];
+    let dir = dirCoord(arrDir[0].dir);
+    console.log("dir",arrDir[0].dir)
+    for(let i = 0; i < len; i++){
+      arr.push({x: arrDir[0].x-(3*i*1), y: arrDir[0].y-(3*i*0), dir: arrDir[0].dir});
+    }
+    return arr;
+}
+export function createNextArr(len){
+    let arr = [];
+    for(let i = 0; i < len; i++){
+      arr.push(1);
+    }
+    return arr;
 }

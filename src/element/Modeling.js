@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import Preview from "./Preview";
 import Ground from "./Ground";
 import Train from "./Train";
+import TrainsController from "./TrainsController";
 
 
 function Modeling({mtrx=[], ways=[], timer=0}) {
@@ -21,10 +22,10 @@ function Modeling({mtrx=[], ways=[], timer=0}) {
     
 
   }
-  let trains = [];
-  for(let i = 0; i < ways.length; i++){
-    trains.push(<Train pos={[0,i,0]} train={ways[i]} timer={timer}/>)
-  }
+  // let trains = [];
+  // for(let i = 0; i < ways.length; i++){
+  //   trains.push(<Train pos={[0,i,0]} train={ways[i]} timer={timer}/>)
+  // }
   useEffect(() => {
     document.addEventListener("mousemove", handleMouse);
     return () => {
@@ -40,7 +41,8 @@ function Modeling({mtrx=[], ways=[], timer=0}) {
             <pointLight position={[-3,0,2]}/>
             <Preview mtrx={mtrx} objSet={objSettings} prev={false}/>
             <Ground mousePos={mousePos} objSet={objSettings} enterFunk={сellSelection}/>
-            {trains}
+            {/* {trains} */}
+            <TrainsController trains={ways} timer={timer}/>
             {/* {trainGo && <Train mtrx={mtrx} >} */}
           </Canvas>
     );
