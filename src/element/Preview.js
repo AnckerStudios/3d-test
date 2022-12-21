@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Cell from "./Cell";
+import Light from "./RailsTypes/Light";
 import Plate from "./RailsTypes/Plate";
 
 import RailD from "./RailsTypes/RailD";
@@ -15,6 +16,7 @@ function Preview({mtrx = [], objSet = {x: 16, y:16}, prev = true, err=false}) {
     const [changesTypeD, setChangesTypeD] = useState([]);
     const [changesTypeR, setChangesTypeR] = useState([]);
     const [changesPlate, setChangesPlate] = useState([]);
+    const [changesLight, setChangesLight] = useState([]);
 
 
     useEffect(()=>{
@@ -22,6 +24,7 @@ function Preview({mtrx = [], objSet = {x: 16, y:16}, prev = true, err=false}) {
         let changesD = [];
         let changesR = [];
         let changesP = [];
+        let chanLight = [];
         for(let row of mtrx){
             for(let item of row){
                 for(let state in item.state){
@@ -75,6 +78,10 @@ function Preview({mtrx = [], objSet = {x: 16, y:16}, prev = true, err=false}) {
                             if(item.state.ry_right === true)
                             changesR.push({x:item.x, y:item.y, rot: {x: 0, y: 0, z: Math.PI/2}, index: ((item.x * row.length + item.y) * (prev ? 1 : 8) + (prev ? 0 : 7))});
                             break;
+                        case 'light':
+                            if(item.state.light === true)
+                            chanLight.push({x:item.x, y:item.y, rot: {x: 0, y: 0, z: 0}});
+                            break;
                         case 'dir':
                             if(item.state.dir === true){
                                 changesP.push({x:item.x, y:item.y, rot: {x: 0, y: 0, z: 0}, state: item.state.plate});
@@ -90,15 +97,17 @@ function Preview({mtrx = [], objSet = {x: 16, y:16}, prev = true, err=false}) {
         setChangesTypeD(changesD);
         setChangesTypeR(changesR);
         setChangesPlate(changesP);
+        setChangesLight(chanLight);
     },[mtrx])
 
     return (
         <>
             
-            <RailL arr={changesTypeL} count={objSet.x * objSet.y * (prev ? 1 : 2)} color={prev ? ( err ? 'red' :'lime') : 'white'}/>
-            <RailR arr={changesTypeR} count={objSet.x * objSet.y * (prev ? 1 : 8)} color={prev ? ( err ? 'red' :'lime') : 'white'}/>
-            <Plate arr={changesPlate} color={prev ? ( err ? 'red' :'lime') : 'white'}/>
-            <RailD arr={changesTypeD} count={objSet.x * objSet.y * (prev ? 1 : 2)} color={prev ? ( err ? 'red' :'lime') : 'white'}/>
+            <RailL arr={changesTypeL} count={objSet.x * objSet.y * (prev ? 1 : 2)} color={prev ? ( err ? 'red' :'lime') : 'white'} prev={prev}/>
+            <RailR arr={changesTypeR} count={objSet.x * objSet.y * (prev ? 1 : 8)} color={prev ? ( err ? 'red' :'lime') : 'white'} prev={prev}/>
+            <Plate arr={changesPlate} color={prev ? ( err ? 'red' :'lime') : 'white'} prev={prev}/>
+            <Light arr={changesLight} color={prev ? ( err ? 'red' :'lime') : 'white'} prev={prev}/>
+            <RailD arr={changesTypeD} count={objSet.x * objSet.y * (prev ? 1 : 2)} color={prev ? ( err ? 'red' :'lime') : 'white'} prev={prev}/>
         </>
     );
 }

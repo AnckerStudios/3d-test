@@ -1,7 +1,7 @@
 import { ArcballControls, DeviceOrientationControls, FirstPersonControls, FlyControls, MapControls, PointerLockControls, PresentationControls, ScrollControls, Stats, TrackballControls } from "@react-three/drei";
 import { Canvas, useThree } from "@react-three/fiber";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Cell from "./Cell";
 
 
@@ -13,7 +13,8 @@ import RailTypeL_old from "./RailsTypes/RailTypeL_old";
 import CameraControl from "./CameraControl";
 import { setCell, updatePlate } from "../logic/EditorLogic";
 
-function Editor({mtrx=[],setMtrx, view=true, tool='cursor'}) {
+function Editor({mtrx=[],setMtrx, view=true, tool='cursor', flag}) {
+  const ref = useRef();
   const [selectType, setSelectType] = useState('none');
   const [clickedCell, setClickedCell] = useState({first: undefined, second: undefined});
   const [selectedCell, setSelectedCell] = useState({x: undefined, y: undefined, scroll: true});
@@ -30,7 +31,10 @@ function Editor({mtrx=[],setMtrx, view=true, tool='cursor'}) {
   const [plates, setPlates] = useState([]);
 
 
- 
+  useEffect(()=>{
+    
+    console.log(ref.current.toDataURL('image/jpg')); 
+  },[flag])
 
   function createMtrx(x, y){
     let arr = [];
@@ -165,7 +169,7 @@ function Editor({mtrx=[],setMtrx, view=true, tool='cursor'}) {
   }
   
   return (
-          <Canvas orthographic camera={{position: [50+25, -50+25, 50], zoom: 20, rotation: view ? [Math.PI/4, Math.PI/5, Math.PI/6] : [Math.PI/4, Math.PI/5, 0]}} 
+          <Canvas ref={ref} orthographic camera={{position: [50+25, -50+25, 50], zoom: 20, rotation: view ? [Math.PI/4, Math.PI/5, Math.PI/6] : [Math.PI/4, Math.PI/5, 0]}} 
                   onWheel={(e) => scrollWheel(e)} onClick={()=>cellClicking()} onContextMenu={()=>contextFunk()}>
             <Stats/>
             <CameraControl view = {view} zoom = {zoom} pos = {camPos}/>

@@ -27,7 +27,7 @@ function ToolList({setTool}) {
     }
 
     return (
-        <div className=" w-40 h-full absolute  left-4 top-4 flex flex-col  gap-y-4">
+        <div className=" w-1/12 h-full absolute  left-4 top-4 flex flex-col gap-y-4">
             {tools}   
         </div>
     );
