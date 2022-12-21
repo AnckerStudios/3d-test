@@ -1,10 +1,15 @@
-/* html{
-    font-size: 20px;
-    font-family: "Montserrat";
-    font-weight: medium;
-} */
+.divhome{
+    height: 100vh;
+    width: 100vw;
+    background-color: #f0f9e0;
+    color: #132b02;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    
+}
 .but{
-    background-color:dimgray;
+    background-color:#5e9400;
     width: 350px;
     height: 50px;
     margin-top: 30px;
@@ -22,15 +27,15 @@
     outline-color: #4b4a49;
 }
 .but:active {
-    background:#b39b6e;
-    border-color: #f0f4ed;
-    color: black;
+    background:#dcf9aa;
+    border-color: #2c4618;
+    color: #0e1d03;
 }
 .in{
     width: 350px;
     height: 40px;
     border-width: 1px;
-    border-color: black;
+    border-color:  #0e1d03;;
     padding-left: 12px;
     font-size: 20px;
     position: relative;

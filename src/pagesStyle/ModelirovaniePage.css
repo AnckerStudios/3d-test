@@ -105,8 +105,8 @@
 }
 
 #x1 {
-    background-color: rgb(2, 12, 52);
-    color: #edf0f3d4;
+    background-color: #edf0f3d4;
+    color: rgb(2, 12, 52);
 }
 
 #x2 {
@@ -176,7 +176,7 @@
 .rec {
 
     width:280px;
-    height: 50px;
+    height: 70px;
     background: #d9d9d9;
     display: flex;
     flex-direction: row;
@@ -188,49 +188,58 @@
 
 }
 
-#sqvare {
-    width: 27px;
-    height: 27px;
-    background: #f8f9fe;
-    border-radius: 5px;
+.sqvare {
+    width: 50px;
+    height: 50px;
     margin-top: 2px;
-
-}
-
-#treug {
-    border: 18px solid transparent;
-    border-left: 19px solid #f8f9fe;
     border-radius: 7px;
-}
+    border-color: transparent;
+    background-color: transparent;
+    background-image: url('/public/picture/Vector-1.png');
+    background-repeat: no-repeat;
+    background-size: 30px 35px;
+    background-position: center;
+  }
+  .sqvare:hover
+  {
+    border-color: #385572b0;
+  }
+  .treug {
+    width: 50px;
+    height: 50px;
+    margin-top: 2px;
+    border-radius: 7px;
+    border-color: transparent;
+    background-color: transparent;
+    background-image: url('/public/picture/Vector-2.png');
+    background-repeat: no-repeat;
+    background-size: 30px 35px;
+    background-position: center;
+  }
+  
+  .treug:hover
+  {
+    border-color: #385572b0;
+  }
+  
+  .pause{
+    width: 50px;
+    height: 50px;
+    margin-top: 2px;
+    border-radius: 7px;
+    border-color: transparent;
+    background-color: transparent;
+    background-image: url('/public/picture/Vector.png');
+    background-repeat: no-repeat;
+    background-size: 30px 35px;
+    background-position: center;
+  }
+  .pause:hover
+  {
+    border-color: #385572b0;
+  }
 
-.dd {
-    width: 10px;
-    height: 30px;
-
-    background: #f8f9fe;
-    border-radius: 6px;
-}
-
-.dd2 {
-    
-    width: 10px;
-    height: 30px;
-    background: #f8f9fe;
-    border-radius: 6px;
-    margin-left: 6px;
-
-}
-
-
-#square:hover {
-    background-color: grey;
-}
-#pause div{
-    display: flex;
-    flex-direction: row;
-}
 .ex4 {
-    font-size: 200%;
     padding: 5px;
     padding-right: 30px;
     padding-left: 20px;
@@ -244,6 +253,7 @@
     color: rgb(101, 99, 255) ;
 }
 .buttonex{
+    font-size:medium;
     position: absolute;
 }
 .divwithtable{

@@ -1,5 +1,7 @@
 import '../pagesStyle/ModelirovaniePage.css';
-import React from "react";
+import React, { createRef } from "react";
+import { useState } from "react";
+
 const data = [
   { nplat: "1", nputi: "2", npoezd: "D500A", timepr: "8:00", timeotp: "8:30", marshrut: "Санкт-Петербург-Екатеринбург", type: "п" },
   { nplat: "1", nputi: "2", npoezd: "333", timepr: "8:00", timeotp: "8:30", marshrut: "город-город2", type: "п" },
@@ -21,78 +23,87 @@ for (let i = 0; i < data.length; i++) {
 }
 
 function ModelirovaniePage() {
-  let time = React.createRef();
-  let hour = React.createRef();
-  let min = React.createRef();
-  let minEnd = React.createRef();
-  let hourEnd = React.createRef();
-  let interval;
-  let h, m;
-  let speed = 1000;
+  const [start, setStart] = useState();
+  const [end, setEnd] = useState();
 
-  function start() {
-    h = hour.current.value;
-    m = min.current.value;
-    if (m < 0 || m > 60 || h < 0 || h > 23 || hourEnd.current.value < 0 || hourEnd.current.value > 23 || hourEnd.current.value < h) {
-      hour.current.value = 0;
-      min.current.value = 0;
-      hourEnd.current.value = 0;
-      minEnd.current.value = 0;
+  let arr, arr2, h, m, hourEnd, minuteEnd;
+  let time = createRef();
+  let interval;
+
+  function pusk() {
+    arr = start.split(':');
+    arr2 = end.split(':');
+    h = arr[0];
+    m = arr[1];
+    hourEnd = arr2[0]
+    minuteEnd = arr2[1];
+
+    if (hourEnd < h) {
+      h = 0;
+      m = 0;
+      hourEnd = 0;
+      minuteEnd = 0;
       time.current.innerHTML = "Некорректный ввод";
     }
     else {
       clearInterval(interval);
-      interval = setInterval(addTime, speed);
+      interval = setInterval(addTime, 1000);
     }
   }
 
   function addTime() {
-    if (((h === hourEnd.current.value) && (m === minEnd.current.value)) || ((h === hourEnd.current.value) && (m === "0" + minEnd.current.value)) || ((h === "0" + hourEnd.current.value) && (m === "0" + minEnd.current.value))) {
-      m = m < 10 ? '0' + m : m;
+    if (((h === hourEnd) && (m === minuteEnd)) || ((h === hourEnd) && (m === "0" + minuteEnd)) || ((h === "0" + hourEnd) && (m === "0" + minuteEnd))) {
+      m = m < 10 && m !== '00' ? '0' + m : m;
       time.current.innerHTML = h + ":" + m;
       clearInterval(interval);
     }
     else {
       if (m !== 59) {
-        m = m < 10 ? '0' + m : m;
+        if (m < 10) {
+          if (m < 10 && m.length !== 2) {
+            m = '0' + m;
+          }
+
+
+        }
+
         time.current.innerHTML = h + ":" + m;
         m++;
       }
       else {
         time.current.innerHTML = h + ":" + m;
-        m = 0;
-
+        m = '00';
         h++;
         h = h < 10 ? '0' + h : h;
       }
     }
-
   }
 
   function pause() {
-    min.current.value = m;
-    hour.current.value = h;
+    setStart(h + ':' + m);
     clearInterval(interval);
   }
 
   function stop() {
-    hour.current.value = 0;
-    min.current.value = 0;
-    hourEnd.current.value = 0;
-    minEnd.current.value = 0;
     time.current.innerHTML = "00:00";
     clearInterval(interval);
+    arr2[0] = hourEnd;
+    arr2[1] = minuteEnd;
   }
 
   function x2() {
-    speed = 500;
+    clearInterval(interval);
+    interval = setInterval(addTime, 500);
   }
   function x1() {
-    speed = 1000;
+    clearInterval(interval);
+    interval = setInterval(addTime, 1000);
   }
   function x3() {
-    speed = 250;
+    clearInterval(interval);
+    interval = setInterval(addTime, 250);
   }
+
 
   return (
     <div className='bigdivformmod'>
@@ -126,12 +137,12 @@ function ModelirovaniePage() {
               <label >Начало
               </label>
               <span>
-                <input className="addtime2" type="time"></input>
+                <input type="time" className="addtime2" onChange={(e) => setStart(e.target.value)} />
               </span>
               <label>Конец
               </label>
               <span>
-                <input className="addtime2" type="time"></input>
+                <input className="addtime2" type="time" onChange={(e) => setEnd(e.target.value)}></input>
               </span>
             </span>
 
@@ -140,21 +151,16 @@ function ModelirovaniePage() {
               <button onClick={x1} id='x1'>1X</button>
               <button onClick={x2} id='x2'>2X</button>
               <button onClick={x3} id='x3'>3X</button>
-              <button onClick={start} id="pusk">Запуск</button>
+              <button onClick={pusk} id="pusk">Запуск</button>
             </span>
 
 
           </div>
 
           <div className='rec'>
-            <button onClick={stop} id="sqvare"></button>
-            <button onClick={pause} id='pause'>
-              <div>
-                <section className='dd' />
-                <section className='dd2' />
-              </div>
-            </button>
-            <button onClick={start} id="treug"></button>
+            <button onClick={stop} className="sqvare"></button>
+            <button onClick={pause} className='pause'></button>
+            <button onClick={pusk} className="treug"></button>
 
           </div>
 
@@ -162,11 +168,11 @@ function ModelirovaniePage() {
 
       </div>
       <div className='buttonex'>
-          <a href='http://localhost:3000/admin-menu' className='ex4'>x</a>
+        <button className='ex4'>Выход</button>
       </div>
       <div className='timer'>
         <p id="timer">Время</p>
-        <p id="timer2" ref={time} >00:00</p>
+        <p ref={time} id="timer2" >00:00</p>
       </div>
     </div>
 
