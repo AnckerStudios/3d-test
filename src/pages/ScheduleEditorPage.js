@@ -33,7 +33,7 @@ function ScheduleEditorPage() {
             })
             .catch(function (error) {
                 setSchedule(data); //убрать
-                setDate("2.2.22");
+                setDate("02-02-22");
                 console.log(error);
             });
         }
@@ -112,12 +112,11 @@ function ScheduleEditorPage() {
         <div className=' flex p-10 w-full justify-center h-full'>
         {date && <ScheduleTable schedule={schedule}/>}
         {date && <AddEntry schedule={schedule} setSchedule={setSchedule} id={topology}/>}
-        {!date && <ModalDateSelector set={setDate}/>}
         <button  className='ex2'>Выход</button>
         <button className=" w-24 h-15 absolute  rounded-xl bottom-4 right-4 bg-slate-200 flex shadow-md justify-center font-bold p-1 hover:bg-slate-400" onClick={()=>Save()}>
             save
         </button>
-        <Link className=" w-24 h-15 absolute  rounded-xl bottom-24 right-4 bg-slate-200 flex shadow-md justify-center font-bold p-1 hover:bg-slate-400" to={`/modeling/${id}`}>
+        <Link className=" w-24 h-15 absolute  rounded-xl bottom-24 right-4 bg-slate-200 flex shadow-md justify-center font-bold p-1 hover:bg-slate-400" to={`/modeling/${id}/${date}`}>
             model
         </Link>
         </div>
