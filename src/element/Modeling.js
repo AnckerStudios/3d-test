@@ -42,7 +42,7 @@ function Modeling({mtrx=[], ways=[], timer=0}) {
             <Preview mtrx={mtrx} objSet={objSettings} prev={false}/>
             <Ground mousePos={mousePos} objSet={objSettings} enterFunk={сellSelection}/>
             {/* {trains} */}
-            <TrainsController trains={ways} timer={timer}/>
+            <TrainsController trains={ways} timer={timer} mtrx={mtrx}/>
             {/* {trainGo && <Train mtrx={mtrx} >} */}
           </Canvas>
     );

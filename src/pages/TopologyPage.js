@@ -3,7 +3,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import ModalDateSelector from "../components/scheduleComponents/ModalDateSelector";
 import ScheduleList from "../components/scheduleComponents/ScheduleList";
-import TopologyListItem from "../element/TopologyListItem";
 
 
 function TopologyPage() {

@@ -34,7 +34,7 @@ function App() {
       <Route path="/schedule-editor/:topology/:id" element={<ScheduleEditorPage/>}/> 
       <Route path="/schedule" element={<SchedulePage/>}/>
       {/* <Route path="/modelirovanie" element={<ModelirovaniePage/>}/> */}
-      <Route path="/modeling/:id" element={<ModelingPage/>}/> 
+      <Route path="/modeling/:id/:date" element={<ModelingPage/>}/> 
       <Route path="/modelirovanie" element={<ModelirovaniePage/>}/> 
       <Route path="/topology/:id" element={<TopologyPage/>}/> 
       <Route path="/create-schedule/:id" element={<ScheduleCreatePage/>}/> 

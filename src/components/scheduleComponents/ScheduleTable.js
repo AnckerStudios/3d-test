@@ -3,39 +3,44 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
 
-function ScheduleTable({schedule}) {
+function ScheduleTable({schedule = [], loading = true}) {
 
     const items = []
     for(let i = 0; i < schedule.length; i++){
-        items.push( <tr key={i}>
-            <td>{schedule[i].plate.number}</td>
-            <td>{schedule[i].plateLine.number}</td>
-            <td>{schedule[i].trainName}</td>
-            <td>{schedule[i].arrivalTime}</td>
-            <td>{schedule[i].departureTime}</td>
-            <td>{schedule[i].departureCity}-{schedule[i].arrivalCity}</td>
-            <td>{schedule[i].typeTrain}</td>
+        items.push( <tr key={i} className=' border'>
+            <td className=" text-center">{schedule[i].plate.number}</td>
+            <td className=" text-center">{schedule[i].plateLine.number}</td>
+            <td className=" text-center">{schedule[i].trainName}</td>
+            <td className=" text-center">{schedule[i].arrivalTime}</td>
+            <td className=" text-center">{schedule[i].departureTime}</td>
+            <td className=" text-center">{schedule[i].departureCity}-{schedule[i].arrivalCity}</td>
+            <td className=" text-center">{schedule[i].typeTrain}</td>
         </tr>)  
     }
     
     return (
-        <table className = "table2">
+        <div>
+        <table className = " ">
             <caption>Расписание</caption>
+            
             <thead>
-            <tr className='trtab'>
-                <th>№ платф.</th>
-                <th>№ пути</th>
-                <th>№ поезда</th>
-                <th>время<br/>прибытия</th>
-                <th>время<br/>отбытия</th>
-                <th>маршрут</th>
-                <th>тип поезда</th>
-             </tr>
+                <tr className=' border'>
+                 <th className=" p-2">№ пути</th>
+                 <th className=" p-2">№ платф.</th>
+                 <th className=" p-2">№ поезда</th>
+                 <th className=" p-2">время<br/>прибытия</th>
+                 <th className=" p-2">время<br/>отбытия</th>
+                 <th className=" p-2">маршрут</th>
+                 <th className=" p-2">тип поезда</th>
+                 </tr>
             </thead>
+            
+           
             <tbody>
-                {items}
+                {loading ? <div>Loading...</div> : items}
             </tbody>
         </table>
+        </div>
         
     );
 }

@@ -6,10 +6,12 @@ import ScheduleListItem from "./ScheduleListItem";
 
 
 function ScheduleList({id}) {
-    const [schedules,setSchedules] = useState([{scheduleName:'26.12.22', idSchedule:1},{scheduleName:'27.12.22', idSchedule:2}]);
+    const [schedules,setSchedules] = useState();
     const [currentIndex, setCurrentIndex] = useState(0)
-    const [length, setLength] = useState(schedules.length)
+    const [length, setLength] = useState(2)
+    const [loading, setLoading] = useState(true);
     useEffect(()=>{
+        setLoading(true);
         axios.get('http://localhost:3000/api/schedule/all', {
             params: {
               idTopology: id
@@ -18,9 +20,12 @@ function ScheduleList({id}) {
         .then(function (response) {
             setSchedules(response.data);
             console.log(response);
+            setLoading(false);
         })
         .catch(function (error) {
+            setSchedules([{timetableDate:'26-12-2222', idSchedule:1},{timetableDate:'27-12-2222', idSchedule:2}]);
             console.log(error);
+            setLoading(false);
         });
         console.log(schedules);
     },[])
@@ -63,12 +68,13 @@ function ScheduleList({id}) {
 
         <div className=" w-full relative">
             <div className=" w-full flex overflow-hidden">
+                {loading ? <div>Loading...</div>:
                 <div className=" flex gap-4 " style={{ transform: `translateX(-${currentIndex * 25}%)` }}>
                 {schedules?.map(schedule => {
-                    return <ScheduleListItem key={schedule.idSchedule} name={schedule.scheduleName} id={schedule.idSchedule} del={delShedule} idTopology={id}/>
+                    return <ScheduleListItem key={schedule.idSchedule} date={schedule.timetableDate} id={schedule.idSchedule} del={delShedule} idTopology={id}/>
                 })}
-                <ScheduleAddItem idTopology={id}/>
-                </div>  
+                <ScheduleAddItem idTopology={id} schedules={schedules}/>
+                </div>  }
                 
                 
             </div> 

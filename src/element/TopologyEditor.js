@@ -3,6 +3,7 @@ import axios from "axios";
 
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
+import TopologyModal from "../components/topologyComponents/TopologyModal";
 import { createMtrx } from "../logic/EditorLogic";
 import Cell from "./Cell";
 import Editor from "./Editor";
@@ -78,6 +79,7 @@ function TopologyEditor() {
                 test
             </button>
         </div>
+        {/* <TopologyModal/> */}
     </div>
     );
 }

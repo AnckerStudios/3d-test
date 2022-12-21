@@ -6,26 +6,38 @@ import { Vector2, Vector3 } from "three";
 import { createPaths, dirSwich } from "../logic/ModelingLogic";
 import Train from "./Train";
 
-function TrainsController({trains=[], timer=0}) {
+function TrainsController({trains=[], timer=0, mtrx=[]}) {
 
+  
+  
   const paths = createPaths(trains);
   const [err,setErr] = useState(false);
   const [trainInfo, setTrainInfo] = useState(createTrains(trains));
-  console.log(trainInfo);
+  const [trainLight, setTrainLight] = useState(createLights(mtrx));
+
   function createTrains(trains){
     let arr = [];
     for(let i = 0; i < trains.length; i++){
-      
       arr.push({wagons:creareWagons(trains[i],paths[i]), step:0.1, isMoving:true, isStop:false});
     }
     return arr;
+  }
+  function createLights(mtrx){
+    let lights = {};
+    for(let i = 0; i < mtrx.length; i++){
+      for(let j = 0; j < mtrx[i].length; j++){
+        if(mtrx[i][j]?.state?.light === true){
+          lights[i+j*mtrx.length] = {busy: false, owner: false};
+        }
+      }
+    }
+    return lights;
   }
   function creareWagons(trains,paths){
     let arrWagons = [];
     for(let w = 0; w < trains.wagons; w++){
       arrWagons.push({next:1,pos:{x: paths[0].x-(3*w*1), y: paths[0].y-(3*w*0), dir: dirSwich(trains.way[0].dir)}})
     }
-    console.log("wagon",trains.wagons)
     return arrWagons;
   }
   let arrTrains = [];
@@ -33,24 +45,42 @@ function TrainsController({trains=[], timer=0}) {
     arrTrains.push(<Train key={i} train={trainInfo[i]}/>);
   }
   useEffect(()=>{
-    console.log(timer);
-    setTrainInfo(MoveTrains());
+    MoveTrains();
+    setCurTimer(timer);
   },[timer])
 
-
+  
+  const [curTimer, setCurTimer] = useState(0);
   function MoveTrains(){
-    let arr = createTrains(trains);
-    for(let t=0; t<timer; t++){
+    let arr;
+    let lights;
+    let timeCount;
+    if(timer >= curTimer){
+      arr = Object.assign([],trainInfo);
+      lights = Object.assign([],trainLight);
+      timeCount = curTimer;
+    }else{
+      arr = createTrains(trains);
+      lights = createLights(mtrx);
+      timeCount = 0;
+    }
+    
+    for(let t=timeCount; t<timer; t++){
       for(let tr=0; tr<trainInfo.length; tr++){
+        
         if(t >= trains[tr].time){
-            if(!arr[tr].isStop && test(arr, tr)){
+            if(test2(arr, tr, lights)){
+            
               arr[tr].step = 0;
-              arr[tr].isStop = true;
-            }
-            if(arr[tr].isStop && t >= trains[tr].timeOtb){
+              
+            }else{
+            
               arr[tr].step = 0.1;
-              arr[tr].isStop = false;
             }
+            // if(arr[tr].isStop && t >= trains[tr].timeOtb){
+            //   arr[tr].step = 0.1;
+            //   arr[tr].isStop = false;
+            // }
             for(let w = 0; w < trainInfo[tr].wagons.length; w++){
               let n = arr[tr].wagons[w].next;
               let pos = arr[tr].wagons[w].pos;
@@ -68,7 +98,11 @@ function TrainsController({trains=[], timer=0}) {
         }
       }
     }
-    return arr;
+    
+    setTrainInfo(arr);
+    setTrainLight(lights);
+
+    //return arr;
   }
   function test(arr, tr){
     let stopWay = arr[tr].wagons[0].next-1
@@ -77,6 +111,34 @@ function TrainsController({trains=[], timer=0}) {
         return true;
       }
     }
+    return false;
+  }
+  function test2(arr, tr, lights){
+    let stopWay = arr[tr].wagons[0].next+1
+    let lastWag = arr[tr].wagons[arr[tr].wagons.length-1].next-3;
+    if(lastWag > 0){
+      let index = paths[tr][lastWag].x + paths[tr][lastWag].y * mtrx.length;
+      if(lights[index]?.owner === tr){
+       
+        lights[index].owner = false;
+        lights[index].busy = false;
+        
+      }
+    }
+    if(stopWay < paths[tr].length){
+      let index = paths[tr][stopWay].x + paths[tr][stopWay].y * mtrx.length;
+      if(lights[index] !== undefined){
+        
+        if(lights[index]?.busy === false || lights[index]?.owner === tr){
+          lights[index].owner = tr;
+          lights[index].busy = true;
+          return false;
+        }else{
+          return true;
+        }
+      }
+    }
+    
     return false;
   }
   function collisionDetect(arr,index){
