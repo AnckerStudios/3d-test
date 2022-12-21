@@ -8,7 +8,7 @@
 
 }
 .table2 th{
-	background: #efefef;
+	background: rgba(255, 244, 255, 0.808);
 	border: 1px solid #dddddd;
     padding: 8px;
     
@@ -20,7 +20,7 @@
 
 .table2 td {
 	padding: 10px;
-	border: 1px solid #eee;
+	border: 1px solid rgb(222, 180, 226);
     text-align: center;
     height: 20px;
     font-size: 15px;
@@ -30,21 +30,25 @@
     font-size: 30px;
 }
 .table2 tbody tr:nth-child(odd){
-	background: #fff;
+	background: rgba(116, 91, 139, 0.33);
 }
 .table2 tbody tr:nth-child(even){
-	background: #F7F7F7;
+	background: rgba(255, 244, 255, 0.808);
 }
 .trtab{
     font-size: small;
 }
 .divsep{
-    
-    position:relative;
-    top: 90px;
-    left: 100px;    
-    height: 500px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgb(234, 211, 255);
+    color: rgb(23, 1, 44);
 }
+
 
 .formsep{
     background-color:#F7F7F7;
@@ -52,8 +56,9 @@
     height: 530px;
     padding-left: 60px;
     padding-right: 30px;
-
-    
+    margin: 50px;
+    border-radius: 10px;
+    background-color: rgba(116, 91, 139, 0.33);
     font-size: 17px;
 }
 .formsep legend{
@@ -82,58 +87,65 @@
     border-color: black;
     border-width: 1px;
     border-radius: 4px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 15px;
+}
+.addtime{
+    width: 160px;
+    position: relative;
+    left: 30px;
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+    margin-left: 30%; 
+    margin-top: -30px;
+    border-color: black;
+    border-width: 1px;
+    border-radius: 4px;
     cursor:text;
     padding-left: 10px;
     padding-right: 10px;
     font-size: 15px;
 }
 
-.tim{
-    width: 68px;
-    padding: 5px;
-    border-color: black;
-    border-width: 1px;
-    border-radius: 4px;
-    
-    cursor:text;
-    margin-left: 10px;
-    margin-right: 10px;
-    position: relative;
-    padding-left: 12px;
-    font-size: 15px;
-    cursor:text;
-}
-#ti{
-    margin-bottom: 20px;
-}
-
-#h{
-    display: flex;
-    flex-direction: row;
-}
 
 #tpr{
     position: relative;
-    left:62px;
+    left:70px;
 
 }
 #totpr{
     position: relative;
-    left:46px;
+    left:70px;
 }
-.ex2{
-    background-color: black;
-    color: #dddddd;
-    height: 40px;
-    width: 300px;
-    text-align: left;
-    padding-left: 30px;
-    position:absolute;
-    top:-40px;
-    left:1240px;
-}
+
 #bb{
     position: relative;
     top:-20px;
     left: 125px;
+}
+.centr{
+    font-weight: bold;
+    cursor:pointer;
+    font-size: 25px;
+    position: relative;
+    bottom: 50px;
+    left: 30%;
+}
+.centr:hover{
+    color:rgba(255, 244, 255, 0.808);
+    
+}
+.centr:active{
+    color:rgba(35, 24, 35, 0.808);
+    
+}
+.ex{
+    font-size: 300%;
+    position: absolute;
+    left:96%;
+}
+.ex:active{
+    color:rgb(213, 184, 184);
 }

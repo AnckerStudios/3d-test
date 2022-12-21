@@ -8,6 +8,7 @@ import ModalDateSelector from '../components/scheduleComponents/ModalDateSelecto
 
 
 function ScheduleEditorPage() {
+
     const {id, topology} = useParams();
     const [schedule, setSchedule] = useState([]);
     const data = [
@@ -83,29 +84,29 @@ function ScheduleEditorPage() {
             )
         }
     const items = []
-        for(let i = 0; i < data.length; i++){
-             items.push( <tr>
-                <td>{data[i].nplat}</td>
-                <td>{data[i].nputi}</td>
-                <td>{data[i].npoezd}</td>
-                <td>{data[i].timeotp}</td>
-                <td>{data[i].timepr}</td>
-                <td>{data[i].marshrut}</td>
-                <td>{data[i].type}</td>
-            </tr>)  
-        }
+    for (let i = 0; i < data.length; i++) {
+        items.push(<tr>
+            <td>{data[i].nplat}</td>
+            <td>{data[i].nputi}</td>
+            <td>{data[i].npoezd}</td>
+            <td>{data[i].timeotp}</td>
+            <td>{data[i].timepr}</td>
+            <td>{data[i].marshrut}</td>
+            <td>{data[i].type}</td>
+        </tr>)
+    }
     const platforms = []
-        for(let i = 0; i < nplat.length; i++){
-        platforms.push( 
+    for (let i = 0; i < nplat.length; i++) {
+        platforms.push(
             <option>{nplat[i]}</option>
-        )  
-        }
+        )
+    }
     const puty = []
-        for(let i = 0; i < nput.length; i++){
-        puty.push( 
+    for (let i = 0; i < nput.length; i++) {
+        puty.push(
             <option>{nput[i]}</option>
-        )  
-        }
+        )
+    }
 
     return (
         <>

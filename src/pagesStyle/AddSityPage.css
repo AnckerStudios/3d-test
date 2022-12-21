@@ -1,6 +1,10 @@
+.divbigaddsity{
+    height: 100vh;
+    width: 100vw;
+    background-color: #e4ffc6;
+}
 .NewSity{
     border-width: 1px;
-    border-color: black;
     padding: 5px;
     padding-left: 10px;
     margin-bottom: 30px;
@@ -14,10 +18,13 @@
 .form2{
     width: 500px;
     height: 300px;
-    background-color: #e1e1e6;
-    position: relative;
-    top: 150px;
-    left:500px;
+    background-color: #95b488;
+    color:#1a3404;
+    position: absolute;
+    left: 32%;
+    top:20%;
+    border-radius: 5px;
+    
 }
 .lgsity{
     position: relative;
@@ -27,7 +34,7 @@
     text-align: center;
 }
 .button2{
-    background-color:dimgray;
+    background-color:rgb(39, 71, 2);
     width: 400px;
     height: 60px;
     border-radius: 5px;
@@ -37,49 +44,22 @@
     position: relative;
     top:50px;
     left: 50px;
+    cursor: pointer;
 }
-.button2:hover{
-    border-width: 1px;
-    border-color:#4b4a49;
-   
-}
-.button2:focus{
-    outline-color: #4b4a49;
-}
+
 .button2:active {
-    background:#b39b6e;
+    background:#699b55;
     border-color: #f0f4ed;
-    color: black;
+    color: rgb(235, 253, 230);
 }
 .head{
-    width: 100%;
-    height: 10px;
     border-color: #4b4a49;
     position: relative;
     top:30px;
 }
-#t1{
-    position: relative;
-    left: 1.5%;
-    cursor:pointer;
-    color:black;
-}
-#t2{
-    position: relative;
-    left: 88%;
-    cursor: pointer;
-    color:black;
-}
-#t1:hover{
-    color: #b2b6ae;
-}
-#t2:hover{
-    color: #b2b6ae;
-}
-#t1:active{
-    color: #000000;
-}
-#t2:active{
-    color: #000000;
+.list{
+    border-color: rgb(16, 47, 1);
+    background-color: #fbfff8;
+    color: rgb(16, 47, 1);
 }
 

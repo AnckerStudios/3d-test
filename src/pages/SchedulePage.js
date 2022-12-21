@@ -25,12 +25,13 @@ function SchedulePage() {
         }
     return (
         
-        <div>
+        <div className='divbigshed'>
             <header className='head'>
             <a href='http://localhost:3000/admin-menu' id = "t1">назад</a>
             <a href='http://localhost:3000/admin-menu' id = 't2'>домой</a>         
-            </header>    
-         <table className = "table2">
+            </header> 
+            <div className='divlistshed'>
+            <table id='shedulepage' className = "table2">
             <caption>Расписание</caption>
             <thead>
             <tr>
@@ -47,6 +48,8 @@ function SchedulePage() {
                 {items}{items}
             </tbody>
         </table>
+            </div>   
+         
         <button  className='ex3'>Выход</button>
         </div>
     );
