@@ -23,60 +23,63 @@ for (let i = 0; i < data.length; i++) {
 }
 
 function ModelirovaniePage() {
-  const [start, setStart] = useState();
-  const [end, setEnd] = useState();
-
-  let arr, arr2, h, m, hourEnd, minuteEnd;
-  let time = createRef();
+  const[start,setStart] = useState();
+  const[end,setEnd] = useState();
+  
+  let arr,arr2, h,m,hourEnd,minuteEnd;
+  let time= createRef();
   let interval;
 
-  function pusk() {
+  function pusk() 
+  {
     arr = start.split(':');
     arr2 = end.split(':');
     h = arr[0];
     m = arr[1];
     hourEnd = arr2[0]
     minuteEnd = arr2[1];
+    
 
-    if (hourEnd < h) {
-      h = 0;
-      m = 0;
-      hourEnd = 0;
-      minuteEnd = 0;
-      time.current.innerHTML = "Некорректный ввод";
-    }
-    else {
-      clearInterval(interval);
-      interval = setInterval(addTime, 1000);
-    }
+    if (hourEnd < h)
+      {
+          h=0;
+          m=0;
+          hourEnd=0;
+          minuteEnd=0;
+          time.current.innerHTML="Некорректный ввод";
+      }
+    else
+      {
+        clearInterval(interval);
+        interval=setInterval(addTime,1000);
+      }
   }
 
-  function addTime() {
-    if (((h === hourEnd) && (m === minuteEnd)) || ((h === hourEnd) && (m === "0" + minuteEnd)) || ((h === "0" + hourEnd) && (m === "0" + minuteEnd))) {
-      m = m < 10 && m !== '00' ? '0' + m : m;
-      time.current.innerHTML = h + ":" + m;
-      clearInterval(interval);
-    }
-    else {
-      if (m !== 59) {
-        if (m < 10) {
-          if (m < 10 && m.length !== 2) {
-            m = '0' + m;
-          }
-
-
-        }
-
-        time.current.innerHTML = h + ":" + m;
-        m++;
+  function addTime()
+  {
+    if(((h==hourEnd) && (m==minuteEnd)) || ((h==hourEnd) && ( m=="0" + minuteEnd))|| ((h=="0"+hourEnd) && ( m=="0" + minuteEnd)))
+      {
+          m = m < 10 && m != '00' ? '0'+ m : m;
+          time.current.innerHTML = h + ":" + m;
+          clearInterval(interval);
       }
-      else {
-        time.current.innerHTML = h + ":" + m;
-        m = '00';
-        h++;
-        h = h < 10 ? '0' + h : h;
+    else 
+      {
+          if(m != 59)
+            {
+              m = m < 10 && m.length !== 2 ? '0'+ m : m;
+             
+              time.current.innerHTML = h + ":" + m;
+              m++;
+            }
+          else 
+            {
+              time.current.innerHTML = h + ":" + m;
+              m = '00';
+              h++;
+              h = h < 10 ? '0'+ h : h;
+            }
       }
-    }
   }
 
   function pause() {
