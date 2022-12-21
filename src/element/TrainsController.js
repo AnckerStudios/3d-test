@@ -74,9 +74,9 @@ function TrainsController({trains=[], timer=0, mtrx=[]}) {
               arr[tr].step = 0;
               
             }else{
-            
-              arr[tr].step = 0.1;
+                arr[tr].step = 0.1;
             }
+            
             // if(arr[tr].isStop && t >= trains[tr].timeOtb){
             //   arr[tr].step = 0.1;
             //   arr[tr].isStop = false;
