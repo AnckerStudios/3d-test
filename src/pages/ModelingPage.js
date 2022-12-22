@@ -39,7 +39,7 @@ function ModelingPage() {
                 let sch = [{plate:{number:1},plateLine: {number:2},trainName:"lox",arrivalTime: "10:10", departureTime: "12:12",departureCity:"Samara",arrivalCity:"Moscow", typeTrain:"F"},{plate:{number:1},plateLine: {number:2},trainName:"lox",arrivalTime: "10:10", departureTime: "12:12",departureCity:"Samara",arrivalCity:"Moscow", typeTrain:"F"}]
                 setSchedule(sch);
                 console.log(error);
-                setLoading(false)
+                setLoading(false);
             });
       },[])
     const handleStart = () => {

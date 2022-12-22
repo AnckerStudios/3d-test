@@ -38,7 +38,9 @@ function TopologyEditorPage() {
             axios.post('http://localhost:8080/api/topology', {
                 title: name,
                 body: mtrx
-              })
+              },{params:{
+                idTopology: id
+              }})
               .then(function (response) {
                 console.log(response);
               })

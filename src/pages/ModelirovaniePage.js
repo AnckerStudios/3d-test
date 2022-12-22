@@ -18,7 +18,14 @@ function ModelirovaniePage() {
     const [mtrx, setMtrx] = useState();
     const [schedule, setSchedule] = useState();
     const [scheduleEntry, setScheduleEntry] = useState();
-   
+    const [err, setErr] = useState(false);
+
+    useEffect(()=>{
+if(err === true){
+  clearInterval(interval);
+}
+
+    },[err])
     const [timer, setTimer] = useState(0)
     const [loading, setLoading] = useState(true);
     useEffect(()=> {
@@ -35,7 +42,76 @@ function ModelirovaniePage() {
                 {"id":86,"x":5,"y":6,"type":"none","state":{}},{"id":87,"x":5,"y":7,"type":"none","state":{}},{"id":88,"x":5,"y":8,"type":"none","state":{}},{"id":89,"x":5,"y":9,"type":"none","state":{}},{"id":90,"x":5,"y":10,"type":"none","state":{dx:true}},{"id":91,"x":5,"y":11,"type":"none","state":{}},{"id":92,"x":5,"y":12,"type":"none","state":{}},{"id":93,"x":5,"y":13,"type":"none","state":{}},{"id":94,"x":5,"y":14,"type":"none","state":{}},{"id":95,"x":5,"y":15,"type":"none","state":{}}],[{"id":96,"x":6,"y":0,"type":"rail","state":{}},{"id":97,"x":6,"y":1,"type":"none","state":{}},{"id":98,"x":6,"y":2,"type":"none","state":{}},{"id":99,"x":6,"y":3,"type":"none","state":{}},{"id":100,"x":6,"y":4,"type":"none","state":{rx_left:true}},{"id":101,"x":6,"y":5,"type":"none","state":{}},{"id":102,"x":6,"y":6,"type":"none","state":{}},{"id":103,"x":6,"y":7,"type":"none","state":{}},{"id":104,"x":6,"y":8,"type":"none","state":{}},{"id":105,"x":6,"y":9,"type":"none","state":{dx:true}},{"id":106,"x":6,"y":10,"type":"none","state":{}},{"id":107,"x":6,"y":11,"type":"none","state":{}},{"id":108,"x":6,"y":12,"type":"none","state":{}},{"id":109,"x":6,"y":13,"type":"none","state":{}},{"id":110,"x":6,"y":14,"type":"none","state":{}},{"id":111,"x":6,"y":15,"type":"none","state":{}}],[{"id":112,"x":7,"y":0,"type":"none","state":{}},{"id":113,"x":7,"y":1,"type":"none","state":{}},{"id":114,"x":7,"y":2,"type":"none","state":{}},{"id":115,"x":7,"y":3,"type":"none","state":{}},{"id":116,"x":7,"y":4,"type":"none","state":{x:true}},{"id":117,"x":7,"y":5,"type":"none","state":{}},{"id":118,"x":7,"y":6,"type":"none","state":{ry_top: true}},{"id":119,"x":7,"y":7,"type":"none","state":{y:true}},{"id":120,"x":7,"y":8,"type":"none","state":{ry_down:true}},{"id":121,"x":7,"y":9,"type":"none","state":{}},{"id":122,"x":7,"y":10,"type":"none","state":{}},{"id":123,"x":7,"y":11,"type":"none","state":{}},{"id":124,"x":7,"y":12,"type":"none","state":{}},{"id":125,"x":7,"y":13,"type":"none","state":{}},{"id":126,"x":7,"y":14,"type":"none","state":{}},{"id":127,"x":7,"y":15,"type":"none","state":{}}],[{"id":128,"x":8,"y":0,"type":"none","state":{}},{"id":129,"x":8,"y":1,"type":"none","state":{}},{"id":130,"x":8,"y":2,"type":"none","state":{}},{"id":131,"x":8,"y":3,"type":"none","state":{}},{"id":132,"x":8,"y":4,"type":"none","state":{x:true}},{"id":133,"x":8,"y":5,"type":"none","state":{dx:true}},{"id":134,"x":8,"y":6,"type":"none","state":{}},{"id":135,"x":8,"y":7,"type":"none","state":{}},{"id":136,"x":8,"y":8,"type":"none","state":{}},{"id":137,"x":8,"y":9,"type":"none","state":{}},{"id":138,"x":8,"y":10,"type":"none","state":{}},{"id":139,"x":8,"y":11,"type":"none","state":{}},{"id":140,"x":8,"y":12,"type":"none","state":{}},{"id":141,"x":8,"y":13,"type":"none","state":{}},{"id":142,"x":8,"y":14,"type":"none","state":{}},{"id":143,"x":8,"y":15,"type":"none","state":{}}],[{"id":144,"x":9,"y":0,"type":"none","state":{}},{"id":145,"x":9,"y":1,"type":"none","state":{}},{"id":146,"x":9,"y":2,"type":"none","state":{}},{"id":147,"x":9,"y":3,"type":"none","state":{}},{"id":148,"x":9,"y":4,"type":"none","state":{x:true, dx:true, light: true}},{"id":149,"x":9,"y":5,"type":"none","state":{}},{"id":150,"x":9,"y":6,"type":"none","state":{}},{"id":151,"x":9,"y":7,"type":"none","state":{}},{"id":152,"x":9,"y":8,"type":"none","state":{}},{"id":153,"x":9,"y":9,"type":"none","state":{}},{"id":154,"x":9,"y":10,"type":"none","state":{}},{"id":155,"x":9,"y":11,"type":"none","state":{}},{"id":156,"x":9,"y":12,"type":"none","state":{}},{"id":157,"x":9,"y":13,"type":"none","state":{}},{"id":158,"x":9,"y":14,"type":"none","state":{}},{"id":159,"x":9,"y":15,"type":"none","state":{}}],[{"id":160,"x":10,"y":0,"type":"none","state":{}},{"id":161,"x":10,"y":1,"type":"none","state":{}},{"id":162,"x":10,"y":2,"type":"none","state":{}},{"id":163,"x":10,"y":3,"type":"none","state":{rx_top:true}},{"id":164,"x":10,"y":4,"type":"none","state":{x:true}},{"id":165,"x":10,"y":5,"type":"none","state":{}},{"id":166,"x":10,"y":6,"type":"none","state":{}},{"id":167,"x":10,"y":7,"type":"none","state":{}},{"id":168,"x":10,"y":8,"type":"none","state":{}},{"id":169,"x":10,"y":9,"type":"none","state":{}},{"id":170,"x":10,"y":10,"type":"none","state":{}},{"id":171,"x":10,"y":11,"type":"none","state":{}},
                 {"id":172,"x":10,"y":12,"type":"none","state":{}},{"id":173,"x":10,"y":13,"type":"none","state":{}},{"id":174,"x":10,"y":14,"type":"none","state":{}},{"id":175,"x":10,"y":15,"type":"none","state":{}}],[{"id":176,"x":11,"y":0,"type":"none","state":{}},{"id":177,"x":11,"y":1,"type":"none","state":{}},{"id":178,"x":11,"y":2,"type":"none","state":{}},{"id":179,"x":11,"y":3,"type":"none","state":{x:true}},{"id":180,"x":11,"y":4,"type":"none","state":{x:true}},{"id":181,"x":11,"y":5,"type":"none","state":{}},{"id":182,"x":11,"y":6,"type":"none","state":{}},{"id":183,"x":11,"y":7,"type":"none","state":{}},{"id":184,"x":11,"y":8,"type":"none","state":{}},{"id":185,"x":11,"y":9,"type":"none","state":{}},{"id":186,"x":11,"y":10,"type":"none","state":{}},{"id":187,"x":11,"y":11,"type":"none","state":{}},{"id":188,"x":11,"y":12,"type":"none","state":{}},{"id":189,"x":11,"y":13,"type":"none","state":{}},{"id":190,"x":11,"y":14,"type":"none","state":{}},{"id":191,"x":11,"y":15,"type":"none","state":{}}],[{"id":192,"x":12,"y":0,"type":"none","state":{}},{"id":193,"x":12,"y":1,"type":"none","state":{}},{"id":194,"x":12,"y":2,"type":"none","state":{}},{"id":195,"x":12,"y":3,"type":"none","state":{x:true}},{"id":196,"x":12,"y":4,"type":"none","state":{x:true}},{"id":197,"x":12,"y":5,"type":"none","state":{}},{"id":198,"x":12,"y":6,"type":"none","state":{}},{"id":199,"x":12,"y":7,"type":"none","state":{}},{"id":200,"x":12,"y":8,"type":"none","state":{}},{"id":201,"x":12,"y":9,"type":"none","state":{}},{"id":202,"x":12,"y":10,"type":"none","state":{}},{"id":203,"x":12,"y":11,"type":"none","state":{}},{"id":204,"x":12,"y":12,"type":"none","state":{}},{"id":205,"x":12,"y":13,"type":"none","state":{}},{"id":206,"x":12,"y":14,"type":"none","state":{}},{"id":207,"x":12,"y":15,"type":"none","state":{}}],[{"id":208,"x":13,"y":0,"type":"none","state":{}},{"id":209,"x":13,"y":1,"type":"none","state":{}},{"id":210,"x":13,"y":2,"type":"none","state":{}},{"id":211,"x":13,"y":3,"type":"none","state":{x:true}},{"id":212,"x":13,"y":4,"type":"none","state":{x:true}},{"id":213,"x":13,"y":5,"type":"none","state":{}},{"id":214,"x":13,"y":6,"type":"none","state":{}},{"id":215,"x":13,"y":7,"type":"none","state":{}},{"id":216,"x":13,"y":8,"type":"none","state":{}},{"id":217,"x":13,"y":9,"type":"none","state":{}},{"id":218,"x":13,"y":10,"type":"none","state":{}},{"id":219,"x":13,"y":11,"type":"none","state":{}},{"id":220,"x":13,"y":12,"type":"none","state":{}},{"id":221,"x":13,"y":13,"type":"none","state":{}},{"id":222,"x":13,"y":14,"type":"none","state":{}},{"id":223,"x":13,"y":15,"type":"none","state":{}}],[{"id":224,"x":14,"y":0,"type":"none","state":{}},{"id":225,"x":14,"y":1,"type":"none","state":{}},{"id":226,"x":14,"y":2,"type":"none","state":{}},{"id":227,"x":14,"y":3,"type":"none","state":{x:true}},{"id":228,"x":14,"y":4,"type":"none","state":{x:true}},{"id":229,"x":14,"y":5,"type":"none","state":{}},{"id":230,"x":14,"y":6,"type":"none","state":{}},{"id":231,"x":14,"y":7,"type":"none","state":{}},{"id":232,"x":14,"y":8,"type":"none","state":{}},{"id":233,"x":14,"y":9,"type":"none","state":{}},{"id":234,"x":14,"y":10,"type":"none","state":{}},{"id":235,"x":14,"y":11,"type":"none","state":{}},{"id":236,"x":14,"y":12,"type":"none","state":{}},{"id":237,"x":14,"y":13,"type":"none","state":{}},{"id":238,"x":14,"y":14,"type":"none","state":{}},{"id":239,"x":14,"y":15,"type":"none","state":{}}],[{"id":240,"x":15,"y":0,"type":"none","state":{}},{"id":241,"x":15,"y":1,"type":"none","state":{}},{"id":242,"x":15,"y":2,"type":"none","state":{}},{"id":243,"x":15,"y":3,"type":"none","state":{x:true, light:true}},{"id":244,"x":15,"y":4,"type":"none","state":{x:true}},{"id":245,"x":15,"y":5,"type":"none","state":{}},{"id":246,"x":15,"y":6,"type":"none","state":{}},{"id":247,"x":15,"y":7,"type":"none","state":{}},{"id":248,"x":15,"y":8,"type":"none","state":{}},{"id":249,"x":15,"y":9,"type":"none","state":{}},{"id":250,"x":15,"y":10,"type":"none","state":{}},{"id":251,"x":15,"y":11,"type":"none","state":{}},{"id":252,"x":15,"y":12,"type":"none","state":{}},{"id":253,"x":15,"y":13,"type":"none","state":{}},{"id":254,"x":15,"y":14,"type":"none","state":{}},{"id":255,"x":15,"y":15,"type":"none","state":{}}]]
                 setMtrx(arr);
-                let sch = [
+                let sch = [{
+                  "record": {
+                      "plate": {
+                          "number": 0,
+                          "info": 0,
+                          "dir": true,
+                          "lines": [
+                              {
+                                  "x": 10,
+                                  "y": 3,
+                                  "number": 1
+                              }
+                          ]
+                      },
+                      "plateLine": {
+                          "x": 10,
+                          "y": 3,
+                          "number": 1
+                      },
+                      "trainName": "1",
+                      "arrivalTime": "09:00",
+                      "departureTime": "10:00",
+                      "departureCity": "Самара",
+                      "arrivalCity": "Москва",
+                      "typeTrain": "Пассаж.",
+                      "in": {
+                          "id": 1,
+                          "x": 0,
+                          "y": 11,
+                          "type": "rail",
+                          "state": {
+                              "x": true,
+                              "y": false,
+                              "dx": false,
+                              "dy": false,
+                              "rx_top": false,
+                              "rx_down": false,
+                              "rx_left": false,
+                              "rx_right": false,
+                              "ry_top": false,
+                              "ry_down": false,
+                              "ry_left": false,
+                              "ry_right": false,
+                              "light": false
+                          }
+                      },
+                      "out": {
+                          "id": 243,
+                          "x": 15,
+                          "y": 3,
+                          "type": "rail",
+                          "state": {
+                              "x": true,
+                              "y": false,
+                              "dx": false,
+                              "dy": false,
+                              "rx_top": false,
+                              "rx_down": false,
+                              "rx_left": false,
+                              "rx_right": false,
+                              "ry_top": false,
+                              "ry_down": false,
+                              "ry_left": false,
+                              "ry_right": false,
+                              "light": false
+                          }
+                      }
+                  },
+                  way: [{x:0,y:11,dir:2},{x:1,y:11,dir:2},{x:2,y:11,dir:2},{x:3,y:11,dir:2},{x:4,y:11,dir:3},{x:5,y:10,dir:3},{x:6,y:9,dir:3},{x:7,y:8,dir:4},{x:7,y:7,dir:4},{x:7,y:6,dir:3},{x:8,y:5,dir:3},{x:9,y:4,dir:3},{x:10,y:3,dir:2},{x:11,y:3,dir:2},{x:12,y:3,dir:2},{x:13,y:3,dir:2},{x:14,y:3,dir:2},{x:15,y:3,dir:2}]
+              },
                   {
                       "record": {
                           "plate": {
@@ -64,7 +140,7 @@ function ModelirovaniePage() {
                           "in": {
                               "id": 1,
                               "x": 0,
-                              "y": 1,
+                              "y": 0,
                               "type": "rail",
                               "state": {
                                   "x": true,
@@ -85,7 +161,7 @@ function ModelirovaniePage() {
                           "out": {
                               "id": 243,
                               "x": 15,
-                              "y": 3,
+                              "y": 4,
                               "type": "rail",
                               "state": {
                                   "x": true,
@@ -104,88 +180,7 @@ function ModelirovaniePage() {
                               }
                           }
                       },
-                      "way": [
-                          {
-                              "x": 0,
-                              "y": 1,
-                              "dir": 2
-                          },
-                          {
-                              "x": 1,
-                              "y": 1,
-                              "dir": 2
-                          },
-                          {
-                              "x": 2,
-                              "y": 2,
-                              "dir": 1
-                          },
-                          {
-                              "x": 3,
-                              "y": 3,
-                              "dir": 1
-                          },
-                          {
-                              "x": 4,
-                              "y": 3,
-                              "dir": 2
-                          },
-                          {
-                              "x": 5,
-                              "y": 3,
-                              "dir": 2
-                          },
-                          {
-                              "x": 6,
-                              "y": 3,
-                              "dir": 2
-                          },
-                          {
-                              "x": 7,
-                              "y": 3,
-                              "dir": 2
-                          },
-                          {
-                              "x": 8,
-                              "y": 3,
-                              "dir": 2
-                          },
-                          {
-                              "x": 9,
-                              "y": 3,
-                              "dir": 2
-                          },
-                          {
-                              "x": 10,
-                              "y": 3,
-                              "dir": 2
-                          },
-                          {
-                              "x": 11,
-                              "y": 3,
-                              "dir": 2
-                          },
-                          {
-                              "x": 12,
-                              "y": 3,
-                              "dir": 2
-                          },
-                          {
-                              "x": 13,
-                              "y": 3,
-                              "dir": 2
-                          },
-                          {
-                              "x": 14,
-                              "y": 3,
-                              "dir": 2
-                          },
-                          {
-                              "x": 15,
-                              "y": 3,
-                              "dir": 2
-                          }
-                      ]
+                      way: [{x:0,y:0,dir:2},{x:1,y:0,dir:2},{x:2,y:0,dir:1},{x:3,y:1,dir:1},{x:4,y:2,dir:1},{x:5,y:3,dir:1},{x:6,y:4,dir:2},{x:7,y:4,dir:2},{x:8,y:4,dir:2},{x:9,y:4,dir:2},{x:10,y:4,dir:2},{x:11,y:4,dir:2},{x:12,y:4,dir:2},{x:13,y:4,dir:2},{x:14,y:4,dir:2},{x:15,y:4,dir:2}]
                   }
               ]
                 setSchedule(sch);
@@ -313,7 +308,7 @@ function ModelirovaniePage() {
 
   return (
     <div className='bigdivformmod'>
-       {loading ? <div className=" ">Loading</div> : <Modeling mtrx={mtrx} ways={schedule} timer={timer}/>}
+       {loading ? <div className=" ">Loading</div> : <Modeling mtrx={mtrx} ways={schedule} timer={timer} setErr={setErr}/>}
       <div className='columndiv'>
         <ScheduleTable2 schedule={schedule} loading={loading}/>
 

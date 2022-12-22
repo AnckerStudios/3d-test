@@ -11,7 +11,7 @@ function AddEntry({inOut, platforms, id, addSchedule}) {
     const [lineIndex, setLineIndex] = useState(0);
     const [plateIndex, setPlateIndex] = useState();
     const type = ['Пассаж.','Груз.','Электричка'];
-    const [entry, setEntry] = useState({plate: platforms[0]});
+    const [entry, setEntry] = useState({ plate: platforms[0], plateLine: platforms[0].lines[lineIndex]});
 
     const sity = [{city:"Самара"}, {city:"Москва"},{city:"Санкт-Петербург"},{city:"Оренбург"}, ]
     const sitys = []

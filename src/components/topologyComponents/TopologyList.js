@@ -16,7 +16,7 @@ function TopologyList({id}) {
             console.log(response);
         })
         .catch(function (error) {
-            setTopologys([{topologyName:22,idTopology:22}]);
+            setTopologys([{topologyName:"name",idTopology:1}]);
             setLoading(false);
             console.log(error);
         });

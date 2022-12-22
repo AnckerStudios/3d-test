@@ -8,7 +8,7 @@ import Train from "./Train";
 import TrainsController from "./TrainsController";
 
 
-function Modeling({mtrx=[], ways=[], timer=0}) {
+function Modeling({mtrx=[], ways=[], timer=0,setErr}) {
   let objSettings = {x:mtrx.length, y:mtrx[0].length}
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const handleMouse = (event) => {
@@ -42,7 +42,7 @@ function Modeling({mtrx=[], ways=[], timer=0}) {
             <Preview mtrx={mtrx} objSet={objSettings} prev={false}/>
             <Ground mousePos={mousePos} objSet={objSettings} enterFunk={сellSelection}/>
             {/* {trains} */}
-            <TrainsController trains={ways} timer={timer} mtrx={mtrx}/>
+            <TrainsController trains={ways} timer={timer} mtrx={mtrx} setErr={setErr}/>
             {/* {trainGo && <Train mtrx={mtrx} >} */}
           </Canvas>
     );

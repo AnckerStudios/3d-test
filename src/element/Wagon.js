@@ -20,7 +20,7 @@ function Wagon({wagInfo}) {
         geometry={nodes.Cube001.geometry}
         
       >
-        <meshStandardMaterial color={'white'} opacity={1} transparent={true}/>
+        <meshStandardMaterial color={wagInfo.err ? 'red' : 'white'} opacity={1} transparent={true}/>
       </mesh>
     </group>
   );
