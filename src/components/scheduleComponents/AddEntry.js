@@ -6,12 +6,12 @@ import { Link } from "react-router-dom";
 function AddEntry({inOut, platforms, id, addSchedule}) {
     const [loading, setLoading] = useState(true);
     
-   
+    console.log("plte",platforms[0].lines)
 
     const [lineIndex, setLineIndex] = useState(0);
-    const [plateIndex, setPlateIndex] = useState();
+    const [planeIndex, setPlaneIndex] = useState(0);
     const type = ['Пассаж.','Груз.','Электричка'];
-    const [entry, setEntry] = useState({ plate: 0, plateLine: platforms[0].lines[lineIndex]});
+    const [entry, setEntry] = useState({ plate: platforms[0].number, plateLine: platforms[0].lines[lineIndex], arrivalTime: "00:00", departureTime: "00:00", in: inOut[0], out: inOut[0],typeTrain:type[0]});
 
     const sity = [{city:"Самара"}, {city:"Москва"},{city:"Санкт-Петербург"},{city:"Оренбург"}, ]
     const sitys = []
@@ -28,22 +28,18 @@ function AddEntry({inOut, platforms, id, addSchedule}) {
     //     if(selectLine < entry.plate.lines.length){
     //         setEntry({...entry, plateLine: entry.plate.lines[selectLine]})}
     //     },[selectLine]);
-    const [arTime, setArTime] = useState({h:0,m:0});
-    const [deTime, setDeTime] = useState({h:0,m:0});
-
-    useEffect(()=>{
-        setEntry({...entry, arrivalTime: `${arTime.h < 10 ? '0'+arTime.h :arTime.h }:${arTime.m < 10 ? '0'+arTime.m :arTime.m }`});
-    },[arTime])
-    useEffect(()=>{setEntry({...entry, departureTime: `${deTime.h < 10 ? '0'+deTime.h :deTime.h }:${deTime.m < 10 ? '0'+deTime.m :deTime.m }`})},[deTime])
 
 
     function setPlate(i){
+        setPlaneIndex(i);
         console.log(platforms,i)
         if(platforms[i].lines.length-1 < lineIndex){
-            console.log(platforms[i].lines.length-1)
-            setEntry({...entry, plate: i, plateLine: platforms[i].lines[0]})
+            console.log("gfgsdg",platforms[i].lines.length-1)
+            setEntry({...entry, plate: platforms[i].number, plateLine: platforms[i].lines[0]})
+            setLineIndex(0);
         }else{
-            setEntry({...entry, plate: i, plateLine: platforms[i].lines[lineIndex]})
+            console.log("ccccc",platforms[i].lines.length)
+            setEntry({...entry, plate: platforms[i].number, plateLine: platforms[i].lines[lineIndex]})
         }
     }
     return (
@@ -59,8 +55,9 @@ function AddEntry({inOut, platforms, id, addSchedule}) {
                 </label>
                 <br/>
                 <label>Выберите путь
-                    <select className = "addsep" onChange={(e)=>{setEntry({...entry, plateLine: platforms[entry.plate].lines[e.target.value]}); setLineIndex(e.target.value)}}>
-                        {platforms[entry.plate].lines?.map((line,index) => {
+                    <select className = "addsep" onChange={(e)=>{setEntry({...entry, plateLine: platforms[planeIndex].lines[e.target.value]}); setLineIndex(e.target.value)}}>
+                        {platforms[planeIndex].lines.map((line,index) => {
+                            
                             return <option key={index} value={index}>Путь №{line.number}</option>
                         })}
                     </select>
@@ -72,23 +69,12 @@ function AddEntry({inOut, platforms, id, addSchedule}) {
                 <br/>
                 <label>Время прибытия
                     <span id = "tpr">
-                        <input type="number" min="0" max="23" value={arTime.h} onChange={(e)=>setArTime({...arTime, h: +e.target.value > 23? 23: Math.floor(+e.target.value) })}/>
-
-                    :
-
-                        <input type="number" min="0" max="59" value={arTime.m} onChange={(e)=>setArTime({...arTime, m: +e.target.value > 59? 59: Math.floor(+e.target.value) })}/>
- 
+                    <input className="addtime" type="time" onChange={(e)=>setEntry({...entry, arrivalTime: e.target.value})}></input>   
                     </span>
                 </label> <br/>
                 <label>Время отравления
                 <span id='totpr'>
-
-                        <input type="number" min="0" max="23"  value={deTime.h} onChange={(e)=>setDeTime({...deTime,  h: +e.target.value > 23? 23: Math.floor(+e.target.value)})}/>
-
-                    :
- 
-                        <input type="number" min="0" max="59" value={deTime.m} onChange={(e)=>setDeTime({...deTime, m: +e.target.value > 59? 59: Math.floor(+e.target.value) })}/>
-
+                        <input className="addtime" type="time" onChange={(e)=>setEntry({...entry, departureTime: e.target.value})}></input>
                     </span>
                 </label>
                 <br/><br/>

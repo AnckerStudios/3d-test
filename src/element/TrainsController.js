@@ -18,7 +18,7 @@ function TrainsController({ trains = [], timer = 0, mtrx = [],setErr }) {
   function createTrains(trains) {
     let arr = [];
     for (let i = 0; i < trains.length; i++) {
-      arr.push({ wagons: creareWagons(trains[i], paths[i]), step: 0.08, isMoving: true, isStop: false });
+      arr.push({ wagons: creareWagons(trains[i], paths[i]), step: 1, maxStep: 1, isMoving: true, isStop: false });
     }
     return arr;
   }
@@ -88,7 +88,7 @@ function TrainsController({ trains = [], timer = 0, mtrx = [],setErr }) {
               arr[tr].step = 0;
 
             } else {
-              arr[tr].step = 0.08;
+              arr[tr].step = arr[tr].maxStep;
             }
 
             // if(arr[tr].isStop && t >= trains[tr].timeOtb){

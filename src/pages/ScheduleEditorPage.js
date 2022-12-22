@@ -107,9 +107,10 @@ function ScheduleEditorPage() {
         <>
             <div className='divsep'>
                 <div className='flex flex-col'>
+                {loading ? <div>Погоди-погожу</div>:
                     <><ScheduleTable id={id} date={date} setSchedule={setSchedule} schedule={schedule} isCreate={isCreate}/>
-                    <button onClick={()=>setaddFlag(true)}>Добавить</button></>
-                    {addFlag && <AddEntry inOut={inOut} platforms={platforms} addSchedule={addSchedule}/>}
+                    <button onClick={()=>setaddFlag(true)}>Добавить</button>
+                    {addFlag && <AddEntry inOut={inOut} platforms={platforms} addSchedule={addSchedule}/>}</>}
                 </div>
 
                 <div className='flex flex-grow p-2'>

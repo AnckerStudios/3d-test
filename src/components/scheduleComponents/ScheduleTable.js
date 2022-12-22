@@ -2,10 +2,10 @@ import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 const data = [
-  {plate: {number: 1, lines:[{x:0,y:0,number:1}]}, plateLine: {x:0,y:0,number:1}, trainName : "D500A", arrivalTime: "10:10", departureTime: "10:10", arrivalCity: "10:10", departureCity: "10:10",typeTrain:"п"},
-  {plate: {number: 1, lines:[{x:0,y:0,number:1}]}, plateLine: {x:0,y:0,number:1}, trainName : "333", arrivalTime: "10:10", departureTime: "10:10", arrivalCity: "10:10", departureCity: "10:10",typeTrain:"п"},
-  {plate: {number: 1, lines:[{x:0,y:0,number:1}]}, plateLine: {x:0,y:0,number:1}, trainName : "333", arrivalTime: "10:10", departureTime: "10:10", arrivalCity: "10:10", departureCity: "10:10",typeTrain:"п"},
-  {plate: {number: 1, lines:[{x:0,y:0,number:1}]}, plateLine: {x:0,y:0,number:1}, trainName : "333", arrivalTime: "10:10", departureTime: "10:10", arrivalCity: "10:10", departureCity: "10:10",typeTrain:"п"},
+  {plate: 1, plateLine: {x:0,y:0,number:1}, trainName : "D500A", arrivalTime: "10:10", departureTime: "10:10", arrivalCity: "10:10", departureCity: "10:10",typeTrain:"п"},
+  {plate: 1, plateLine: {x:0,y:0,number:1}, trainName : "333", arrivalTime: "10:10", departureTime: "10:10", arrivalCity: "10:10", departureCity: "10:10",typeTrain:"п"},
+  {plate: 1, plateLine: {x:0,y:0,number:1}, trainName : "333", arrivalTime: "10:10", departureTime: "10:10", arrivalCity: "10:10", departureCity: "10:10",typeTrain:"п"},
+  {plate: 1, plateLine: {x:0,y:0,number:1}, trainName : "333", arrivalTime: "10:10", departureTime: "10:10", arrivalCity: "10:10", departureCity: "10:10",typeTrain:"п"},
   ];
 
 function ScheduleTable({id,date,setSchedule, schedule, isCreate}) {
@@ -59,7 +59,7 @@ function ScheduleTable({id,date,setSchedule, schedule, isCreate}) {
 
               {loading ? <div>Погоди...</div> : schedule?.map((sch, index) => {
                 return <tr key={index} className=' border'>
-                  <td className=" text-center">{sch.plate.number}</td>
+                  <td className=" text-center">{sch.plate}</td>
                   <td className=" text-center">{sch.plateLine.number}</td>
                   <td className=" text-center">{sch.trainName}</td>
                   <td className=" text-center">{sch.arrivalTime}</td>
