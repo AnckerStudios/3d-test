@@ -33,7 +33,9 @@ function App() {
       <Route path="/add-sity" element={<AddSityPage/>}/> 
       <Route path="/choicepage" element={<ChoicePage/>}/> 
       <Route path="/new-maket" element={<NewMacketPage/>}/>
-      <Route path="/schedule-editor/:id/:date" element={<ScheduleEditorPage/>}/> 
+      <Route path="/schedule-editor/:id/:date/" element={<ScheduleEditorPage/>}>
+        <Route path=":isCreate" element={<ScheduleEditorPage/>} />
+      </Route>
       <Route path="/schedule" element={<SchedulePage/>}/>
       {/* <Route path="/modelirovanie" element={<ModelirovaniePage/>}/> */}
       <Route path="/modeling/:id/:date" element={<ModelingPage/>}/> 

@@ -15,7 +15,8 @@ import TopologyView from '../components/scheduleComponents/TopologyView';
 
 function ScheduleEditorPage() {
 
-    const { id, date } = useParams();
+    const { id, date, isCreate} = useParams();
+    console.log(isCreate)
     const [schedule, setSchedule] = useState([]);
     const [loading, setLoading] = useState(true);
     const [addFlag, setaddFlag] = useState(false);
@@ -106,7 +107,7 @@ function ScheduleEditorPage() {
         <>
             <div className='divsep'>
                 <div className='flex flex-col'>
-                    <><ScheduleTable id={id} date={date} setSchedule={setSchedule} schedule={schedule}/>
+                    <><ScheduleTable id={id} date={date} setSchedule={setSchedule} schedule={schedule} isCreate={isCreate}/>
                     <button onClick={()=>setaddFlag(true)}>Добавить</button></>
                     {addFlag && <AddEntry inOut={inOut} platforms={platforms} addSchedule={addSchedule}/>}
                 </div>

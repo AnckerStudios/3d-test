@@ -8,10 +8,11 @@ const data = [
   {plate: {number: 1, lines:[{x:0,y:0,number:1}]}, plateLine: {x:0,y:0,number:1}, trainName : "333", arrivalTime: "10:10", departureTime: "10:10", arrivalCity: "10:10", departureCity: "10:10",typeTrain:"п"},
   ];
 
-function ScheduleTable({id,date,setSchedule, schedule}) {
+function ScheduleTable({id,date,setSchedule, schedule, isCreate}) {
   //const[schedule,setSchedule] = useState();
   const [loading, setLoading] = useState(true);
   useEffect(() => {
+    if(isCreate === undefined){
     setLoading(true);
     axios.get('http://localhost:8080/api/schedule/', {
       params: {
@@ -29,6 +30,9 @@ function ScheduleTable({id,date,setSchedule, schedule}) {
         console.log(error);
         setLoading(false);
       });
+    }else{
+      setLoading(false);
+    }
   }, [])
 
 
