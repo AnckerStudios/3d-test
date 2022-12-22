@@ -7,17 +7,17 @@ import ScheduleList from "../components/scheduleComponents/ScheduleList";
 
 function TopologyPage() {
     const {id} = useParams();
-    function load(){
-        axios.get('http://localhost:8080/api/field', {
+    // function load(){
+    //     axios.get('http://localhost:8080/api/field', {
            
-        })
-        .then(function (response) {
-            console.log(response);
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
-    }
+    //     })
+    //     .then(function (response) {
+    //         console.log(response);
+    //     })
+    //     .catch(function (error) {
+    //         console.log(error);
+    //     });
+    // }
 
     return (
 
@@ -34,9 +34,9 @@ function TopologyPage() {
                         <div className="m-2 ">
                             Enim et commodo culpa aliqua ullamco sit ut duis occaecat. Ex aliqua reprehenderit anim quis veniam mollit eiusmod incididunt aliqua commodo mollit voluptate ut. Nulla do sit commodo commodo. Irure id dolore ipsum id consectetur ex nulla nisi culpa voluptate quis consequat enim.                             
                         </div>
-                        <button className=" border hover:bg-white rounded-xl  m-2 flex justify-center" onClick={() => load()}>
-                            <Link className=" m-2 " to={`/topology-editor/${id}`}>button</Link>
-                        </button>
+
+                            <Link className=" border hover:bg-white rounded-xl  m-2 flex justify-center" to={`/topology-editor/${id}`}>button</Link>
+                        
                     </div>
             
             

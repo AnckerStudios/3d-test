@@ -16,6 +16,8 @@ import TopologyPage from './pages/TopologyPage';
 import ModelirovaniePage from './pages/ModelirovaniePage';
 import ScheduleCreatePage from "./pages/ScheduleCreatePage";
 import ModelingListPage from "./pages/ModelingListPage";
+import CreateTopologyPage from "./pages/CreateTopologyPage";
+import TopologyEditorPage from "./pages/TopologyEditorPage";
 
 
 function App() {
@@ -38,7 +40,8 @@ function App() {
       <Route path="/modelirovanie/:id/:date" element={<ModelirovaniePage/>}/> 
       <Route path="/topology/:id" element={<TopologyPage/>}/> 
       <Route path="/create-schedule/:id/:date" element={<ScheduleCreatePage/>}/> 
-      <Route path="/topology-editor/:id" element={<TopologyEditor/>}/> 
+      <Route path="/topology-editor/:id" element={<TopologyEditorPage/>}/> 
+      <Route path="/create-topology/" element={<CreateTopologyPage/>}/> 
     </Routes>
   );
 }
