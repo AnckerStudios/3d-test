@@ -35,7 +35,7 @@ function TrainsController({trains=[], timer=0, mtrx=[]}) {
   }
   function creareWagons(trains,paths){
     let arrWagons = [];
-    for(let w = 0; w < trains.wagons; w++){
+    for(let w = 0; w < 3; w++){ //wagons
       arrWagons.push({next:1,pos:{x: paths[0].x-(3*w*1), y: paths[0].y-(3*w*0), dir: dirSwich(trains.way[0].dir)}})
     }
     return arrWagons;
@@ -52,6 +52,7 @@ function TrainsController({trains=[], timer=0, mtrx=[]}) {
   
   const [curTimer, setCurTimer] = useState(0);
   function MoveTrains(){
+    
     let arr;
     let lights;
     let timeCount;
@@ -67,8 +68,13 @@ function TrainsController({trains=[], timer=0, mtrx=[]}) {
     
     for(let t=timeCount; t<timer; t++){
       for(let tr=0; tr<trainInfo.length; tr++){
-        
-        if(t >= trains[tr].time){
+        let tarr =  trains[tr].record.arrivalTime;
+        tarr = tarr.split(':');
+        let h = tarr[0];
+        let m = tarr[1];
+    
+        let trainTime = ((h*60+(+m))*100);
+        if(t >= trainTime ){
             if(test2(arr, tr, lights)){
             
               arr[tr].step = 0;
