@@ -11,7 +11,7 @@ import Text from "./Text";
 
 
 
-function TopologyView({id, inOut,platforms}) {
+function TopologyView({id, inOut, platforms}) {
   const [mtrx, setMtrx] = useState();
   const [loading, setLoading] = useState(true);
   console.log(platforms)
@@ -50,7 +50,8 @@ function TopologyView({id, inOut,platforms}) {
         <Preview mtrx={mtrx} objSet={{x:mtrx.length, y:mtrx[0].length}} prev={false}/>
         <Ground objSet={{x:mtrx.length, y:mtrx[0].length}}/>
         {inOut?.map((io,index)=>{return <Text key={index} opacity={1} position={[io.x,io.y, 0]} color='black'>{io.x+":"+io.y}</Text>})}
-        {platforms?.map((p,indexP)=>{p.lines?.map((l,indexL)=> {return <Text key={indexP+""+indexL} opacity={1} position={[0,0,0]} color='black'>gg</Text>})})}
+        
+        
         
     </Canvas>}</>
     );

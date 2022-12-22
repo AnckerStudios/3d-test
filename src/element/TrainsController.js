@@ -18,7 +18,7 @@ function TrainsController({ trains = [], timer = 0, mtrx = [],setErr }) {
   function createTrains(trains) {
     let arr = [];
     for (let i = 0; i < trains.length; i++) {
-      arr.push({ wagons: creareWagons(trains[i], paths[i]), step: 1, maxStep: 1, isMoving: true, isStop: false });
+      arr.push({ wagons: creareWagons(trains[i], paths[i]), step: 0.05, maxStep: 0.05, isMoving: true, isStop: false });
     }
     return arr;
   }
@@ -36,7 +36,7 @@ function TrainsController({ trains = [], timer = 0, mtrx = [],setErr }) {
   function creareWagons(trains, paths) {
     let arrWagons = [];
     for (let w = 0; w < 3; w++) { //wagons
-      arrWagons.push({ next: 1, err:false, pos: { x: paths[0].x - (3 * w * 1), y: paths[0].y - (3 * w * 0), dir: dirSwich(trains.way[0].dir) } })
+      arrWagons.push({ next: 1, err:false, pos: { x: paths[0].x - (3 * w * 1), y: paths[0].y - (3 * w * 0), dir: dirSwich(trains.way[0].dir) }, opacity: 0})
     }
     return arrWagons;
   }
@@ -68,7 +68,6 @@ function TrainsController({ trains = [], timer = 0, mtrx = [],setErr }) {
 
     for (let t = timeCount; t < timer; t++) {
       let isErr = collisionDetect(arr);
-      //console.log(isErr);
       if(isErr.err === true){
         setErr(isErr.err);
         setTrainInfo(isErr.arr);
@@ -101,6 +100,11 @@ function TrainsController({ trains = [], timer = 0, mtrx = [],setErr }) {
               let dist = distance(pos, paths[tr][n]);
               let step = arr[tr].step;
               if (dist > step) {
+                if(arr[tr].wagons[w].next === 2 && arr[tr].wagons[w].opacity < 1){
+                  arr[tr].wagons[w].opacity += step;
+                }else if (arr[tr].wagons[w].next === paths[tr].length-1 && arr[tr].wagons[w].opacity > 0){
+                  arr[tr].wagons[w].opacity -= step;
+                }
                 arr[tr].wagons[w].pos = newPoint(pos, paths[tr][n], dist, step);
               } else {
                 arr[tr].wagons[w].pos = paths[tr][n];
@@ -162,7 +166,7 @@ function TrainsController({ trains = [], timer = 0, mtrx = [],setErr }) {
     for (let i = 0; i < arr.length; i++) {
       for (let w = 0; w < arr[i].wagons.length; w++) {
         let cur = arr[i].wagons[w].next - 1;
-        if (cur > 0 && cur < paths[i].length-1) {
+        if (cur > 0 && cur < paths[i].length-2) {
           let index = paths[i][cur].x + paths[i][cur].y * mtrx.length;
 
           if (allPos[index]?.count >= 1) {

@@ -1,13 +1,13 @@
 import { useMemo } from "react";
 
-function Text({ children, position, opacity, color = 'black', fontSize = 35 }) {
+function Text({ children, position, opacity, color = 'black', fontSize = 150 }) {
 
   
 
     const canvas = useMemo(() => {
       var fontface = "Arial";
       var fontsize = fontSize;
-      var borderThickness =  0;
+      var borderThickness =  4;
   
       var canvas = document.createElement('canvas');
       var context = canvas.getContext('2d');
@@ -20,14 +20,14 @@ function Text({ children, position, opacity, color = 'black', fontSize = 35 }) {
       context.lineWidth = borderThickness;
   
       context.fillStyle = color
-      context.fillText( children, textWidth - (textWidth*0.5), fontsize);    
+      context.fillText( children, textWidth - (textWidth*0.8), fontsize);    
       return canvas
     }, [children])
   
   
     return (
       <sprite 
-      scale={[5, 3, 3]} position={position}>
+      scale={[2, 2, 1]} position={position}>
         <spriteMaterial attach="material" transparent alphaTest={0.5} >
           <canvasTexture attach="map" image={canvas} />
         </spriteMaterial>
