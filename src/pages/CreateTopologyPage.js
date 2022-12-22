@@ -14,12 +14,14 @@ function CreateTopologyPage() {
     const [flag, setFlag] = useState(false);
     const [name, setName] = useState()
     function save(){
-        axios.post('http://localhost:8080/api/topology/create', mtrx,{
+        axios.post('http://localhost:8080/api/topology/create', {
+            title: name,
+            body: mtrx
+          },{
             params: {
                 topologyName: name,
                 accountName: "ilya",
-                city: "Самара",
-                date: date
+                city: "Самара"
             }
         })
           .then(function (response) {
