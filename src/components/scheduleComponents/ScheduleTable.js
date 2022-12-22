@@ -19,27 +19,24 @@ function ScheduleTable({schedule = [], loading = true}) {
     }
     
     return (
-        <div>
-        <table className = " ">
+        <div className='divwithtable'>
+          <table className="table3">
             <caption>Расписание</caption>
-            
             <thead>
-                <tr className=' border'>
-                 <th className=" p-2">№ пути</th>
-                 <th className=" p-2">№ платф.</th>
-                 <th className=" p-2">№ поезда</th>
-                 <th className=" p-2">время<br/>прибытия</th>
-                 <th className=" p-2">время<br/>отбытия</th>
-                 <th className=" p-2">маршрут</th>
-                 <th className=" p-2">тип поезда</th>
-                 </tr>
+              <tr className='trtab'>
+                <th>№ платф.</th>
+                <th>№ пути</th>
+                <th>№ поезда</th>
+                <th>время<br />прибытия</th>
+                <th>время<br />отбытия</th>
+                <th>маршрут</th>
+                <th>тип поезда</th>
+              </tr>
             </thead>
-            
-           
             <tbody>
                 {loading ? <div>Loading...</div> : items}
             </tbody>
-        </table>
+          </table>
         </div>
         
     );

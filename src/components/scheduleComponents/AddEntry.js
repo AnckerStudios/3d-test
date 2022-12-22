@@ -4,8 +4,9 @@ import { Link } from "react-router-dom";
 
 
 function AddEntry({schedule, setSchedule, id}) {
-
+    const [loading, setLoading] = useState(true);
     useEffect(()=>{
+        setLoading(true);
         axios.get('http://localhost:8080/api/topology/plates', {
             params: {
               idTopology: id
@@ -28,7 +29,7 @@ function AddEntry({schedule, setSchedule, id}) {
                 in:resInOut[0], 
                 out:resInOut[0]});
             console.log(response);
-            
+            setLoading(false);
         })
         .catch(function (error) {
             console.log(error);
@@ -47,6 +48,7 @@ function AddEntry({schedule, setSchedule, id}) {
                 typeTrain: type[0], 
                 in:resInOut[0], 
                 out:resInOut[0]});
+            setLoading(false);
         });
     },[])
     const [platforms,setPlatforms] = useState();

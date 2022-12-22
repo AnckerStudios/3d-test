@@ -17,9 +17,8 @@ function ModelirovaniePage() {
   const {id,date} = useParams();
     const [mtrx, setMtrx] = useState();
     const [schedule, setSchedule] = useState();
-    let test = {start: {x:0,y:0,dir:2}, end:{x:15,y:4,dir:2}, stop: {x:11, y:4}, time: 200, timeOtb: 600, wagons: 3, way: [{x:0,y:0,dir:2},{x:1,y:0,dir:2},{x:2,y:0,dir:1},{x:3,y:1,dir:1},{x:4,y:2,dir:1},{x:5,y:3,dir:1},{x:6,y:4,dir:2},{x:7,y:4,dir:2},{x:8,y:4,dir:2},{x:9,y:4,dir:2},{x:10,y:4,dir:2},{x:11,y:4,dir:2},{x:12,y:4,dir:2},{x:13,y:4,dir:2},{x:14,y:4,dir:2},{x:15,y:4,dir:2}]}
-    let test2 = {start: {x:0,y:11,dir:2}, end:{x:15,y:4,dir:2}, stop: {x:11, y:4}, time: 200, timeOtb: 700, wagons:2, way: [{x:0,y:11,dir:2},{x:1,y:11,dir:2},{x:2,y:11,dir:2},{x:3,y:11,dir:2},{x:4,y:11,dir:3},{x:5,y:10,dir:3},{x:6,y:9,dir:3},{x:7,y:8,dir:4},{x:7,y:7,dir:4},{x:7,y:6,dir:3},{x:8,y:5,dir:3},{x:9,y:4,dir:3},{x:10,y:3,dir:2},{x:11,y:3,dir:2},{x:12,y:3,dir:2},{x:13,y:3,dir:2},{x:14,y:3,dir:2},{x:15,y:3,dir:2}]}
-    let ways = [test,test2]
+    const [scheduleEntry, setScheduleEntry] = useState();
+   
     const [timer, setTimer] = useState(0)
     const [loading, setLoading] = useState(true);
     useEffect(()=> {

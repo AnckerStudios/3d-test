@@ -5,48 +5,46 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import ModalDateSelector from '../components/scheduleComponents/ModalDateSelector';
+import ScheduleTable2 from '../components/scheduleComponents/ScheduleTable2';
 
 
 function ScheduleEditorPage() {
 
     const {id, date} = useParams();
     const [schedule, setSchedule] = useState([]);
+    const [loading, setLoading] = useState(true);
     const data = [
-        {plate: {number: 1, lines:[{x:0,y:0,number:1}]}, plateLine: {x:0,y:0,number:1}, trainName : "D500A", arrivalTime: {h:0,m:0}, departureTime: {h:1,m:0}, marshrut: "Санкт-Петербург-Екатеринбург",typeTrain:"п"},
-        {plate: {number: 1, lines:[{x:0,y:0,number:1}]}, plateLine: {x:0,y:0,number:1}, trainName : "333", arrivalTime: {h:0,m:0}, departureTime: {h:0,m:20}, marshrut: "город-город2",typeTrain:"п"},
-        {plate: {number: 1, lines:[{x:0,y:0,number:1}]}, plateLine: {x:0,y:0,number:1}, trainName : "333", arrivalTime: {h:12,m:0}, departureTime: {h:12,m:20}, marshrut: "город-город2",typeTrain:"п"},
-        {plate: {number: 1, lines:[{x:0,y:0,number:1}]}, plateLine: {x:0,y:0,number:1}, trainName : "333", arrivalTime: {h:8,m:0}, departureTime: {h:8,m:30}, marshrut: "город-город2",typeTrain:"п"},
+        {plate: {number: 1, lines:[{x:0,y:0,number:1}]}, plateLine: {x:0,y:0,number:1}, trainName : "D500A", arrivalTime: "10:10", departureTime: "10:10", arrivalCity: "10:10", departureCity: "10:10",typeTrain:"п"},
+        {plate: {number: 1, lines:[{x:0,y:0,number:1}]}, plateLine: {x:0,y:0,number:1}, trainName : "333", arrivalTime: "10:10", departureTime: "10:10", arrivalCity: "10:10", departureCity: "10:10",typeTrain:"п"},
+        {plate: {number: 1, lines:[{x:0,y:0,number:1}]}, plateLine: {x:0,y:0,number:1}, trainName : "333", arrivalTime: "10:10", departureTime: "10:10", arrivalCity: "10:10", departureCity: "10:10",typeTrain:"п"},
+        {plate: {number: 1, lines:[{x:0,y:0,number:1}]}, plateLine: {x:0,y:0,number:1}, trainName : "333", arrivalTime: "10:10", departureTime: "10:10", arrivalCity: "10:10", departureCity: "10:10",typeTrain:"п"},
         ];
     
     useEffect(()=>{
-        
-        if(id === 'create'){
-            
-        }else{
+        setLoading(true);
             axios.get('http://localhost:8080/api/schedule/', {
                 params: {
-                idTopology: id //или дату и id топологии
+                idTopology: id, //или дату и id топологии
+                date: date
                 }
             })
             .then(function (response) {
                 setSchedule(response.data);
                 console.log(response);
+                setLoading(false);
             })
             .catch(function (error) {
                 setSchedule(data); //убрать
                 console.log(error);
+                setLoading(false);
             });
-        }
     },[])
 
     function Save(){
-        axios.post('http://localhost:8080/api/schedule/save',{
+        axios.post('http://localhost:8080/api/schedule/save',schedule,{
             params: {
                 idTopology: id,
                 date: date
-            },
-            body:{
-                records: schedule
             }
           })
           .then(function (response) {
@@ -110,8 +108,8 @@ function ScheduleEditorPage() {
     return (
         <>
         <div className=' flex p-10 w-full justify-center h-full'>
-        {date && <ScheduleTable schedule={schedule}/>}
-        {date && <AddEntry schedule={schedule} setSchedule={setSchedule} id={id}/>}
+        <ScheduleTable schedule={schedule} loading={loading}/>
+        <AddEntry schedule={schedule} setSchedule={setSchedule} id={id}/>
         <button  className='ex2'>Выход</button>
         <button className=" w-24 h-15 absolute  rounded-xl bottom-4 right-4 bg-slate-200 flex shadow-md justify-center font-bold p-1 hover:bg-slate-400" onClick={()=>Save()}>
             save
