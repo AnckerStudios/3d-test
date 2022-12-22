@@ -9,7 +9,7 @@ import axios from 'axios';
 
 
 function TopologyEditorPage() {
-    const {id} = useParams();
+    const {id,name} = useParams();
     const [mtrx, setMtrx] = useState();
     const [loading, setLoading] = useState(true);
 
@@ -34,9 +34,23 @@ function TopologyEditorPage() {
                   setLoading(false);
               });
         },[])
+    function save(){
+            axios.post('http://localhost:8080/api/topology', {
+                title: name,
+                body: mtrx
+              })
+              .then(function (response) {
+                console.log(response);
+              })
+              .catch(function (error) {
+                console.log(mtrx[0][0])
+                console.log(mtrx[1][0])
+                console.log(error);
+        });
+    }
     return (
         <>
-        {loading ? <div>Loading...</div>: <TopologyEditor id={id} mtrx={mtrx} setMtrx={setMtrx} name={data.name}/> }
+        {loading ? <div>Loading...</div>: <TopologyEditor id={id} mtrx={mtrx} setMtrx={setMtrx} saveFunk={save}/> }
         </>
     );
 }

@@ -6,7 +6,7 @@ import ScheduleList from "../components/scheduleComponents/ScheduleList";
 
 
 function TopologyPage() {
-    const {id} = useParams();
+    const {id,name} = useParams();
     // function load(){
     //     axios.get('http://localhost:8080/api/field', {
            
@@ -25,7 +25,7 @@ function TopologyPage() {
             <div className="w-full bg-slate-0 flex-col">
                 <div className="w-full flex py-10 px-2">
                     <h4 className="font-bold text-4xl text-slate-900">
-                        Name 
+                        {name} 
                     </h4>
                 </div>
                 <div className=" w-full flex flex-col md:flex-row gap-y-2 md:gap-y-0 gap-x-4 p-2">
@@ -35,7 +35,7 @@ function TopologyPage() {
                             Enim et commodo culpa aliqua ullamco sit ut duis occaecat. Ex aliqua reprehenderit anim quis veniam mollit eiusmod incididunt aliqua commodo mollit voluptate ut. Nulla do sit commodo commodo. Irure id dolore ipsum id consectetur ex nulla nisi culpa voluptate quis consequat enim.                             
                         </div>
 
-                            <Link className=" border hover:bg-white rounded-xl  m-2 flex justify-center" to={`/topology-editor/${id}`}>button</Link>
+                            <Link className=" border hover:bg-white rounded-xl  m-2 flex justify-center" to={`/topology-editor/${id}/${name}`}>button</Link>
                         
                     </div>
             

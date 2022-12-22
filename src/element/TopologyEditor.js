@@ -15,7 +15,7 @@ import ToolListElement from "./ToolListElement";
 import Train from "./Train";
 import ViewSwitcher from "./ViewSwitcher";
 
-function TopologyEditor({id,mtrx=[], setMtrx, name}) {
+function TopologyEditor({id,mtrx=[], setMtrx, saveFunk}) {
     // const {id} = useParams();
     const [view, setView] = useState();
     const [tool, setTool] = useState();
@@ -41,20 +41,7 @@ function TopologyEditor({id,mtrx=[], setMtrx, name}) {
   //           console.log(error);
   //       });
   // },[])
-  function save(){
-    axios.post('http://localhost:8080/api/topology', {
-        title: name,
-        body: mtrx
-      })
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(mtrx[0][0])
-        console.log(mtrx[1][0])
-        console.log(error);
-      });
-  }
+  
   const [flag,setFlag] = useState();
   function testSaveImage(){
     setFlag(()=>true);
@@ -69,7 +56,7 @@ function TopologyEditor({id,mtrx=[], setMtrx, name}) {
             <Editor mtrx={mtrx} setMtrx={setMtrx} view={view} tool={tool} flag= {flag}/>
             <ToolList setTool={setTool}/>
             <ViewSwitcher setView={setView}/>
-            <button className=" w-24 h-15 absolute  rounded-xl bottom-4 right-4 bg-slate-200 flex shadow-md justify-center font-bold p-1 hover:bg-slate-400" onClick={() => save()}>
+            <button className=" w-24 h-15 absolute  rounded-xl bottom-4 right-4 bg-slate-200 flex shadow-md justify-center font-bold p-1 hover:bg-slate-400" onClick={() => saveFunk()}>
                 Save
             </button>
             <button className=" w-24 h-15 absolute  rounded-xl bottom-24 right-4 bg-slate-200 flex shadow-md justify-center font-bold p-1 hover:bg-slate-400" onClick={() => clear()}>
