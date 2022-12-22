@@ -9,7 +9,7 @@ import ModalDateSelector from '../components/scheduleComponents/ModalDateSelecto
 
 function ScheduleEditorPage() {
 
-    const {id, topology} = useParams();
+    const {id, date} = useParams();
     const [schedule, setSchedule] = useState([]);
     const data = [
         {plate: {number: 1, lines:[{x:0,y:0,number:1}]}, plateLine: {x:0,y:0,number:1}, trainName : "D500A", arrivalTime: {h:0,m:0}, departureTime: {h:1,m:0}, marshrut: "Санкт-Петербург-Екатеринбург",typeTrain:"п"},
@@ -17,9 +17,9 @@ function ScheduleEditorPage() {
         {plate: {number: 1, lines:[{x:0,y:0,number:1}]}, plateLine: {x:0,y:0,number:1}, trainName : "333", arrivalTime: {h:12,m:0}, departureTime: {h:12,m:20}, marshrut: "город-город2",typeTrain:"п"},
         {plate: {number: 1, lines:[{x:0,y:0,number:1}]}, plateLine: {x:0,y:0,number:1}, trainName : "333", arrivalTime: {h:8,m:0}, departureTime: {h:8,m:30}, marshrut: "город-город2",typeTrain:"п"},
         ];
-    const [date, setDate] = useState();
+    
     useEffect(()=>{
-        console.log(id, topology)
+        
         if(id === 'create'){
             
         }else{
@@ -34,7 +34,6 @@ function ScheduleEditorPage() {
             })
             .catch(function (error) {
                 setSchedule(data); //убрать
-                setDate("02-02-22");
                 console.log(error);
             });
         }
@@ -43,7 +42,7 @@ function ScheduleEditorPage() {
     function Save(){
         axios.post('http://localhost:8080/api/schedule/save',{
             params: {
-                idTopology: topology,
+                idTopology: id,
                 date: date
             },
             body:{
@@ -112,12 +111,12 @@ function ScheduleEditorPage() {
         <>
         <div className=' flex p-10 w-full justify-center h-full'>
         {date && <ScheduleTable schedule={schedule}/>}
-        {date && <AddEntry schedule={schedule} setSchedule={setSchedule} id={topology}/>}
+        {date && <AddEntry schedule={schedule} setSchedule={setSchedule} id={id}/>}
         <button  className='ex2'>Выход</button>
         <button className=" w-24 h-15 absolute  rounded-xl bottom-4 right-4 bg-slate-200 flex shadow-md justify-center font-bold p-1 hover:bg-slate-400" onClick={()=>Save()}>
             save
         </button>
-        <Link className=" w-24 h-15 absolute  rounded-xl bottom-24 right-4 bg-slate-200 flex shadow-md justify-center font-bold p-1 hover:bg-slate-400" to={`/modeling/${id}/${date}`}>
+        <Link className=" w-24 h-15 absolute  rounded-xl bottom-24 right-4 bg-slate-200 flex shadow-md justify-center font-bold p-1 hover:bg-slate-400" to={`/modelirovanie/${id}/${date}`}>
             model
         </Link>
         </div>
