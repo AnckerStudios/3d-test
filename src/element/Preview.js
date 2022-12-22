@@ -84,9 +84,10 @@ function Preview({mtrx = [], objSet = {x: 16, y:16}, prev = true, err=false}) {
                             break;
                         case 'dir':
                             if(item.state.dir === true){
-                                changesP.push({x:item.x, y:item.y, rot: {x: 0, y: 0, z: 0}, state: item.state.plate});
+        
+                                changesP.push({x:item.x, y:item.y, rot: {x: 0, y: 0, z: 0}, state: item.state.plate, number: item.state.number});
                             }else if(item.state.dir === false){
-                                changesP.push({x:item.x, y:item.y, rot: {x: 0, y: 0, z: Math.PI/2}, state: item.state.plate});
+                                changesP.push({x:item.x, y:item.y, rot: {x: 0, y: 0, z: Math.PI/2}, state: item.state.plate, number: item.state.number});
                             }
                             break;
                       }

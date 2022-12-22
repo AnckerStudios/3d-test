@@ -90,7 +90,7 @@ function Editor({mtrx=[],setMtrx, view=true, tool='cursor', flag}) {
   }
   useEffect(()=>{
     if(selectedCell.x != undefined && selectedCell.y != undefined){
-      let cellPrev = setCell(selectedCell, mtrx, tool, clickedCell);
+      let cellPrev = setCell(selectedCell, mtrx, tool, clickedCell, plates);
       setPreviewMtrx(cellPrev.arr);
       setPlaceErr(cellPrev.err);
     }

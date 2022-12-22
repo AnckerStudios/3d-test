@@ -1,4 +1,4 @@
-export function cellFree(cell, mtrx, tool) {
+export function cellFree(cell, mtrx, tool, plates) {
     let arr = createMtrx(mtrx.length,mtrx[1].length);
     let x = cell.x;
     let y = cell.y;
@@ -18,7 +18,7 @@ export function cellFree(cell, mtrx, tool) {
             let yMax = y + (!scroll ? 1 : 0);
             
             arr[x][y].type = tool.name;
-            arr[x][y].state = {dir: scroll ? true : false};
+            arr[x][y].state = {dir: scroll ? true : false, number: plates.length};
            
             if(xMin >= 0 && yMin >= 0 && xMax < arr.length && yMax < arr[x].length){
                 arr[xMin][yMin].type = "plate edge";
@@ -36,10 +36,10 @@ export function cellFree(cell, mtrx, tool) {
     
 }
 
-export function setCell(cell, mtrx, tool, clickedCell){
+export function setCell(cell, mtrx, tool, clickedCell, plates){
     let arr = createMtrx(mtrx.length,mtrx[1].length);
     if(isFirstClick(clickedCell)){
-        return cellFree(cell, mtrx, tool);
+        return cellFree(cell, mtrx, tool, plates);
     }
     else if(tool.doubleClick){
         let change = createWay(clickedCell.first, cell);
