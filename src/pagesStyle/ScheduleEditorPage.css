@@ -44,14 +44,14 @@
     flex-wrap: nowrap;
     justify-content: center;
     height: 100vh;
-    width: 100vw;
+    width: 100%;
     background-color: rgb(234, 211, 255);
     color: rgb(23, 1, 44);
 }
 
 
 .formsep{
-    background-color:#F7F7F7;
+
     width: 500px;
     height: 530px;
     padding-left: 60px;

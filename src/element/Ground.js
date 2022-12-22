@@ -39,6 +39,7 @@ function Ground({mousePos, objSet = {x: 16, y:16}, enterFunk = true}) {
     const [instanceId, setInstanceId] = useState();
     const [isFirstLeave, setIsFirstLeave] = useState(true);
     useEffect(() => {
+      if(mousePos !== undefined){
         let mouse = new THREE.Vector2(mousePos.x, mousePos.y);
         ts.raycaster.setFromCamera(mouse, ts.camera);
         
@@ -60,6 +61,7 @@ function Ground({mousePos, objSet = {x: 16, y:16}, enterFunk = true}) {
             setIsFirstLeave(false);
           }
         }
+      }
       }, [mousePos]);
   
     

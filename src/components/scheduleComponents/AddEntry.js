@@ -3,60 +3,15 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
 
-function AddEntry({schedule, setSchedule, id}) {
+function AddEntry({inOut, platforms, id, addSchedule}) {
     const [loading, setLoading] = useState(true);
-    useEffect(()=>{
-        setLoading(true);
-        axios.get('http://localhost:8080/api/topology/plates', {
-            params: {
-              idTopology: id
-            }
-        })
-        .then(function (response) {
-            let resPlates = response.data.plates;
-            let resInOut = response.data.inOut;
-            setPlatforms(resPlates);
-            setInOut(resInOut);
-            setEntry({
-                plate: resPlates[0], 
-                plateLine: resPlates[0].lines[0],  //GGGGGGGGGGGGGGG
-                trainName: "", 
-                arrivalTime: '00:00', 
-                departureTime:'00:00',
-                departureCity:"",
-                arrivalCity:"",
-                typeTrain: type[0], 
-                in:resInOut[0], 
-                out:resInOut[0]});
-            console.log(response);
-            setLoading(false);
-        })
-        .catch(function (error) {
-            console.log(error);
-            let resPlates =[{number: 7, dir: true, lines:[{x:0,y:0,number:1}]},{number: 8, dir: true, lines:[{x:0,y:0,number:3},{x:0,y:0,number:4}]},{number: 4, dir: true, lines:[{x:0,y:0,number:5},{x:0,y:0,number:6}]}];
-            let resInOut = [{x:0,y:0,dir:0},{x:15,y:9,dir:0},{x:0,y:3,dir:0},{x:4,y:0,dir:0}];
-            setPlatforms(resPlates);
-            setInOut(resInOut);
-            setEntry({
-                plate: resPlates[0], 
-                plateLine: resPlates[0].lines[0],  //GGGGGGGGGGGGGGG
-                trainName: "", 
-                arrivalTime: '00:00', 
-                departureTime:'00:00',
-                departureCity:"",
-                arrivalCity:"",
-                typeTrain: type[0], 
-                in:resInOut[0], 
-                out:resInOut[0]});
-            setLoading(false);
-        });
-    },[])
-    const [platforms,setPlatforms] = useState();
-    const [inOut,setInOut] = useState();
+    
+   
 
-
+    const [lineIndex, setLineIndex] = useState(0);
+    const [plateIndex, setPlateIndex] = useState();
     const type = ['Пассаж.','Груз.','Электричка'];
-    const [entry, setEntry] = useState({plate: {lines:[]}});
+    const [entry, setEntry] = useState({plate: platforms[0]});
 
     const sity = [{city:"Самара"}, {city:"Москва"},{city:"Санкт-Петербург"},{city:"Оренбург"}, ]
     const sitys = []
@@ -66,7 +21,7 @@ function AddEntry({schedule, setSchedule, id}) {
 
     function Add(){
         console.log(entry)
-        setSchedule([...schedule,entry]);
+        addSchedule(entry);
     }
     // const [selectLine,setSelectLine]=useState(0);
     // useEffect(()=>{
@@ -80,13 +35,23 @@ function AddEntry({schedule, setSchedule, id}) {
         setEntry({...entry, arrivalTime: `${arTime.h < 10 ? '0'+arTime.h :arTime.h }:${arTime.m < 10 ? '0'+arTime.m :arTime.m }`});
     },[arTime])
     useEffect(()=>{setEntry({...entry, departureTime: `${deTime.h < 10 ? '0'+deTime.h :deTime.h }:${deTime.m < 10 ? '0'+deTime.m :deTime.m }`})},[deTime])
-    
+
+
+    function setPlate(i){
+        console.log(platforms,i)
+        if(platforms[i].lines.length-1 < lineIndex){
+            console.log(platforms[i].lines.length-1)
+            setEntry({...entry, plate: platforms[i], plateLine: platforms[i].lines[0]})
+        }else{
+            setEntry({...entry, plate: platforms[i], plateLine: platforms[i].lines[lineIndex]})
+        }
+    }
     return (
         <div className='formsep'>
             <fieldset>
                 <legend>Добавить запись</legend>
                 <label id = "firstlab">Выберите платформу
-                    <select className = "addsep" onChange={(e)=>setEntry({...entry, plate: platforms[e.target.value]})}>
+                    <select className = "addsep" onChange={(e)=>setPlate(e.target.value)}>
                         {platforms?.map((platform,index) => {
                             return <option key={index} value={index}>Платформа №{platform.number}</option>
                         })}
@@ -94,7 +59,7 @@ function AddEntry({schedule, setSchedule, id}) {
                 </label>
                 <br/>
                 <label>Выберите путь
-                    <select className = "addsep" onChange={(e)=>setEntry({...entry, plateLine: entry.plate.lines[e.target.value]})}>
+                    <select className = "addsep" onChange={(e)=>{setEntry({...entry, plateLine: entry.plate.lines[e.target.value]}); setLineIndex(e.target.value)}}>
                         {entry.plate.lines?.map((line,index) => {
                             return <option key={index} value={index}>Путь №{line.number}</option>
                         })}
