@@ -11,7 +11,7 @@ function AddEntry({inOut, platforms, id, addSchedule}) {
     const [lineIndex, setLineIndex] = useState(0);
     const [plateIndex, setPlateIndex] = useState();
     const type = ['Пассаж.','Груз.','Электричка'];
-    const [entry, setEntry] = useState({ plate: platforms[0], plateLine: platforms[0].lines[lineIndex]});
+    const [entry, setEntry] = useState({ plate: 0, plateLine: platforms[0].lines[lineIndex]});
 
     const sity = [{city:"Самара"}, {city:"Москва"},{city:"Санкт-Петербург"},{city:"Оренбург"}, ]
     const sitys = []
@@ -41,9 +41,9 @@ function AddEntry({inOut, platforms, id, addSchedule}) {
         console.log(platforms,i)
         if(platforms[i].lines.length-1 < lineIndex){
             console.log(platforms[i].lines.length-1)
-            setEntry({...entry, plate: platforms[i], plateLine: platforms[i].lines[0]})
+            setEntry({...entry, plate: i, plateLine: platforms[i].lines[0]})
         }else{
-            setEntry({...entry, plate: platforms[i], plateLine: platforms[i].lines[lineIndex]})
+            setEntry({...entry, plate: i, plateLine: platforms[i].lines[lineIndex]})
         }
     }
     return (
@@ -59,8 +59,8 @@ function AddEntry({inOut, platforms, id, addSchedule}) {
                 </label>
                 <br/>
                 <label>Выберите путь
-                    <select className = "addsep" onChange={(e)=>{setEntry({...entry, plateLine: entry.plate.lines[e.target.value]}); setLineIndex(e.target.value)}}>
-                        {entry.plate.lines?.map((line,index) => {
+                    <select className = "addsep" onChange={(e)=>{setEntry({...entry, plateLine: platforms[entry.plate].lines[e.target.value]}); setLineIndex(e.target.value)}}>
+                        {platforms[entry.plate].lines?.map((line,index) => {
                             return <option key={index} value={index}>Путь №{line.number}</option>
                         })}
                     </select>

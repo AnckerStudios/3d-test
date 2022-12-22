@@ -57,7 +57,7 @@ function ScheduleTable({id,date,setSchedule, schedule, isCreate}) {
           </thead>
           <tbody>
 
-              {loading ? <div>Loading...</div> : schedule?.map((sch, index) => {
+              {loading ? <div>Погоди...</div> : schedule?.map((sch, index) => {
                 return <tr key={index} className=' border'>
                   <td className=" text-center">{sch.plate.number}</td>
                   <td className=" text-center">{sch.plateLine.number}</td>
