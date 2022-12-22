@@ -296,19 +296,19 @@ function ModelirovaniePage() {
     clearInterval(interval);
     setInter(setInterval(() => {
       setTimer((timer) => timer + 1)
-    }, 500));
+    }, 5));
   }
   function x1() {
     clearInterval(interval);
     setInter(setInterval(() => {
       setTimer((timer) => timer + 1)
-    }, 1000));
+    }, 10));
   }
   function x3() {
     clearInterval(interval);
     setInter(setInterval(() => {
       setTimer((timer) => timer + 1)
-    }, 250));
+    }, 3));
   }
 
 
