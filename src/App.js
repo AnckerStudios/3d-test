@@ -31,13 +31,13 @@ function App() {
       <Route path="/add-sity" element={<AddSityPage/>}/> 
       <Route path="/choicepage" element={<ChoicePage/>}/> 
       <Route path="/new-maket" element={<NewMacketPage/>}/>
-      <Route path="/schedule-editor/:id/:date/" element={<ScheduleEditorPage/>}/> 
+      <Route path="/schedule-editor/:id/:date" element={<ScheduleEditorPage/>}/> 
       <Route path="/schedule" element={<SchedulePage/>}/>
       {/* <Route path="/modelirovanie" element={<ModelirovaniePage/>}/> */}
       <Route path="/modeling/:id/:date" element={<ModelingPage/>}/> 
       <Route path="/modelirovanie/:id/:date" element={<ModelirovaniePage/>}/> 
       <Route path="/topology/:id" element={<TopologyPage/>}/> 
-      <Route path="/create-schedule/:id" element={<ScheduleCreatePage/>}/> 
+      <Route path="/create-schedule/:id/:date" element={<ScheduleCreatePage/>}/> 
       <Route path="/topology-editor/:id" element={<TopologyEditor/>}/> 
     </Routes>
   );

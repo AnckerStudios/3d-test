@@ -80,37 +80,13 @@ function ScheduleEditorPage() {
                 <option>{i}</option>
             )
         }
-    const items = []
-    for (let i = 0; i < data.length; i++) {
-        items.push(<tr>
-            <td>{data[i].nplat}</td>
-            <td>{data[i].nputi}</td>
-            <td>{data[i].npoezd}</td>
-            <td>{data[i].timeotp}</td>
-            <td>{data[i].timepr}</td>
-            <td>{data[i].marshrut}</td>
-            <td>{data[i].type}</td>
-        </tr>)
-    }
-    const platforms = []
-    for (let i = 0; i < nplat.length; i++) {
-        platforms.push(
-            <option>{nplat[i]}</option>
-        )
-    }
-    const puty = []
-    for (let i = 0; i < nput.length; i++) {
-        puty.push(
-            <option>{nput[i]}</option>
-        )
-    }
+
 
     return (
         <>
         <div className=' flex p-10 w-full justify-center h-full'>
         <ScheduleTable schedule={schedule} loading={loading}/>
         <AddEntry schedule={schedule} setSchedule={setSchedule} id={id}/>
-        <button  className='ex2'>Выход</button>
         <button className=" w-24 h-15 absolute  rounded-xl bottom-4 right-4 bg-slate-200 flex shadow-md justify-center font-bold p-1 hover:bg-slate-400" onClick={()=>Save()}>
             save
         </button>

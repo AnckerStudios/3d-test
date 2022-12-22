@@ -12,7 +12,7 @@ function ScheduleList({id}) {
     const [loading, setLoading] = useState(true);
     useEffect(()=>{
         setLoading(true);
-        axios.get('http://localhost:3000/api/schedule/all', {
+        axios.get('http://localhost:8080/api/schedule/all', {
             params: {
               idTopology: id
             }

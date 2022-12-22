@@ -17,7 +17,7 @@ function ScheduleAddItem({idTopology,schedules}) {
             }
         }
         
-        navigate(`/schedule-editor/${idTopology}/${revDate}/create`); 
+        navigate(`/create-schedule/${idTopology}/${revDate}`); 
     }
     return (
         <>
