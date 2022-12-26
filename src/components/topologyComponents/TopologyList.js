@@ -9,7 +9,7 @@ function TopologyList({cityName}) {
     const [loading, setLoading] = useState(false);
     useEffect(()=>{
         setLoading(true);
-        axios.get('http://localhost:8080/api/topology',{
+        axios.get('http://localhost:8080/api/topology/bycity',{
             params:{
                 cityName: cityName
             }
