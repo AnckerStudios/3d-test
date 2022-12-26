@@ -9,7 +9,7 @@ import axios from 'axios';
 
 
 function CreateTopologyPage() {
-    const {id} = useParams();
+    const {cityname} = useParams();
     const [mtrx, setMtrx] = useState();
     const [flag, setFlag] = useState(false);
     const [name, setName] = useState()
@@ -21,7 +21,7 @@ function CreateTopologyPage() {
             params: {
                 topologyName: name,
                 accountName: "ilya",
-                city: "Самара"
+                city: cityname
             }
         })
           .then(function (response) {
@@ -41,7 +41,7 @@ function CreateTopologyPage() {
     return (
         <>
         {!flag && <TopologyModal submin={submin}/>}
-        {flag && <TopologyEditor id={id} mtrx={mtrx} setMtrx={setMtrx} saveFunk={save}/> }
+        {flag && <TopologyEditor mtrx={mtrx} setMtrx={setMtrx} saveFunk={save}/> }
         </>
     );
 }

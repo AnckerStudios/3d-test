@@ -15,7 +15,7 @@ import ToolListElement from "./ToolListElement";
 import Train from "./Train";
 import ViewSwitcher from "./ViewSwitcher";
 
-function TopologyEditor({id,mtrx=[], setMtrx, saveFunk}) {
+function TopologyEditor({mtrx=[], setMtrx, saveFunk}) {
     // const {id} = useParams();
     const [view, setView] = useState();
     const [tool, setTool] = useState();

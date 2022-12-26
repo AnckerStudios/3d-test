@@ -49,7 +49,7 @@ function App() {
       <Route path="/topology/:id/:name" element={<TopologyPage/>}/> 
       <Route path="/create-schedule/:id/:date" element={<ScheduleCreatePage/>}/> 
       <Route path="/topology-editor/:id/:name" element={<TopologyEditorPage/>}/> 
-      <Route path="/create-topology/" element={<CreateTopologyPage/>}/> 
+      <Route path="/create-topology/:cityname" element={<CreateTopologyPage/>}/> 
     </Routes>
   );
 }

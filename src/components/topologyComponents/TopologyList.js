@@ -55,7 +55,7 @@ function TopologyList({cityName}) {
             {topologys?.map((topol,index) => {
                 return <TopologyListItem key={index} topol={topol} del={delShedule} index={index}/>
             })}
-            <TopologyAddItem />
+            <TopologyAddItem cityName={cityName}/>
         </div>}
         </>
     );
