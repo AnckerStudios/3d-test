@@ -19,7 +19,7 @@ function Manul() {
                 
                 
             </div>
-            <TopologyList/>
+            <TopologyList cityName={name}/>
         </div>
         
     );

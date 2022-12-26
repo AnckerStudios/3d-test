@@ -4,19 +4,23 @@ import TopologyAddItem from "./TopologyAddItem";
 import TopologyListItem from "./TopologyListItem";
 
 
-function TopologyList({id}) {
+function TopologyList({cityName}) {
     const [topologys,setTopologys] = useState();
     const [loading, setLoading] = useState(false);
     useEffect(()=>{
         setLoading(true);
-        axios.get('http://localhost:8080/api/topology/all')
+        axios.get('http://localhost:8080/api/topology',{
+            params:{
+                cityName: cityName
+            }
+        })
         .then(function (response) {
             setTopologys(response.data);
             setLoading(false);
             console.log(response);
         })
         .catch(function (error) {
-            setTopologys([{topologyName:"name",idTopology:1}]);
+            setTopologys([{topologyName:"name",idTopology:1, accountName: "lox"}]);
             setLoading(false);
             console.log(error);
         });
@@ -49,7 +53,7 @@ function TopologyList({id}) {
             
 
             {topologys?.map((topol,index) => {
-                return <TopologyListItem key={index} name={topol.topologyName} id={topol.idTopology} del={delShedule} index={index}/>
+                return <TopologyListItem key={index} topol={topol} del={delShedule} index={index}/>
             })}
             <TopologyAddItem />
         </div>}
