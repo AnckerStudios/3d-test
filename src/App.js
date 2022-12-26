@@ -18,6 +18,7 @@ import ScheduleCreatePage from "./pages/ScheduleCreatePage";
 import ModelingListPage from "./pages/ModelingListPage";
 import CreateTopologyPage from "./pages/CreateTopologyPage";
 import TopologyEditorPage from "./pages/TopologyEditorPage";
+import TrainsPage from "./pages/TrainsPage";
 
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
         <Route path=":isCreate" element={<ScheduleEditorPage/>} />
       </Route>
       <Route path="/schedule" element={<SchedulePage/>}/>
+      <Route path="/trains" element={<TrainsPage/>}/>
       {/* <Route path="/modelirovanie" element={<ModelirovaniePage/>}/> */}
       <Route path="/modeling/:id/:date" element={<ModelingPage/>}/> 
       <Route path="/modelirovanie/:id/:date" element={<ModelirovaniePage/>}/> 
