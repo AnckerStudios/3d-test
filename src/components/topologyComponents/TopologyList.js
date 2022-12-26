@@ -25,7 +25,7 @@ function TopologyList({id}) {
     function delShedule(index){
         axios.delete(`http://localhost:8080/api/topology`, {
             params: {
-              idTopology: id,
+              idTopology: topologys[index].idTopology,
             }
         })
         .then(function (response) {
