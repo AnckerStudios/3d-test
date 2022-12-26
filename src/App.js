@@ -3,9 +3,9 @@ import { Route, Routes } from "react-router-dom";
 import TopologyEditor from "./element/TopologyEditor";
 import Manul from './pages/Manul';
 import ModelingPage from "./pages/ModelingPage";
-import AdminMenuPage from './pages/AdminMenuPage';
-import ManagerMenuPage from './pages/ManagerMenuPage';
 import HomePage from './pages/HomePage';
+import ManagerMenuPage from './pages/ManagerMenuPage';
+import LoginPage from './pages/LoginPage';
 import ChoicePage from './pages/ChoicePage';
 import ListManagerPage from './pages/ListManagerPage';
 import AddSityPage from './pages/AddSityPage';
@@ -19,6 +19,7 @@ import ModelingListPage from "./pages/ModelingListPage";
 import CreateTopologyPage from "./pages/CreateTopologyPage";
 import TopologyEditorPage from "./pages/TopologyEditorPage";
 import TrainsPage from "./pages/TrainsPage";
+import CitysPage from "./pages/CitysPage";
 
 
 function App() {
@@ -26,9 +27,12 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Manul/>}/> {/*Manul*/}
+      <Route path="/city" element={<CitysPage/>}/>
+      <Route path="/city/:name" element={<Manul/>}/>
+
       <Route path="/modeling-list" element={<ModelingListPage/>}/> {/*Manul*/}
-      <Route path="/home" element={<HomePage/>}/> 
-      <Route path="/admin-menu" element={<AdminMenuPage/>}/>
+      <Route path="/login" element={<LoginPage/>}/> 
+      <Route path="/home" element={<HomePage/>}/>
       <Route path="/manager-menu" element={<ManagerMenuPage/>}/> 
       <Route path="/list-manager" element={<ListManagerPage/>}/> 
       <Route path="/add-sity" element={<AddSityPage/>}/> 

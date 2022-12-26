@@ -5,6 +5,7 @@ import close from "../../images/closeGray.png"
 
 function TrainAddModal({submin, exit}) {
     const [train, setTrain] = useState({nameTrain:undefined,numberOfWagons:undefined, typeTrain:{idType: 1, typeTrain: "Пасажирский"}});
+    const [err, setErr] = useState({status:false, title:""});
     const type = [1,2,3];
     function getType(type){
         switch(type){

@@ -55,11 +55,8 @@ function TrainsList() {
             setAddFlag(false);
         })
         .catch(function (error) {
-            let copy = Object.assign([], trains);
-            // let index = copy.findIndex(item => item.number == delNumber);
-            copy.push(train);
-            setTrains(copy);
             console.log(error);
+            
         });
     }
 
@@ -81,7 +78,7 @@ function TrainsList() {
             trains.length === 0 ? <div className=" w-full p-5 font-bold text-2xl flex items-center justify-center">{`Пока что, пусто :(`}</div> : trains?.map((train, index) => 
             {return <>
                 <TrainsListItem key={index} train={train} del={del} index={index}/>
-                {index < trains.length-1 && <hr key={index} className=" border-orange-800 mx-6 snap-center"></hr>}
+                {index < trains.length-1 && <hr key={'hr'+index} className=" border-orange-800 mx-6 snap-center"></hr>}
             </>})}
             {addFlag && <TrainAddModal submin={addTrain} exit={setAddFlag}/>}
             

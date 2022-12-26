@@ -22,14 +22,34 @@ function TopologyList({id}) {
         });
 
     },[])
+    function delShedule(index){
+        axios.delete(`http://localhost:8080/api/topology`, {
+            params: {
+              idTopology: id,
+            }
+        })
+        .then(function (response) {
+            let copy = Object.assign([], topologys);
+            copy.splice(index,1)
+            setTopologys(copy);
+            console.log(response);
+        })
+        .catch(function (error) {
+            let copy = Object.assign([], topologys);
+            // let index = copy.findIndex(item => item.number == delNumber);
+            copy.splice(index,1);
+            setTopologys(copy);
+            console.log(error);
+        });
+    }
     return (
         <>
         {loading ? <div>Loading...</div> :
         <div className=" w-full flex flex-col md:flex-row gap-y-2 md:gap-y-0 gap-x-4 p-2">
             
 
-            {topologys?.map(topol => {
-                return <TopologyListItem name={topol.topologyName} id={topol.idTopology}/>
+            {topologys?.map((topol,index) => {
+                return <TopologyListItem key={index} name={topol.topologyName} id={topol.idTopology} del={delShedule} index={index}/>
             })}
             <TopologyAddItem />
         </div>}
