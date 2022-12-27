@@ -1,0 +1,33 @@
+
+.popup{
+    position: fixed;
+    left:0%;
+    justify-content:flex-start;
+    height: 100%;
+    width: 50%;
+    background-color: rgba(255, 255, 255, 0.249);
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.5s;
+}
+.popup.active{
+    opacity: 1;
+    pointer-events: all;
+}
+.popupBody{
+    margin-top: 10%;
+    display: flex;
+    justify-content: center;
+}
+.popupContent{
+
+    border-radius: 10px;
+    color:black;
+    position: relative;
+}
+.popupClose{
+    position: relative;
+    font-size: 30px;
+    font-weight: 200;
+    cursor: pointer;
+}
