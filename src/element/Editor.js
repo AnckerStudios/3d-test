@@ -99,7 +99,6 @@ function Editor({mtrx=[],setMtrx, view=true, tool='cursor', flag}) {
     }
     },[selectedCell])
 
-
   function isFirstClick(){
     return (clickedCell.second != undefined || clickedCell.first == undefined);
   }
