@@ -17,7 +17,7 @@ function ToolList({setTool}) {
     let toolList = [
         {id: 0, name: 'cursor', doubleClick: false},
         {id: 1, name: 'rail', doubleClick: true},
-        {id: 2, name: 'plate', doubleClick: false},
+        {id: 2, name: 'plate', doubleClick: true},
         {id: 3, name: 'traffic lights', doubleClick: false}];
     let tools = [];
     useEffect(()=>{setTool(toolList[selectedTool])},[selectedTool])
