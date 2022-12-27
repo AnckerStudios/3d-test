@@ -1,8 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import ModalDateSelector from "../components/scheduleComponents/ModalDateSelector";
 import ScheduleList from "../components/scheduleComponents/ScheduleList";
-import TopologyListItem from "../element/TopologyListItem";
 
 
 function TopologyPage() {
@@ -20,6 +20,7 @@ function TopologyPage() {
     }
 
     return (
+
         <div className="mx-auto w-full max-w-5xl ">
             <div className="w-full bg-slate-0 flex-col">
                 <div className="w-full flex py-10 px-2">
@@ -34,7 +35,7 @@ function TopologyPage() {
                             Enim et commodo culpa aliqua ullamco sit ut duis occaecat. Ex aliqua reprehenderit anim quis veniam mollit eiusmod incididunt aliqua commodo mollit voluptate ut. Nulla do sit commodo commodo. Irure id dolore ipsum id consectetur ex nulla nisi culpa voluptate quis consequat enim.                             
                         </div>
                         <button className=" border hover:bg-white rounded-xl  m-2 flex justify-center" onClick={() => load()}>
-                            <a className=" m-2 ">button</a>
+                            <Link className=" m-2 " to={`/topology-editor/${id}`}>button</Link>
                         </button>
                     </div>
             
@@ -46,6 +47,7 @@ function TopologyPage() {
             </div>
             
         </div>
+
         
     );
 }

@@ -25,7 +25,10 @@ export function cellFree(cell, mtrx, tool) {
                 arr[xMax][yMax].type = "plate edge";
             }
             return {arr: arr, err: err};
-        case 3:
+        case 'traffic lights':
+          arr[cell.x][cell.y].type = tool.name;
+          arr[cell.x][cell.y].state = {light: true};
+          return {arr: arr, err: err};
 
         default:
             return {arr: arr, err: err};
@@ -101,7 +104,20 @@ export function checkPlace(cell, arr, tool, scroll) {
             if(!(r1 && r2 && r3) && !(r4 && r5 && r6))
                 return true;
             return false;
-        case 3:
+        case 'traffic lights':
+          if(arr[x][y].type !== 'rail'){
+            return true;
+          }
+          let count = 0;
+          for (let key in arr[x][y].state){
+            if(arr[x][y].state[key] === true){
+              count++;
+            }
+          }
+          if(count < 2){
+            return true;
+          }
+          return false;
         default:
             return false;
     }

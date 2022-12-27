@@ -18,9 +18,9 @@ function ToolListElement({setTool, tool, selectedTool}) {
             <div className="m-auto font-bold flex">{tool.name}
                 
             </div>
-            <div className=" absolute bottom-2 right-2 w-15 h-15">
+            {/* <div className=" absolute bottom-2 right-2 w-15 h-15">
                     <img width="20" height="20" src={infoLogo}/>
-                </div>
+                </div> */}
         </div>
     );
 }

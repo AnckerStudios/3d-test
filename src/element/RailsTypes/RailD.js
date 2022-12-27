@@ -4,7 +4,7 @@ import { useLoader } from '@react-three/fiber';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { Matrix4, Object3D } from "three";
 
-function RailD({ arr = [], count = 16, color = 'white'}) {
+function RailD({ arr = [], count = 16, color = 'white', prev=false}) {
     const ref = useRef();
     const {nodes, materials} = useGLTF("/rail_type_d.glb");
     const positions = nodes.Model.geometry.attributes.position.array;
@@ -27,6 +27,7 @@ function RailD({ arr = [], count = 16, color = 'white'}) {
             //console.log(item)
             temp.position.set(item.x,item.y,0);
             temp.rotation.set(item.rot.x,item.rot.y, item.rot.z);
+            
             temp.updateMatrix();
             //console.log(temp)
             ref.current.setMatrixAt(item.index, temp.matrix);
