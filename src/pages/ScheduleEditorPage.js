@@ -111,7 +111,7 @@ function ScheduleEditorPage() {
                     {loading ? <div>Погоди-погожу</div> :
                         <><ScheduleTable id={id} date={date} setSchedule={setSchedule} schedule={schedule} isCreate={isCreate} />
                             <button onClick={() => setaddFlag(true)}>Добавить</button>
-                            {<AddEntry active={addFlag} setActive={setaddFlag} inOut={inOut} platforms={platforms} trains={trains} addSchedule={addSchedule} />}</>}
+                            {<AddEntry active={addFlag} setActive={setaddFlag} schedule={schedule} inOut={inOut} platforms={platforms} trains={trains} addSchedule={addSchedule} />}</>}
                 </div>
                 
                 <div className='flex flex-grow'>

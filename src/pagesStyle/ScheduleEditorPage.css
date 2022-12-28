@@ -155,3 +155,8 @@
 .ex:active{
     color:rgb(213, 184, 184);
 }
+.eradd{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}

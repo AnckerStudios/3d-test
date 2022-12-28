@@ -3,7 +3,7 @@ import '../../pagesStyle/AddEntry.css';
 
 
 
-function AddEntry({ inOut, platforms, trains, id, addSchedule, active, setActive }) {
+function AddEntry({ inOut, platforms, trains, id, addSchedule, active, setActive, schedule }) {
     const [loading, setLoading] = useState(true);
 
     console.log("plte", platforms[0].lines)
@@ -37,7 +37,9 @@ function AddEntry({ inOut, platforms, trains, id, addSchedule, active, setActive
     const [numberOfTrainError, setNumberOfTrainError] = useState('Введите номер поезда');
 
     const [formValid, setFormValid] = useState(false);
+    const[entryError, setEntryError] = useState('');
 
+    
     //если форма не валидна, то запись не добавляется
     useEffect(() => {
         if (cityError || cityArrError || timeArrError || timeDepError || numberOfTrainError) {
@@ -143,9 +145,34 @@ function AddEntry({ inOut, platforms, trains, id, addSchedule, active, setActive
         sitys.push(<option key={i}>{sity[i].city}</option>)
     }
 
-    function Add() {
-        console.log(entry)
-        addSchedule(entry);
+    let flag = true;
+
+    function duplicate(){
+        let i =0;
+        while(i<schedule.length && flag)
+        {
+            if((entry.arrivalTime == schedule[i].arrivalTime && entry.plate == schedule[i].plate) || entry.trainName == schedule[i].trainName)
+            {
+                setEntryError("Запись с данными полями существует");
+                flag=false;
+            }
+            i++;
+        }
+    }
+
+
+    function Add(){
+        setEntryError('');
+        duplicate();
+
+        if(flag)
+        {
+            addSchedule(entry);
+            numberOfTrain.value = '';
+        }
+        else{
+
+        }
     }
     // const [selectLine,setSelectLine]=useState(0);
     // useEffect(()=>{
@@ -165,6 +192,7 @@ function AddEntry({ inOut, platforms, trains, id, addSchedule, active, setActive
             setEntry({ ...entry, plate: platforms[i].number, plateLine: platforms[i].lines[lineIndex] })
         }
     }
+
     return (
 
         <div className={active ? 'popup active' : 'popup'} onClick={() => setActive(false)}>
@@ -234,7 +262,9 @@ function AddEntry({ inOut, platforms, trains, id, addSchedule, active, setActive
                                         return <option key={index} value={index}>x: {io.x} y: {io.y}</option>
                                     })}
                                 </select>
-                            </label><br />
+                            </label>
+                            <div className="eradd" style ={{color: 'red', height: 5}}>{entryError}</div>
+                            <br/>
                             <button disabled={!formValid} id="bb" className='centr' onClick={() => Add()}>Добавить</button>
                         </fieldset>
                     </div>
