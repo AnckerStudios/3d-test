@@ -52,7 +52,7 @@ export function createPaths(trains){
                 let dir = centerDir(trains[t].way[i-1].dir,trains[t].way[i].dir);
                 trainPath.push({x: coord.x, y: coord.y, dir: dir});
                 if(i === trains[t].way.length-1){
-                    trainPath.push({x: coord.x + dirCoord(trains[t].way[i].dir).x, y: coord.y + dirCoord(trains[t].way[i].dir).y, dir: dir});
+                    trainPath.push({x: coord.x + (dirCoord(trains[t].way[i].dir).x * 2), y: coord.y + (dirCoord(trains[t].way[i].dir).y * 2), dir: dir});
                 }
             }else{
                 trainPath.push({x: trains[t].way[i].x - dirCoord(trains[t].way[i].dir).x, y: trains[t].way[i].y - dirCoord(trains[t].way[i].dir).y, dir: dirSwich(trains[t].way[i].dir)});

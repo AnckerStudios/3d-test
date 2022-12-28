@@ -82,6 +82,11 @@ function TrainsController({ trains = [], timer = 0, mtrx = [],setErr }) {
           let m = tarr[1];
 
           let trainTime = spawnTime(tr, ((h * 60 + (+m)) * 100), arr); 
+          let tout = trains[tr].record.departureTime;
+          tout = tout.split(':');
+          let ho = tout[0];
+          let mo = tout[1];
+          let outTime = ((ho * 60 + (+mo)) * 100)
           if (t >= trainTime) {
             if (test2(arr, tr, lights)) {
 
@@ -94,6 +99,10 @@ function TrainsController({ trains = [], timer = 0, mtrx = [],setErr }) {
             if (test(arr, tr)) {
               arr[tr].step = 0;
               arr[tr].isStop = true;
+            }
+            if(t >= outTime && arr[tr].isStop){
+              arr[tr].isStop = false;
+              arr[tr].step = arr[tr].maxStep;
             }
             // if(arr[tr].isStop && t >= trains[tr].timeOtb){
             //   arr[tr].step = 0.1;
