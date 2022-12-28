@@ -20,6 +20,7 @@ function ScheduleEditorPage() {
     const [schedule, setSchedule] = useState([]);
     const [loading, setLoading] = useState(true);
     const [addFlag, setaddFlag] = useState(false);
+    const [trains, setTrains] = useState([]);
     const [mtrx, setMtrx] = useState();
     let objSettings = { x: 16, y: 16 }
     const data = [
@@ -83,10 +84,11 @@ function ScheduleEditorPage() {
             }
         })
             .then(function (response) {
-                let resPlates = response.data.plates;
+                let res = response.data;
                 let resInOut = response.data.inOut;
-                setPlatforms(resPlates);
-                setInOut(resInOut);
+                setPlatforms(res.plates);
+                setInOut(res.inOut);
+                setTrains(res.trains);
                 console.log(response);
                 setLoading(false);
             })
@@ -94,8 +96,10 @@ function ScheduleEditorPage() {
                 console.log(error);
                 let resPlates = [{ number: 7, dir: true, lines: [{ x: 0, y: 0, number: 1 }] }, { number: 8, dir: true, lines: [{ x: 0, y: 0, number: 3 }, { x: 0, y: 0, number: 4 }] }, { number: 4, dir: true, lines: [{ x: 0, y: 0, number: 5 }, { x: 0, y: 0, number: 6 }] }];
                 let resInOut = [{x:0,y:0,dir:0, name:"A"},{x:15,y:9,dir:0, name:"B"},{x:0,y:3,dir:0, name:"C"},{x:4,y:0,dir:0, name:"D"}];
+                let trains = [{idTrain: 56, nameTrain:"333", typeTrain:"Грузовой", numberOfWagons:3}]
                 setPlatforms(resPlates);
                 setInOut(resInOut);
+                setTrains(trains);
                 setLoading(false);
             });
     }, [])
@@ -110,7 +114,7 @@ function ScheduleEditorPage() {
                 {loading ? <div>Погоди-погожу</div>:
                     <><ScheduleTable id={id} date={date} setSchedule={setSchedule} schedule={schedule} isCreate={isCreate}/>
                     <button onClick={()=>setaddFlag(true)}>Добавить</button>
-                    {addFlag && <AddEntry inOut={inOut} platforms={platforms} addSchedule={addSchedule}/>}</>}
+                    {addFlag && <AddEntry inOut={inOut} platforms={platforms} trains={trains} addSchedule={addSchedule}/>}</>}
                 </div>
 
                 <div className='flex flex-grow p-2'>

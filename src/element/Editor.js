@@ -28,7 +28,7 @@ function Editor({mtrx=[],setMtrx, view=true, tool='cursor', flag}) {
   const [trainGo, setTrainGo] = useState(false);
   const [placeErr, setPlaceErr] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [plates, setPlates] = useState([]);
+  const [plates, setPlates] = useState(0);
 
 
   useEffect(()=>{
@@ -51,9 +51,6 @@ function Editor({mtrx=[],setMtrx, view=true, tool='cursor', flag}) {
     if(selectedCell.x != undefined && selectedCell.y != undefined){
     if(isFirstClick()){
       setClickedCell({first: selectedCell});
-      if(tool.name === "plate"){
-        setPlates([...plates, {x: selectedCell.x, y: selectedCell.y, number: plates.length}]);
-      }
     }
     else{
       setClickedCell({first: clickedCell.first, second: selectedCell});
@@ -63,22 +60,25 @@ function Editor({mtrx=[],setMtrx, view=true, tool='cursor', flag}) {
     console.log('click');
   }
 
-  useEffect(()=>{setMtrx(updatePlate(plates, mtrx));},[plates])
+  //useEffect(()=>{setMtrx();},[plates])
 
   useEffect(()=>{
     console.log(clickedCell.second);
     if(clickedCell.first != undefined){
     if(!tool.doubleClick){
       if(clickedCell.first != undefined && placeErr === false){
-        setMtrx(joinMtrx(joinMtrx(mtrx, previewMtrx),updatePlate(plates, mtrx)));
+        setMtrx(joinMtrx(mtrx, previewMtrx));
         clearPreview();
       }
       setClickedCell({first: undefined, second: undefined});
         
     }else{
       if(clickedCell.second != undefined && placeErr === false){
-        setMtrx(joinMtrx(joinMtrx(mtrx, previewMtrx),updatePlate(plates, mtrx)));
+        setMtrx(joinMtrx(mtrx, previewMtrx));
         clearPreview();
+        if(tool.name === 'plate'){
+          setPlates((plates) => plates+1);
+        }
       }
     }
 
@@ -88,6 +88,8 @@ function Editor({mtrx=[],setMtrx, view=true, tool='cursor', flag}) {
     setSelectedCell({...selectedCell, x:x, y:y});
 
   }
+
+  useEffect(()=>{console.log("AAAAAAAAAA",plates)},[plates])
   useEffect(()=>{
     if(selectedCell.x != undefined && selectedCell.y != undefined){
       let cellPrev = setCell(selectedCell, mtrx, tool, clickedCell, plates);

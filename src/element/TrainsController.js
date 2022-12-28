@@ -11,6 +11,7 @@ function TrainsController({ trains = [], timer = 0, mtrx = [],setErr }) {
 
 
   const paths = createPaths(trains);
+  console.log("path",paths);
   
   const [trainInfo, setTrainInfo] = useState(createTrains(trains));
   const [trainLight, setTrainLight] = useState(createLights(mtrx));
@@ -18,7 +19,7 @@ function TrainsController({ trains = [], timer = 0, mtrx = [],setErr }) {
   function createTrains(trains) {
     let arr = [];
     for (let i = 0; i < trains.length; i++) {
-      arr.push({ wagons: creareWagons(trains[i], paths[i]), step: 0.05, maxStep: 0.05, isMoving: true, isStop: false });
+      arr.push({ wagons: creareWagons(trains[i], paths[i]), step: 0.05, maxStep: 0.05, isStop: false, isLight: false });
     }
     return arr;
   }
@@ -80,16 +81,20 @@ function TrainsController({ trains = [], timer = 0, mtrx = [],setErr }) {
           let h = tarr[0];
           let m = tarr[1];
 
-          let trainTime = ((h * 60 + (+m)) * 100);
+          let trainTime = spawnTime(tr, ((h * 60 + (+m)) * 100), arr); 
           if (t >= trainTime) {
             if (test2(arr, tr, lights)) {
 
               arr[tr].step = 0;
-
-            } else {
+              arr[tr].isLight = true;
+            } else if(arr[tr].isLight === true){
               arr[tr].step = arr[tr].maxStep;
+              arr[tr].isLight = false;
             }
-
+            if (test(arr, tr)) {
+              arr[tr].step = 0;
+              arr[tr].isStop = true;
+            }
             // if(arr[tr].isStop && t >= trains[tr].timeOtb){
             //   arr[tr].step = 0.1;
             //   arr[tr].isStop = false;
@@ -107,9 +112,12 @@ function TrainsController({ trains = [], timer = 0, mtrx = [],setErr }) {
                 }
                 arr[tr].wagons[w].pos = newPoint(pos, paths[tr][n], dist, step);
               } else {
+                
                 arr[tr].wagons[w].pos = paths[tr][n];
                 if (n < paths[tr].length - 1)
                   arr[tr].wagons[w].next++;
+                // if(arr[tr].wagons[w].next === 10)
+                //   arr[tr].step = 0;
               }
             }
 
@@ -124,9 +132,15 @@ function TrainsController({ trains = [], timer = 0, mtrx = [],setErr }) {
     //return arr;
   }
   function test(arr, tr) {
-    let stopWay = arr[tr].wagons[0].next - 1
+    let len = arr[tr].wagons.length;
+    let stopWay;
+    if(len % 2 === 0){
+      stopWay = arr[tr].wagons[len/2].next;
+    }else{
+      stopWay = arr[tr].wagons[Math.floor(len/2)].next - 1;
+    }
     if (stopWay < paths[tr].length) {
-      if (paths[tr][stopWay].x === trains[tr].stop.x && paths[tr][stopWay].y === trains[tr].stop.y) {
+      if (paths[tr][stopWay].x === trains[tr].record.plateLine.x && paths[tr][stopWay].y === trains[tr].record.plateLine.y) {
         return true;
       }
     }
@@ -160,6 +174,26 @@ function TrainsController({ trains = [], timer = 0, mtrx = [],setErr }) {
 
     return false;
   }
+
+  function spawnTime(tr,arrivalTime, arr){
+    let pos = trains[tr].record.plateLine;
+    let cur = 0; 
+    let dist = 0;
+    while(!(pos.x === paths[tr][cur].x && pos.y === paths[tr][cur].y) && cur < paths[tr].length){
+      if(cur+1 < paths[tr].length){
+        dist += distance(paths[tr][cur], paths[tr][cur+1]); 
+      }
+      cur++;
+    }
+    let len = arr[tr].wagons.length;
+    if(len % 2 === 0){
+      dist += (len/2) * 3;
+    }else{
+      dist += Math.floor(len/2) * 3;
+    }
+    //dist += arr[tr].wagons.length;
+    return arrivalTime - Math.floor(dist/trainInfo[tr].maxStep);
+  }
   function collisionDetect(arr) {
     let allPos = {};
     let collision = { err: false, arr: Object.assign([], arr) };
@@ -188,7 +222,7 @@ function TrainsController({ trains = [], timer = 0, mtrx = [],setErr }) {
     return Math.sqrt(Math.pow(c.x - n.x, 2) + Math.pow(c.y - n.y, 2));
   }
   function newPoint(c, n, dist, st) {
-    return { x: c.x + (((n.x - c.x) * st) / dist), y: c.y + (((n.y - c.y) * st) / dist), dir: c.dir + ((n.dir - c.dir) * st) };
+    return { x: c.x + (((n.x - c.x) * st) / dist), y: c.y + (((n.y - c.y) * st) / dist), dir: c.dir + (((n.dir - c.dir) * st) / dist) };
   }
 
 

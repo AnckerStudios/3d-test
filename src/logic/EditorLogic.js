@@ -18,7 +18,7 @@ export function cellFree(cell, mtrx, tool, plates) {
             let yMax = y + (!scroll ? 1 : 0);
             
             arr[x][y].type = tool.name;
-            arr[x][y].state = {dir: scroll ? true : false, number: plates.length};
+            arr[x][y].state = {dir: scroll ? true : false, number: plates};
            
             if(xMin >= 0 && yMin >= 0 && xMax < arr.length && yMax < arr[x].length){
                 arr[xMin][yMin].type = "plate edge";
@@ -37,20 +37,21 @@ export function cellFree(cell, mtrx, tool, plates) {
 }
 
 export function setCell(cell, mtrx, tool, clickedCell, plates){
+    
     let arr = createMtrx(mtrx.length,mtrx[1].length);
     if(isFirstClick(clickedCell)){
-        return cellFree(cell, mtrx, tool, plates);
+        return cellFree(cell, mtrx, tool);
     }
     else if(tool.doubleClick){
       let change;
       if(tool.name === 'rail'){
         change = createWay(clickedCell.first, cell);
       }else if(tool.name === 'plate'){
-        change = createPlate(clickedCell.first, cell);
+        change = createPlate(clickedCell.first, cell, plates);
       }
         
         let obj = addChanges(arr,change, mtrx, tool.name);
-        return {arr: obj.arr, err: obj.err};
+        return {arr: obj.arr, err: obj.err,};
     }
 
     return {arr: arr, err: false};
@@ -129,7 +130,7 @@ export function checkPlace(cell, arr, tool, scroll) {
     }
     
 }
-function createPlate(first, second){
+function createPlate(first, second, plates){
   let arr = [];
   let deltaX = second.x - first.x; //проверки добавь
   let deltaY = second.y - first.y;
@@ -139,15 +140,25 @@ function createPlate(first, second){
   let fscroll = first.scroll;
   let sign = fscroll ? Math.sign(deltaX): Math.sign(deltaY);
   let delta = fscroll ? second.x - first.x : second.y - first.y; 
-  arr.push({x: first.x, y: first.y, state: {dir: fscroll, number: 2}});
+  let mainX = 0;
+  let mainY = 0;
+  //arr.push({x: first.x, y: first.y, state: {dir: fscroll, number: 2}, type: type});
   for(let i = 0; i <= Math.floor(Math.abs(delta/3)); i++){
-    if(fscroll){
-      arr.push({x: first.x + i*3*sign, y: first.y, state: {dir: fscroll, number: 2}});
-    }else{
-      arr.push({x: first.x, y: first.y + i*3*sign, state: {dir: fscroll, number: 2}});
+    let type = 'neplate';
+    let number;
+    if(i === Math.floor(Math.abs(delta/3)/2)){
+      type = 'plate';
+      number = plates;
+      mainX=fscroll?first.x + i*3*sign:first.x;
+      mainY=!fscroll?first.y + i*3*sign:first.y;
     }
+    if(fscroll){
+      arr.push({x: first.x + i*3*sign, y: first.y, state: {dir: fscroll, number: number}, type: type});
+    }else{
+      arr.push({x: first.x, y: first.y + i*3*sign, state: {dir: fscroll, number: number}, type: type});
+    }
+    
   }
-  
   
   return arr;
 }
@@ -162,32 +173,32 @@ function createWay(first, second){
     let curY = first.y;
     let fscroll = first.scroll;
     let sscroll = second.scroll;
-    arr.push({x: curX, y: curY, state: fscroll ? {'x':true} : {'y':true}});
+    arr.push({x: curX, y: curY, state: fscroll ? {'x':true} : {'y':true}, type: 'rail'});
     if(fscroll === sscroll){
       if(fscroll ? Math.abs(deltaX) > Math.abs(deltaY) : Math.abs(deltaX) < Math.abs(deltaY)){
         if(fscroll ? deltaY === 0 : deltaX === 0){
           while(fscroll ? (curX != second.x) : (curY != second.y)){
             curX = fscroll ? curX + ix : curX;
             curY = fscroll ? curY : curY + iy;
-            arr.push({x: curX, y: curY, state: fscroll ? {'x':true} : {'y':true}});
+            arr.push({x: curX, y: curY, state: fscroll ? {'x':true} : {'y':true}, type: 'rail'});
           }
         }else{
           curX = fscroll ? curX + ix : curX;
           curY = fscroll ? curY : curY + iy;
-          arr.push({x: curX, y: curY, state: testSwich(ix, iy, fscroll)});
+          arr.push({x: curX, y: curY, state: testSwich(ix, iy, fscroll), type: 'rail'});
           curX = curX + ix;
           curY = curY + iy;
       
           while((curX != second.x) && (curY != second.y)){
-            arr.push({x: curX, y: curY, state: ix === iy ? {'dy':true} : {'dx':true}});
+            arr.push({x: curX, y: curY, state: ix === iy ? {'dy':true} : {'dx':true}, type: 'rail'});
             curX = curX + ix;
             curY = curY + iy;
           }
-          arr.push({x: curX, y: curY, state: testSwich(-ix, -iy, sscroll)});
+          arr.push({x: curX, y: curY, state: testSwich(-ix, -iy, sscroll), type: 'rail'});
           while((curX != second.x) || (curY != second.y)){
             curX = sscroll ? curX + ix : curX;
             curY = sscroll ? curY : curY + iy;
-            arr.push({x: curX, y: curY, state: sscroll ? {'x':true} : {'y':true}});
+            arr.push({x: curX, y: curY, state: sscroll ? {'x':true} : {'y':true}, type: 'rail'});
           }
         }
       }
@@ -197,25 +208,25 @@ function createWay(first, second){
           for(let i = 0; i < Math.abs(Math.abs(deltaX) - Math.abs(deltaY)); i++){
             curX = fscroll ? curX + ix : curX;
             curY = fscroll ? curY : curY + iy;
-            arr.push({x: curX, y: curY, state: fscroll ? {'x':true} : {'y':true}});
+            arr.push({x: curX, y: curY, state: fscroll ? {'x':true} : {'y':true}, type: 'rail'});
           }
         }
         curX = fscroll ? curX + ix : curX;
         curY = fscroll ? curY : curY + iy;
-        arr.push({x: curX, y: curY, state: testSwich(ix, iy, fscroll)});
+        arr.push({x: curX, y: curY, state: testSwich(ix, iy, fscroll), type: 'rail'});
         curX = curX + ix;
         curY = curY + iy;
       
         while((curX != second.x) && (curY != second.y)){
-          arr.push({x: curX, y: curY, state: ix === iy ? {'dy':true} : {'dx':true}});
+          arr.push({x: curX, y: curY, state: ix === iy ? {'dy':true} : {'dx':true}, type: 'rail'});
           curX = curX + ix;
           curY = curY + iy;
         }
-          arr.push({x: curX, y: curY, state: testSwich(-ix, -iy, sscroll)});
+          arr.push({x: curX, y: curY, state: testSwich(-ix, -iy, sscroll), type: 'rail'});
           while((curX != second.x) || (curY != second.y)){
               curX = sscroll ? curX + ix : curX;
               curY = sscroll ? curY : curY + iy;
-              arr.push({x: curX, y: curY, state: sscroll ? {'x':true} : {'y':true}});
+              arr.push({x: curX, y: curY, state: sscroll ? {'x':true} : {'y':true}, type: 'rail'});
           }
       }
     } 
@@ -239,7 +250,7 @@ function addChanges(arr, change, mtrx, type){
     let copy = Object.assign([], arr);
     for(let item of change){
       copy[item.x][item.y].state = item.state;
-      copy[item.x][item.y].type = type;
+      copy[item.x][item.y].type = item.type;
       err = err || checkPlace({x: item.x, y: item.y}, mtrx, type, false);
     }
     //console.log("dsdasdasdasdasdasdada")
@@ -250,24 +261,6 @@ function addChanges(arr, change, mtrx, type){
 
 export function updatePlate(plates, mtrx){
   let copy = Object.assign([], mtrx);
-  if(plates.length !== 0){
-    for(let plt of plates){
-      let dir = copy[plt.x][plt.y].state.dir;
-      let dx = dir ? 0 : 1;
-      let dy = dir ? 1 : 0;
-      let arr = [];
-      if(plt.x-dx > 0 && plt.y-dy > 0){
-        if(copy[plt.x-dx][plt.y-dy].type === "rail" && copy[plt.x-dx][plt.y-dy].state[dir ? "x" : "y"] === true){
-          arr.push({x: plt.x-dx, y: plt.y-dy, number: plt.number*2});
-        }
-      }
-      if(plt.x+dx < copy.length && plt.y+dy < copy[plt.x].length){
-        if(copy[plt.x+dx][plt.y+dy].type === "rail" && copy[plt.x+dx][plt.y+dy].state[dir ? "x" : "y"] === true){
-          arr.push({x: plt.x+dx, y: plt.y+dy, number: plt.number*2+1});
-        }
-      }
-      copy[plt.x][plt.y].state = {...copy[plt.x][plt.y].state, number: plt.number, lines: arr}
-    }
-  }
+
   return copy;
 }

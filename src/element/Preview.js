@@ -103,7 +103,6 @@ function Preview({mtrx = [], objSet = {x: 16, y:16}, prev = true, err=false}) {
 
     return (
         <>
-            
             <RailL arr={changesTypeL} count={objSet.x * objSet.y * (prev ? 1 : 2)} color={prev ? ( err ? 'red' :'lime') : 'white'} prev={prev}/>
             <RailR arr={changesTypeR} count={objSet.x * objSet.y * (prev ? 1 : 8)} color={prev ? ( err ? 'red' :'lime') : 'white'} prev={prev}/>
             <Plate arr={changesPlate} color={prev ? ( err ? 'red' :'lime') : 'white'} prev={prev}/>

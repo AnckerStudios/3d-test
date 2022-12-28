@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
 
-function AddEntry({inOut, platforms, id, addSchedule}) {
+function AddEntry({inOut, platforms, trains, id, addSchedule}) {
     const [loading, setLoading] = useState(true);
     
     console.log("plte",platforms[0].lines)
@@ -11,12 +11,12 @@ function AddEntry({inOut, platforms, id, addSchedule}) {
     const [lineIndex, setLineIndex] = useState(0);
     const [planeIndex, setPlaneIndex] = useState(0);
     const type = ['Пассаж.','Груз.','Электричка'];
-    const [entry, setEntry] = useState({ plate: platforms[0].number, plateLine: platforms[0].lines[lineIndex], arrivalTime: "00:00", departureTime: "00:00", in: inOut[0], out: inOut[0],typeTrain:type[0]});
+    const [entry, setEntry] = useState({ plate: platforms[0].number, plateLine: platforms[0].lines[lineIndex], trainName: trains[0].nameTrain, arrivalTime: "00:00", departureTime: "00:00", in: inOut[0], out: inOut[0],typeTrain:type[0]});
 
     const sity = [{city:"Самара"}, {city:"Москва"},{city:"Санкт-Петербург"},{city:"Оренбург"}, ]
     const sitys = []
     for(let i = 0; i < sity.length; i++){
-         sitys.push(<option key={i}>{sity[i].city}</option>)  
+        sitys.push(<option key={i}>{sity[i].city}</option>)  
     }
 
     function Add(){
@@ -64,7 +64,11 @@ function AddEntry({inOut, platforms, id, addSchedule}) {
                 </label>
                 <br/>
                 <label>Введите номер поезда
-                    <input className = "addsep text-center"  type = "text" minLength = "1" maxLength = "6" onChange={(e)=>setEntry({...entry, trainName: e.target.value})}/> 
+                    <select className = "addsep" onChange={(e)=>{setEntry({...entry, trainName: trains[e.target.value].nameTrain}); setLineIndex(e.target.value)}}>
+                        {trains?.map((pl,index) => {
+                            return <option key={index} value={index}>№{pl.nameTrain}</option>
+                        })}
+                    </select>
                 </label>
                 <br/>
                 <label>Время прибытия
@@ -103,11 +107,6 @@ function AddEntry({inOut, platforms, id, addSchedule}) {
                         })}
                     </select>
                 </label><br/>
-                <label>Выберите тип поезда<select className = "addsep" onChange={(e)=>setEntry({...entry, typeTrain: type[e.target.value]})}>
-                        {type?.map((io,index) => {
-                            return <option key={index} value={index}>{io}</option>
-                        })}
-                    </select></label><br/>
                 <button id = "bb" className='cent' onClick={()=>Add()}>Добавить</button>
             </fieldset>
         </div>
