@@ -61,7 +61,6 @@ function TrainsList() {
     }
 
     return (
-
         <div className=" bg-orange-300 rounded-xl max-h-full relative overflow-auto">
             <div className=" flex justify-around p-1 px-5 w-full">
                 <div className="  w-1/4 font-bold text-lg  flex items-center justify-center">Номер</div>

@@ -33,8 +33,8 @@ function ScheduleList({id}) {
         console.log(schedules);
         axios.get('http://localhost:8080/api/schedule/delete', {
             params: {
-              idTopology: id,
-              idSchedule: schedules[index].idSchedule
+              //idTopology: id,
+              idTimetable: schedules[index].idTimetable
             }
         })
         .then(function (response) {

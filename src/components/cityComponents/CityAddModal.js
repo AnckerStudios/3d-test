@@ -25,7 +25,7 @@ function CityAddModal({submin, exit}) {
             console.log(response);
         })
         .catch(function (error) {
-            setCitys([{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"}]);
+            setCitys([{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"}]);
             setLoading(false);
             console.log(error);
         });
@@ -36,14 +36,16 @@ function CityAddModal({submin, exit}) {
         <>
         <div className=" fixed bg-black/50 top-0 right-0 left-0 bottom-0 z-20">
             <div className="w-[500px] p-5 rounded-xl bg-slate-300 absolute top-10 left-1/2 -translate-x-1/2 flex flex-col gap-4 items-center">
-                <div className="flex flex-col gap-2">
+                <div className="flex flex-col gap-2 w-full items-center">
                     <div>Выберите город</div>
-                    <div className="bg-orange-300 rounded-xl max-h-full relative overflow-auto">
+                    <div className="bg-orange-300 rounded-xl max-h-[500px] w-2/3 relative overflow-auto">
+                        <div className=" h-full">
                         {loading ? <div>Loading</div> : citys?.map((city,index)=>{
-                            return <Link className=" flex w-full p-2 relative hover:bg-slate-50 justify-center snap-start " to={`/city/${city?.cityName}`}>
+                            return <Link key={index} className=" flex w-full p-2 relative hover:bg-slate-50 justify-center snap-start " to={`/city/${city?.cityName}`}>
                                 {city?.cityName}
                             </Link>
                         })}
+                        </div>
                     </div>
                 </div>
                 

@@ -12,12 +12,10 @@ function LoginPage() {
   function handleLogin() {
     AuthService.login(login, password).then(
       () => {
-        this.props.router.navigate("/home");
-        window.location.reload();
+        navigate("/home");
       },
       error => {
         navigate("/home");
-        window.location.reload();
         console.log(error);
       }
     );

@@ -26,7 +26,7 @@ function App() {
   
   return (
     <Routes>
-      <Route path="/" element={<Manul/>}/> {/*Manul*/}
+      <Route path="/" element={<LoginPage/>}/> {/*Manul*/}
       <Route path="/city" element={<CitysPage/>}/>
       <Route path="/city/:name" element={<Manul/>}/>
 
