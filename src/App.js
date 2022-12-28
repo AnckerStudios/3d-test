@@ -22,27 +22,27 @@ import TrainsPage from "./pages/TrainsPage";
 import CitysPage from "./pages/CitysPage";
 import { useEffect } from "react";
 import authHeader from "./services/auth-header";
+import axios from "axios";
+import AuthService from "./services/auth.service";
 
 
 function App() {
   
   useEffect(()=>{
     console.log("token",authHeader());
-    console.log("netoken",getCurrentUser());
+    console.log("netoken",AuthService.getCurrentUser());
     axios.get('http://localhost:8080/api/services/controller/user/getUser',
     {
       headers: authHeader(),
-      params: getCurrentUser()
+      params: AuthService.getCurrentUser()
     }
     )
     .then(function (response) {
-        setCitys(response.data);
-        setLoading(false);
+
         console.log("res",response);
     })
     .catch(function (error) {
-        setCitys([{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"},{cityName:"name"}]);
-        setLoading(false);
+
         console.log(error);
     });
 
