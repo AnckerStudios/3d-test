@@ -23,31 +23,31 @@ function ScheduleList({id}) {
             setLoading(false);
         })
         .catch(function (error) {
-            setSchedules([{timetableDate:'26-12-2222', idSchedule:1},{timetableDate:'27-12-2222', idSchedule:2}]);
+            setSchedules([{timetableDate:'26-12-2222', idTimetable:1, status: true},{timetableDate:'27-12-2222', idTimetable:2,status: false}]);
             console.log(error);
             setLoading(false);
         });
         console.log(schedules);
     },[])
     useEffect(()=>{console.log(schedules)},[schedules])
-    function delShedule(idSchedule){
+    function delShedule(index){
         console.log(schedules);
         axios.get('http://localhost:8080/api/schedule/delete', {
             params: {
               idTopology: id,
-              idSchedule: idSchedule
+              idSchedule: schedules[index].idSchedule
             }
         })
         .then(function (response) {
             let copy = Object.assign([], schedules);
-            let index = copy.findIndex(item => item.idSchedule == idSchedule);
+            // let index = copy.findIndex(item => item.idSchedule == idSchedule);
             copy.splice(index,1)
             setSchedules(copy);
             console.log(response);
         })
         .catch(function (error) {
             let copy = Object.assign([], schedules);
-            let index = copy.findIndex(item => item.idSchedule == idSchedule);
+            // let index = copy.findIndex(item => item.idSchedule == idSchedule);
             copy.splice(index,1)
             setSchedules(copy);
             console.log(error);
@@ -70,8 +70,8 @@ function ScheduleList({id}) {
             <div className=" w-full flex overflow-hidden">
                 {loading ? <div>Loading...</div>:
                 <div className=" flex gap-4 " style={{ transform: `translateX(-${currentIndex * 25}%)` }}>
-                {schedules?.map(schedule => {
-                    return <ScheduleListItem key={schedule.idSchedule} date={schedule.timetableDate} id={schedule.idSchedule} del={delShedule} idTopology={id}/>
+                {schedules?.map((schedule, index) => {
+                    return <ScheduleListItem key={schedule.idTimetable} schedule={schedule} index={index} del={delShedule} idTopology={id}/>
                 })}
                 <ScheduleAddItem idTopology={id} schedules={schedules}/>
                 </div>  }

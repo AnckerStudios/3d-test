@@ -17,9 +17,9 @@ function TrainsListItem({train, del, index}) {
         <div className="  flex w-full p-2 relative">
             <div className=" flex justify-around p-1 px-5 w-full">
                 <div className="  w-1/4 font-bold text-2xl  flex items-center justify-center">{train?.nameTrain}</div>
-                <div className=" w-3/4 font-bold text-2xl text-orange-900 flex items-center justify-center">{train?.typeTrain?.typeTrain}</div>
+                <div className=" w-3/4 font-bold text-2xl text-orange-900 flex items-center justify-center">{train?.typeTrain}</div>
                 <div className=" w-1/4 font-bold text-2xl text-slate-900 flex items-center justify-center">{train?.numberOfWagons}</div>
-                <img src={`./picture/${getImage(train?.typeTrain?.idType)}.png`} className=" w-1/6"/>
+                <img src={`./picture/${getImage(train?.idType)}.png`} className=" w-1/6"/>
             </div>
             <div className=" absolute top-2 right-2 z-10" onClick={()=>del(index)}>
                 <img src={close} className=" w-7 h-7"></img>

@@ -83,10 +83,11 @@ function Preview({mtrx = [], objSet = {x: 16, y:16}, prev = true, err=false}) {
                             chanLight.push({x:item.x, y:item.y, rot: {x: 0, y: 0, z: 0}});
                             break;
                         case 'dir':
-                            if(item.state.dir === true){
+                            console.log("WWOOORRKK",item)
+                            if(item.state.dir){
         
                                 changesP.push({x:item.x, y:item.y, rot: {x: 0, y: 0, z: 0}, state: item.state.plate, number: item.state.number});
-                            }else if(item.state.dir === false){
+                            }else if(!item.state.dir){
                                 changesP.push({x:item.x, y:item.y, rot: {x: 0, y: 0, z: Math.PI/2}, state: item.state.plate, number: item.state.number});
                             }
                             break;

@@ -36,7 +36,7 @@ function TrainsController({ trains = [], timer = 0, mtrx = [],setErr }) {
   }
   function creareWagons(trains, paths) {
     let arrWagons = [];
-    for (let w = 0; w < 3; w++) { //wagons
+    for (let w = 0; w < trains?.record?.train?.numberOfWagons+1; w++) { //wagons
       arrWagons.push({ next: 1, err:false, pos: { x: paths[0].x - (3 * w * 1), y: paths[0].y - (3 * w * 0), dir: dirSwich(trains.way[0].dir) }, opacity: 0})
     }
     return arrWagons;

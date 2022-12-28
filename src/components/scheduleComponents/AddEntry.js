@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
 
-function AddEntry({inOut, platforms, trains, id, addSchedule}) {
+function AddEntry({inOut, platforms, trains, city, addSchedule}) {
     const [loading, setLoading] = useState(true);
     
     console.log("plte",platforms[0].lines)
@@ -11,13 +11,10 @@ function AddEntry({inOut, platforms, trains, id, addSchedule}) {
     const [lineIndex, setLineIndex] = useState(0);
     const [planeIndex, setPlaneIndex] = useState(0);
     const type = ['Пассаж.','Груз.','Электричка'];
-    const [entry, setEntry] = useState({ plate: platforms[0].number, plateLine: platforms[0].lines[lineIndex], trainName: trains[0].nameTrain, arrivalTime: "00:00", departureTime: "00:00", in: inOut[0], out: inOut[0],typeTrain:type[0]});
+    const [entry, setEntry] = useState({ plate: platforms[0].number, plateLine: platforms[0].lines[lineIndex], trainName: trains[0].nameTrain,arrivalCity: city[0].cityName,departureCity: city[0].cityName, arrivalTime: "00:00", departureTime: "00:00", in: inOut[0], out: inOut[0],typeTrain:type[0]});
 
-    const sity = [{city:"Самара"}, {city:"Москва"},{city:"Санкт-Петербург"},{city:"Оренбург"}, ]
-    const sitys = []
-    for(let i = 0; i < sity.length; i++){
-        sitys.push(<option key={i}>{sity[i].city}</option>)  
-    }
+    
+
 
     function Add(){
         console.log(entry)
@@ -64,7 +61,7 @@ function AddEntry({inOut, platforms, trains, id, addSchedule}) {
                 </label>
                 <br/>
                 <label>Введите номер поезда
-                    <select className = "addsep" onChange={(e)=>{setEntry({...entry, trainName: trains[e.target.value].nameTrain}); setLineIndex(e.target.value)}}>
+                    <select className = "addsep" onChange={(e)=>{setEntry({...entry, trainName: trains[e.target.value].nameTrain})}}>
                         {trains?.map((pl,index) => {
                             return <option key={index} value={index}>№{pl.nameTrain}</option>
                         })}
@@ -83,15 +80,18 @@ function AddEntry({inOut, platforms, trains, id, addSchedule}) {
                 </label>
                 <br/><br/>
                 <label>Город отправления
-                    <input className = "addsep" placeholder='Введите город...' list='list' onChange={(e)=>setEntry({...entry, departureCity: e.target.value})}/>
-                    <datalist id = 'list'>
-                        {sitys}
-                    </datalist>
+                <select className = "addsep" onChange={(e)=>{setEntry({...entry, departureCity: city[e.target.value].cityName})}}>
+                        {city?.map((pl,index) => {
+                            return <option key={index} value={index}>{pl.cityName}</option>
+                        })}
+                    </select>
                 </label><br/>
-                <label>Город прибытия<input className = "addsep" placeholder='Введите город...' list='list' onChange={(e)=>setEntry({...entry, arrivalCity: e.target.value})}/>
-                    <datalist id = 'list'>
-                        {sitys}
-                    </datalist>
+                <label>Город прибытия
+                    <select className = "addsep" onChange={(e)=>{setEntry({...entry, arrivalCity: city[e.target.value].cityName})}}>
+                        {city?.map((pl,index) => {
+                            return <option key={index} value={index}>{pl.cityName}</option>
+                        })}
+                    </select>
                 </label><br/>
                 <label>In
                     <select className = "addsep" onChange={(e)=>setEntry({...entry, in: inOut[e.target.value]})}>

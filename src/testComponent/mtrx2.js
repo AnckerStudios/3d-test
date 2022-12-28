@@ -4092,12 +4092,12 @@ export function rec(){
                     "y": 18,
                     "number": 0
                 },
-                "trainName": "451365",
+                "train": {idTrain: 56, nameTrain:"333", typeTrain:"Грузовой", numberOfWagons:3},
                 "arrivalTime": "04:50:00",
                 "departureTime": "05:00:00",
-                "departureCity": "Самара",
-                "arrivalCity": "Москва",
-                "typeTrain": "Пассаж.",
+                "departureCity": {cityName: "Самара"},
+                "arrivalCity": {cityName: "Самара"},
+                
                 "in": {
                     "id": 340,
                     "x": 17,
