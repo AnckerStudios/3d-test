@@ -59,13 +59,13 @@ function ScheduleTable({id,date,setSchedule, schedule, isCreate}) {
 
               {loading ? <div>Погоди...</div> : schedule?.map((sch, index) => {
                 return <tr key={index} className=' border'>
-                  <td className=" text-center">{sch.plate}</td>
-                  <td className=" text-center">{sch.plateLine.number}</td>
-                  <td className=" text-center">{sch.train.trainName}</td>
-                  <td className=" text-center">{sch.arrivalTime}</td>
-                  <td className=" text-center">{sch.departureTime}</td>
-                  <td className=" text-center">{sch.departureCity}-{sch.arrivalCity}</td>
-                  <td className=" text-center">{sch.typeTrain}</td>
+                  <td className=" text-center">{sch?.plate}</td>
+                  <td className=" text-center">{sch?.plateLine?.number}</td>
+                  <td className=" text-center">{sch?.train?.trainName}</td>
+                  <td className=" text-center">{sch?.arrivalTime}</td>
+                  <td className=" text-center">{sch?.departureTime}</td>
+                  <td className=" text-center">{sch?.departureCity?.cityName}-{sch?.arrivalCity?.cityName}</td>
+                  <td className=" text-center">{sch?.train?.typeTrain}</td>
                 </tr>
               })}
 

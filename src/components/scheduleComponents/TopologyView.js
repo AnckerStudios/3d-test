@@ -49,7 +49,7 @@ function TopologyView({id, inOut, platforms}) {
         <pointLight  position={[-3,0,2]}/>
         <Preview mtrx={mtrx} objSet={{x:mtrx.length, y:mtrx[0].length}} prev={false}/>
         <Ground objSet={{x:mtrx.length, y:mtrx[0].length}}/>
-        {inOut?.map((io,index)=>{return <Text key={index} opacity={1} position={[io.x,io.y, 0]} color='black'>{io.x+":"+io.y}</Text>})}
+        {inOut?.map((io,index)=>{return <Text key={index} opacity={1} position={[io.x,io.y, 1]} color='black'>{io.x+":"+io.y}</Text>})}
         
         
         

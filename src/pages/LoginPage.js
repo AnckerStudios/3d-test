@@ -9,17 +9,17 @@ function LoginPage() {
   const [login, setLogin] = useState('')
   const [password, setPassword] = useState('')
   const navigate = useNavigate();
-  const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QG1haWwucnUiLCJleHAiOjE2NzU4NTg3NjJ9.bXfQhicCjcLBK3cGB9Xa2D2F4yiqtZ0cKXP8bQPy8Lv8r4-aBdgJHDl0sJQr9Jb32pAYclv7r849jmygTmnAyA';
+  // const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QG1haWwucnUiLCJleHAiOjE2NzU4NTg3NjJ9.bXfQhicCjcLBK3cGB9Xa2D2F4yiqtZ0cKXP8bQPy8Lv8r4-aBdgJHDl0sJQr9Jb32pAYclv7r849jmygTmnAyA';
   function handleLogin() {
-    console.log(atob(token))
-    // AuthService.login(login, password).then(
-    //   () => {
-    //     navigate("/home");
-    //   },
-    //   error => {
-    //     console.log(error);
-    //   }
-    // );
+    
+    AuthService.login(login, password).then(
+      () => {
+        navigate("/home");
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
   return (

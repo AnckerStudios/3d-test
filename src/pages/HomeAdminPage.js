@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import AuthService from '../services/auth.service';
 
 
-function HomePage() {
+function HomeAdminPage() {
     const navigate = useNavigate();
     function logout(){
         AuthService.logout()
@@ -40,4 +40,4 @@ function HomePage() {
 }
 
 
-export default HomePage; 
+export default HomeAdminPage; 

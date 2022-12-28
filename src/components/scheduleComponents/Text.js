@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 
-function Text({ children, position, opacity, color = 'black', fontSize = 125 }) {
+function Text({ children, position, opacity, color = 'black', fontSize = 20 }) {
 
 
 
@@ -20,7 +20,7 @@ function Text({ children, position, opacity, color = 'black', fontSize = 125 }) 
       context.lineWidth = borderThickness;
 
       context.fillStyle = color
-      context.fillText( children, textWidth + (textWidth*0.95), fontsize);
+      context.fillText( children, textWidth + (textWidth*0.7), fontsize);
       return canvas
     }, [children])
 
