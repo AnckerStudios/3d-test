@@ -11,6 +11,7 @@ function HomePage() {
         navigate("/login");
           
     }
+    
     return (
 
         <div className='divbig'>
