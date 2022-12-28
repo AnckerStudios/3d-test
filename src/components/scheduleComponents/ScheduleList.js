@@ -31,7 +31,7 @@ function ScheduleList({id}) {
     useEffect(()=>{console.log(schedules)},[schedules])
     function delShedule(index){
         console.log(schedules);
-        axios.get('http://localhost:8080/api/schedule/delete', {
+        axios.delete('http://localhost:8080/api/schedule', {
             params: {
               //idTopology: id,
               idTimetable: schedules[index].idTimetable

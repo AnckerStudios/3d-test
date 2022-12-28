@@ -61,7 +61,7 @@ function ScheduleTable({id,date,setSchedule, schedule, isCreate}) {
                 return <tr key={index} className=' border'>
                   <td className=" text-center">{sch.plate}</td>
                   <td className=" text-center">{sch.plateLine.number}</td>
-                  <td className=" text-center">{sch.trainName}</td>
+                  <td className=" text-center">{sch.train.trainName}</td>
                   <td className=" text-center">{sch.arrivalTime}</td>
                   <td className=" text-center">{sch.departureTime}</td>
                   <td className=" text-center">{sch.departureCity}-{sch.arrivalCity}</td>
