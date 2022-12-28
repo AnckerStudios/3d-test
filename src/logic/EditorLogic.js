@@ -50,7 +50,7 @@ export function setCell(cell, mtrx, tool, clickedCell, plates){
         change = createPlate(clickedCell.first, cell, plates);
       }
         
-        let obj = addChanges(arr,change, mtrx, tool.name);
+        let obj = addChanges(arr,change, mtrx, tool.name, clickedCell.first.scroll);
         return {arr: obj.arr, err: obj.err,};
     }
 
@@ -81,7 +81,7 @@ export function checkPlace(cell, arr, tool, scroll) {
                 return true;
             }
             return false;
-        case 'plate':
+        case 'plate' || 'neplater'  || 'neplatel':
             let xMin = x - (scroll ? 1 : 0);
             let xMax = x + (scroll ? 1 : 0);
             let yMin = y - (!scroll ? 1 : 0);
@@ -134,30 +134,19 @@ function createPlate(first, second, plates){
   let arr = [];
   let deltaX = second.x - first.x; //проверки добавь
   let deltaY = second.y - first.y;
-  
-  let curX = first.x;
-  let curY = first.y;
+
   let fscroll = first.scroll;
   let sign = fscroll ? Math.sign(deltaX): Math.sign(deltaY);
   let delta = fscroll ? second.x - first.x : second.y - first.y; 
-  let mainX = 0;
-  let mainY = 0;
   //arr.push({x: first.x, y: first.y, state: {dir: fscroll, number: 2}, type: type});
   for(let i = 0; i <= Math.floor(Math.abs(delta/3)); i++){
-    let type = 'neplate';
-    let number;
+    arr.push({x: fscroll ? first.x + i*3*sign - 1: first.x, y: fscroll ? first.y : first.y + i*3*sign - 1, state: {}, type: 'plate edge'});
+    arr.push({x: fscroll ? first.x + i*3*sign + 1: first.x, y: fscroll ? first.y : first.y + i*3*sign + 1, state: {}, type: 'plate edge'});
     if(i === Math.floor(Math.abs(delta/3)/2)){
-      type = 'plate';
-      number = plates;
-      mainX=fscroll?first.x + i*3*sign:first.x;
-      mainY=!fscroll?first.y + i*3*sign:first.y;
-    }
-    if(fscroll){
-      arr.push({x: first.x + i*3*sign, y: first.y, state: {dir: fscroll, number: number}, type: type});
+      arr.push({x: fscroll ? first.x + i*3*sign : first.x, y: fscroll ? first.y : first.y + i*3*sign, state: {dir: fscroll, number: plates}, type: 'plate'});
     }else{
-      arr.push({x: first.x, y: first.y + i*3*sign, state: {dir: fscroll, number: number}, type: type});
-    }
-    
+      arr.push({x: fscroll ? first.x + i*3*sign : first.x, y: fscroll ? first.y : first.y + i*3*sign, state: {},type: fscroll ? 'neplatel' : 'neplater'});
+    }  
   }
   
   return arr;
@@ -245,13 +234,13 @@ function testSwich(i, j, dir){
     }
   }
 
-function addChanges(arr, change, mtrx, type){
+function addChanges(arr, change, mtrx, type, scroll){
     let err = false;
     let copy = Object.assign([], arr);
     for(let item of change){
       copy[item.x][item.y].state = item.state;
       copy[item.x][item.y].type = item.type;
-      err = err || checkPlace({x: item.x, y: item.y}, mtrx, type, false);
+      err = err || checkPlace({x: item.x, y: item.y}, mtrx, item.type, scroll);
     }
     //console.log("dsdasdasdasdasdasdada")
     //console.log(copy)
