@@ -35,9 +35,9 @@ function Preview({ mtrx = [], objSet = { x: 16, y: 16 }, prev = true, err = fals
                         changesP.push({ x: item.x, y: item.y, rot: { x: 0, y: 0, z: Math.PI / 2 }, state: item.state.plate, number: item.state.number });
                     }
                 } else if (item.type === 'neplater') {
-                    changesP.push({ x: item.x, y: item.y, rot: { x: 0, y: 0, z: 0 }});
-                }else if(item.type === 'neplatel'){
                     changesP.push({ x: item.x, y: item.y, rot: { x: 0, y: 0, z: Math.PI / 2 }});
+                }else if(item.type === 'neplatel'){
+                    changesP.push({ x: item.x, y: item.y, rot: { x: 0, y: 0, z: 0 }});
                 } else if (item.type === 'rail') {
                     for (let state in item.state) {
 
