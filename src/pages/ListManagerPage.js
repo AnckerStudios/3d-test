@@ -6,7 +6,8 @@ import axios from 'axios';
 function ListManagerPage() {
     const [moder, setModer] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [addModer, setAddModer] = useState({id: 0});
+    const [addModer, setAddModer] = useState({id: null});
+    const [err,setErr] = useState(false);
     useEffect(()=>{
         setLoading(true);
         axios.get('http://localhost:8080/api/services/controller/user/allmod')
@@ -26,7 +27,7 @@ function ListManagerPage() {
 
         axios.delete('http://localhost:8080/api/services/controller/user', {
             params: {
-              idAccount: moder[index].idAccount,
+              idAccount: moder[index].id,
               
             }
         })
@@ -42,12 +43,11 @@ function ListManagerPage() {
             // let index = copy.findIndex(item => item.idSchedule == idSchedule);
             copy.splice(index,1)
             setModer(copy);
-            console.log(error);
+            console.log(error.data);
         }); 
     }
 
     function add(addItem){
-        console.log(addItem)
         axios.post('http://localhost:8080/api/services/controller/user/register', addItem 
         )
         .then(function (response) {
@@ -58,7 +58,7 @@ function ListManagerPage() {
         })
         .catch(function (error) {
             console.log(error);
-            
+            setErr(error.data);
         });
     }
     const items = []
@@ -94,10 +94,11 @@ function ListManagerPage() {
                 <fieldset>
                     <legend>Добавить менеджера</legend>
                     <label id='name' className='lbl'>Имя <input className="add" type="text" maxLength="15" onChange={(e)=>{setAddModer({...addModer, name: e.target.value})}}/></label>
-                    <label id='login' className='lbl'>Email <input className="add" type="text" minLength="4" maxLength="12" onChange={(e)=>{setAddModer({...addModer, email: e.target.value})}}/></label>
+                    <label id='login' className='lbl'>Email <input className="add" type="text" minLength="4" maxLength="50" onChange={(e)=>{setAddModer({...addModer, email: e.target.value})}}/></label>
                     <label id='password' className='lbl'>Пароль <input className="add" type="text" minLength="4" maxLength="12" onChange={(e)=>{setAddModer({...addModer, password: e.target.value})}}/></label>
                     <button className='cent' onClick={()=>{add(addModer)}}>Добавить</button>
                 </fieldset>
+                {err && <div>Ошибка записи!</div>}
             </div>
             <a href='http://localhost:3000/home' className='ex'>x</a>
         </div>
