@@ -12,7 +12,7 @@ function AddEntry({ inOut, platforms, trains, id, addSchedule, active, setActive
     const [planeIndex, setPlaneIndex] = useState(0);
 
     const type = ['Пассаж.', 'Груз.', 'Электричка'];
-    const [entry, setEntry] = useState({ plate: platforms[0].number, plateLine: platforms[0].lines[lineIndex], arrivalTime: "00:00", departureTime: "00:00", in: inOut[0], out: inOut[0], typeTrain: type[0] });
+    const [entry, setEntry] = useState({ plate: platforms[0].number, plateLine: platforms[0].lines[lineIndex], train: trains[0], arrivalTime: "00:00", departureTime: "00:00", in: inOut[0], out: inOut[0] });
 
     const sity = [{ city: "Самара" }, { city: "Москва" }, { city: "Санкт-Петербург" }, { city: "Оренбург" },]
     const sitys = []
@@ -220,7 +220,7 @@ function AddEntry({ inOut, platforms, trains, id, addSchedule, active, setActive
                             </label>
                             <br />
                             <label>Выберите поезд
-                                <select className="addsep" onChange={(e) => { setEntry({ ...entry, trainName: trains[e.target.value].nameTrain }) }}>
+                                <select className="addsep" onChange={(e) => { setEntry({ ...entry, train: trains[e.target.value].nameTrain }) }}>
                                     {trains?.map((pl, index) => {
                                         return <option key={index} value={index}>{`№${pl.nameTrain} ${pl.typeTrain}`}</option>
                                     })}
