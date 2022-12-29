@@ -16,17 +16,17 @@ function LoginPage() {
       email: login,
       password: password
     })
-      .then(function (response) {
+    .then(function (response) {
         if (response.data.token && response.data.role) {
           localStorage.setItem("user", JSON.stringify(response.data));
           localStorage.setItem("role", response.data.role);
           navigate("/home");
         }
-      })
-      .catch(function (error) {
+    })
+    .catch(function (error) {
         setErr(error.data);
         console.log(error);
-      });
+    });
   }
 
   return (
