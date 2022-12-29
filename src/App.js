@@ -25,8 +25,8 @@ function App() {
   const navigate = useNavigate();
   useEffect(() => {
     if (!localStorage.getItem("user")) {
-      setRole("ADMIN");
-      //navigate("/");
+      //setRole("ADMIN");
+      navigate("/");
 
     } else {
       console.log("token", authHeader());

@@ -39,9 +39,9 @@ function AddEntry({ inOut, platforms, trains, id, addSchedule, active, setActive
     const [numberOfTrainError, setNumberOfTrainError] = useState('Введите номер поезда');
 
     const [formValid, setFormValid] = useState(false);
-    const[entryError, setEntryError] = useState('');
+    const [entryError, setEntryError] = useState('');
 
-    
+
     //если форма не валидна, то запись не добавляется
     useEffect(() => {
         if (cityError || cityArrError || timeArrError || timeDepError || numberOfTrainError) {
@@ -149,32 +149,29 @@ function AddEntry({ inOut, platforms, trains, id, addSchedule, active, setActive
 
     let flag = true;
 
-    function duplicate(){
-        let i =0;
-        while(i<schedule.length && flag)
-        {
-            if((entry.arrivalTime == schedule[i].arrivalTime && entry.plate == schedule[i].plate) || entry.trainName == schedule[i].trainName)
-            {
+    function duplicate() {
+        let i = 0;
+        while (i < schedule.length && flag) {
+            if ((entry.arrivalTime == schedule[i].arrivalTime && entry.plate == schedule[i].plate) || entry.trainName == schedule[i].trainName) {
                 setEntryError("Запись с данными полями существует");
-                flag=false;
+                flag = false;
             }
             i++;
         }
     }
 
 
-    function Add(){
+    function Add() {
 
         setEntryError('');
         duplicate();
 
-        if(flag)
-        {
+        if (flag) {
             addSchedule(entry);
             numberOfTrain.value = '';
         }
-        else{
-
+        else {
+            console.log('че это')
         }
 
     }
@@ -223,9 +220,12 @@ function AddEntry({ inOut, platforms, trains, id, addSchedule, active, setActive
                                 </select>
                             </label>
                             <br />
-                            <label>Введите номер поезда
-                                {(numberOfTrainDirty && numberOfTrainError) && <div style={{ color: 'red', height: 5 }}>{numberOfTrainError}</div>}
-                                <input onBlur={e => blurHandler(e)} name='numberOfTrain' className="addsep text-center" type="text" minLength="1" maxLength="6" onChange={(e) => changeHandler(e)} />
+                            <label>Выберите поезд
+                                <select className="addsep" onChange={(e) => { setEntry({ ...entry, trainName: trains[e.target.value].nameTrain }) }}>
+                                    {trains?.map((pl, index) => {
+                                        return <option key={index} value={index}>{`№${pl.nameTrain} ${pl.typeTrain}`}</option>
+                                    })}
+                                </select>
                             </label>
                             <br />
                             <label>Время прибытия
@@ -268,8 +268,8 @@ function AddEntry({ inOut, platforms, trains, id, addSchedule, active, setActive
                                     })}
                                 </select>
                             </label>
-                            <div className="eradd" style ={{color: 'red', height: 5}}>{entryError}</div>
-                            <br/>
+                            <div className="eradd" style={{ color: 'red', height: 5 }}>{entryError}</div>
+                            <br />
                             <button disabled={!formValid} id="bb" className='centr' onClick={() => Add()}>Добавить</button>
                         </fieldset>
                     </div>
