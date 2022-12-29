@@ -62,9 +62,7 @@ function TopologyEditor({mtrx=[], setMtrx, saveFunk}) {
             <button className=" w-24 h-15 absolute  rounded-xl bottom-24 right-4 bg-slate-200 flex shadow-md justify-center font-bold p-1 hover:bg-slate-400" onClick={() => clear()}>
                 x
             </button>
-            <button className=" w-24 h-15 absolute  rounded-xl bottom-32 right-4 bg-slate-200 flex shadow-md justify-center font-bold p-1 hover:bg-slate-400" onClick={() => testSaveImage()}>
-                test
-            </button>
+
         </div>
         {/* <TopologyModal/> */}
     </div>

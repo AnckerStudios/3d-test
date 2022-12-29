@@ -14,6 +14,8 @@ import CreateTopologyPage from "./pages/CreateTopologyPage";
 import TopologyEditorPage from "./pages/TopologyEditorPage";
 import TrainsPage from "./pages/TrainsPage";
 import CitysPage from "./pages/CitysPage";
+import CitysModerPageT from "./pages/CitysModerPageT";
+import ManulModerPageT from "./pages/ManulModerPageT";
 import { useEffect, useState } from "react";
 import authHeader from "./services/auth-header";
 import axios from "axios";
@@ -53,6 +55,8 @@ function App() {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/list-manager" element={<ListManagerPage />} />
       {role === "ADMIN" ? <Route path="/home" element={<HomeAdminPage />} /> : <Route path="/home" element={<HomeModerPage />} />}
+      <Route path="/cityM" element={<CitysModerPageT />} />
+      <Route path="/cityM/:name" element={<ManulModerPageT />} />
       
       <Route path="/schedule" element={<SchedulePage />} />
 
@@ -67,6 +71,7 @@ function App() {
       {/* <Route path="/modelirovanie" element={<ModelirovaniePage/>}/> */}
       <Route path="/modelirovanie/:id/:date" element={<ModelirovaniePage />} />
       <Route path="/topology/:id/:name" element={<TopologyPage />} />
+      <Route path="/model/:id/:name" element={<TopologyPage />} />
       <Route
         path="/create-schedule/:id/:date"
         element={<ScheduleCreatePage />}

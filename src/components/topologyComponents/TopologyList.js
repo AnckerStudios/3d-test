@@ -20,7 +20,7 @@ function TopologyList({cityName}) {
             console.log(response);
         })
         .catch(function (error) {
-            setTopologys([{topologyName:"name",idTopology:1, accountName: "lox"}]);
+            setTopologys([{topologyName:"name",idTopology:1, accountName: "avtor"}]);
             setLoading(false);
             console.log(error);
         });

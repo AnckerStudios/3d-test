@@ -2,10 +2,10 @@ import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 const data = [
-  {plate: 1, plateLine: {x:0,y:0,number:1}, trainName : "D500A", arrivalTime: "10:10", departureTime: "10:10", arrivalCity: "10:10", departureCity: "10:10",typeTrain:"п"},
-  {plate: 1, plateLine: {x:0,y:0,number:1}, trainName : "333", arrivalTime: "10:10", departureTime: "10:10", arrivalCity: "10:10", departureCity: "10:10",typeTrain:"п"},
-  {plate: 1, plateLine: {x:0,y:0,number:1}, trainName : "333", arrivalTime: "10:10", departureTime: "10:10", arrivalCity: "10:10", departureCity: "10:10",typeTrain:"п"},
-  {plate: 1, plateLine: {x:0,y:0,number:1}, trainName : "333", arrivalTime: "10:10", departureTime: "10:10", arrivalCity: "10:10", departureCity: "10:10",typeTrain:"п"},
+  {plate: 1, plateLine: {x:0,y:0,number:1}, train : {idTrain: 2, nameTrain: "2fasd", typeTrain:"Грузовой", numberOfWagons:2}, arrivalTime: "10:10", departureTime: "10:10", arrivalCity: "10:10", departureCity: "10:10"},
+  {plate: 1, plateLine: {x:0,y:0,number:1}, train : {idTrain: 2, nameTrain: "2fasd", typeTrain:"Грузовой", numberOfWagons:2}, arrivalTime: "10:10", departureTime: "10:10", arrivalCity: "10:10", departureCity: "10:10"},
+  {plate: 1, plateLine: {x:0,y:0,number:1}, train : {idTrain: 2, nameTrain: "2fasd", typeTrain:"Грузовой", numberOfWagons:2}, arrivalTime: "10:10", departureTime: "10:10", arrivalCity: "10:10", departureCity: "10:10"},
+  {plate: 1, plateLine: {x:0,y:0,number:1}, train : {idTrain: 2, nameTrain: "2fasd", typeTrain:"Грузовой", numberOfWagons:2}, arrivalTime: "10:10", departureTime: "10:10", arrivalCity: "10:10", departureCity: "10:10"},
   ];
 
 function ScheduleTable({id,date,setSchedule, schedule, isCreate}) {
