@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Link, Route, Routes } from "react-router-dom";
 import Manul from "./pages/Manul";
 import HomeAdminPage from "./pages/HomeAdminPage";
 
@@ -15,8 +15,6 @@ import TopologyEditorPage from "./pages/TopologyEditorPage";
 import TrainsPage from "./pages/TrainsPage";
 import CitysPage from "./pages/CitysPage";
 
-import CitysModerPageT from "./pages/CitysModerPageT";
-import ManulModerPageT from "./pages/ManulModerPageT";
 import About from "./pages/About";
 import AboutProgram from "./pages/AboutProgram";
 
@@ -43,7 +41,7 @@ function App() {
 
   return (
     <>
-
+    <Link className=" absolute top-4 right-4" to="/home">Home</Link>
     <Routes>
       <Route path="/" element={<About />} />
       <Route path="/login" element={<LoginPage />} />
@@ -82,7 +80,7 @@ function App() {
       />
       <Route path="/city" element={<CitysPage />} />
       <Route path="/city/:name" element={<Manul />} />
-
+      <Route path="/about" element={<About />} />
       <Route path="/modeling/:id/:name" element={<ModelingListPage />} />
     </Routes>
     </>

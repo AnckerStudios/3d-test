@@ -19,7 +19,7 @@ function LoginPage() {
     .then(function (response) {
         if (response.data.token && response.data.role) {
           localStorage.setItem("user", JSON.stringify(response.data));
-          localStorage.setItem("role", response.data.role);
+          localStorage.setItem("role", response.data.role);//localStorage.setItem("role", "ROLE_ADMIN");
           navigate("/home");
         }
     })
