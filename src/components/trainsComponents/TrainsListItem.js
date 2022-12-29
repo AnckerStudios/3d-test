@@ -20,13 +20,13 @@ function TrainsListItem({ train, del, index }) {
           {train?.nameTrain}
         </div>
         <div className=" w-3/4 font-bold text-2xl text-orange-900 flex items-center justify-center">
-          {train?.typeTrain}
+          {train?.typeTrain?.typeTrain}
         </div>
         <div className=" w-1/4 font-bold text-2xl text-slate-900 flex items-center justify-center">
           {train?.numberOfWagons}
         </div>
         <img
-          src={`./picture/${getImage(train?.typeTrain)}.png`}
+          src={`./picture/${getImage(train?.typeTrain?.typeTrain)}.png`}
           className=" w-1/6"
         />
       </div>

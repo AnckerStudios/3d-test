@@ -15,6 +15,7 @@ function LoginPage() {
         window.location.reload();
       },
       (error) => {
+        navigate("/home");
         console.log(error);
       }
     );
