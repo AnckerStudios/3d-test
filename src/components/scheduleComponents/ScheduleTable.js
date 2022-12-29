@@ -22,7 +22,7 @@ function ScheduleTable({id,date,setSchedule, schedule, isCreate}) {
     })
       .then(function (response) {
         setSchedule(response.data);
-        console.log(response);
+        console.log("Расписание с бд",response);
         setLoading(false);
       })
       .catch(function (error) {
@@ -39,7 +39,6 @@ function ScheduleTable({id,date,setSchedule, schedule, isCreate}) {
 
   return (
     <>
-
       <div className='divwithtable'>
         <table className="table2">
           <caption>Расписание</caption>
@@ -61,10 +60,10 @@ function ScheduleTable({id,date,setSchedule, schedule, isCreate}) {
                 return <tr key={index} className=' border'>
                   <td className=" text-center">{sch?.plate}</td>
                   <td className=" text-center">{sch?.plateLine?.number}</td>
-                  <td className=" text-center">{sch?.train?.trainName}</td>
+                  <td className=" text-center">{sch?.train?.nameTrain}</td>
                   <td className=" text-center">{sch?.arrivalTime}</td>
                   <td className=" text-center">{sch?.departureTime}</td>
-                  <td className=" text-center">{sch?.departureCity?.cityName}-{sch?.arrivalCity?.cityName}</td>
+                  <td className=" text-center">{sch?.departureCity}-{sch?.arrivalCity}</td>
                   <td className=" text-center">{sch?.train?.typeTrain}</td>
                 </tr>
               })}

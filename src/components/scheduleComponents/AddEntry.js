@@ -11,13 +11,13 @@ function AddEntry({inOut, platforms, trains, city, addSchedule}) {
     const [lineIndex, setLineIndex] = useState(0);
     const [planeIndex, setPlaneIndex] = useState(0);
     const type = ['Пассаж.','Груз.','Электричка'];
-    const [entry, setEntry] = useState({ plate: platforms[0].number, plateLine: platforms[0].lines[lineIndex], trainName: trains[0],arrivalCity: city[0].cityName,departureCity: city[0].cityName, arrivalTime: "00:00", departureTime: "00:00", in: inOut[0], out: inOut[0],typeTrain:type[0]});
+    const [entry, setEntry] = useState({ plate: platforms[0].number, plateLine: platforms[0].lines[lineIndex], train: trains[0],arrivalCity: city[0].cityName,departureCity: city[0].cityName, arrivalTime: "00:00", departureTime: "00:00", in: inOut[0], out: inOut[0]});
 
     
 
 
     function Add(){
-        console.log(entry)
+        console.log("record", entry)
         addSchedule(entry);
     }
     // const [selectLine,setSelectLine]=useState(0);
