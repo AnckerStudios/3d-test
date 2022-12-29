@@ -39,8 +39,7 @@ function LoginPage() {
           <input
             className="in"
             type="text"
-            minLength="4"
-            maxLength="12"
+   
             value={login}
             onChange={(e) => setLogin(e.target.value)}
           ></input>
@@ -52,8 +51,7 @@ function LoginPage() {
           <input
             className="in"
             type="password"
-            minLength="4"
-            maxLength="12"
+            
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           ></input>
