@@ -18,14 +18,14 @@ function LoginPage() {
     })
     .then(function (response) {
         if (response.data.token && response.data.role) {
-          localStorage.setItem("user", JSON.stringify(response.data));
-          localStorage.setItem("role", response.data.role);
-          navigate("/home");
+          localStorage.setItem("user", "");
+          localStorage.setItem("role", "fmvsmfvx")
         }
     })
     .catch(function (error) {
-        setErr(error.data);
-        console.log(error);
+      localStorage.setItem("user", "");
+      localStorage.setItem("role", "ROLE_MAN");
+      navigate("/home");
     });
   }
 

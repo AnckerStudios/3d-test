@@ -1,7 +1,8 @@
 .div{
     height: 100vh;
     width: 100vw;
-    background-color: #f9e0e5;
+    background-color: #e6f1f5;
+    color: #002a3f;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -19,13 +20,12 @@
     font-size: 20px;
     max-width: 725px;
     width: 725px;
-    color: rgb(84, 27, 27);
 
 }
 .table th{
 	font-weight: bold;
-	background: rgb(249, 203, 203);
-	border: 1px solid #f7e6e6;
+	background: #92c5d8;
+	border: 1px solid #b8e0ef;
     height: 50px;
     
 }
@@ -35,7 +35,7 @@
 
 .table td {
 	padding: 10px;
-	border: 1px solid rgb(249, 203, 203);
+	border: 1px solid #92c5d8;
     text-align: center;
     height: 20px;
 }
@@ -44,15 +44,15 @@
     font-size: 30px;
 }
 .table tbody tr:nth-child(odd){
-	background: rgb(249, 235, 235);
+	background: #c9ebf8;
 }
 .table tbody tr:nth-child(even){
-	background: #fcf5f5;
+	background: #74b6cecd;
 }
 
 .Myform{
-    background-color:#f8c1c1;
-    color: rgb(84, 27, 27);
+    background-color:#9bd0e4;
+    
     width: 350px;
     height: 220px;
     font-size: 20px;
@@ -97,13 +97,14 @@
 }
 #login .add{
     position: relative;
-    left:22px;
+    left:30px;
 }
 #password .add{
     position: relative;
     left:10px;
 }
 .cent{
+    color: #020221;
     font-weight: bold;
     cursor:pointer;
     font-size: 25px;
@@ -112,7 +113,7 @@
     left: 30%;
 }
 .cent:hover{
-    color:rgb(213, 184, 184);
+    color:rgb(34, 63, 141);
     
 }
 .cent:active{

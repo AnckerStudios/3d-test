@@ -17,7 +17,7 @@ function TrainAddModal({submin, exit, addErr}) {
     return (
         <>
         <div className=" fixed bg-black/50 top-0 right-0 left-0 bottom-0 z-20">
-            <div className="w-[500px] p-5 rounded-xl bg-orange-200 absolute top-10 left-1/2 -translate-x-1/2 flex flex-col gap-4 items-center">
+            <div className="w-[500px] p-5 rounded-xl bg-blue-200 absolute top-10 left-1/2 -translate-x-1/2 flex flex-col gap-4 items-center">
                 <div className="flex flex-grow gap-2">
                     <div className="flex flex-col">
                         <div className=" w-full p-5 font-bold text-xl flex items-center justify-center">Номер</div>
@@ -38,7 +38,7 @@ function TrainAddModal({submin, exit, addErr}) {
                     
                 </div>
                 {addErr?.flag && <div className=" w-full p-5 font-bold text-xl flex items-center justify-center text-red-800">Ошибка создания: {addErr.mes}</div>}
-                <button className=" rounded-lg bg-orange-400 p-2 w-1/4" onClick={()=> {submin(train)}}>ok</button>
+                <button className=" rounded-lg bg-blue-400 p-2 w-1/4" onClick={()=> {submin(train)}}>ok</button>
             </div>
             <div className=" absolute top-2 right-2 z-30" onClick={()=>exit(false)}>
                 <img src={close} className=" w-7 h-7"></img>

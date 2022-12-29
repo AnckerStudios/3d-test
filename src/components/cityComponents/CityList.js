@@ -35,7 +35,7 @@ function CityList() {
             {citys?.map((city,index) => {
                 return <CityListItem key={index} city={city}/>
             })}
-            {getCurRole() && <div className=" bg-slate-300 rounded-xl aspect-square w-3/12 flex justify-center font-bold items-center hover:bg-orange-300" onClick={()=>setAddFlag(true)}>+</div>}
+            {getCurRole() && <div className=" bg-blue-100 rounded-xl aspect-square w-3/12 flex justify-center font-bold items-center hover:bg-orange-300" onClick={()=>setAddFlag(true)}>+</div>}
             {addFlag && getCurRole() && <CityAddModal/>}
         </div>}
         </>
