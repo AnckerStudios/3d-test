@@ -4,12 +4,14 @@ import '../../pagesStyle/AddEntry.css';
 
 
 function AddEntry({ inOut, platforms, trains, id, addSchedule, active, setActive, schedule }) {
+
     const [loading, setLoading] = useState(true);
 
     console.log("plte", platforms[0].lines)
 
     const [lineIndex, setLineIndex] = useState(0);
     const [planeIndex, setPlaneIndex] = useState(0);
+
     const type = ['Пассаж.', 'Груз.', 'Электричка'];
     const [entry, setEntry] = useState({ plate: platforms[0].number, plateLine: platforms[0].lines[lineIndex], arrivalTime: "00:00", departureTime: "00:00", in: inOut[0], out: inOut[0], typeTrain: type[0] });
 
@@ -162,6 +164,7 @@ function AddEntry({ inOut, platforms, trains, id, addSchedule, active, setActive
 
 
     function Add(){
+
         setEntryError('');
         duplicate();
 
@@ -173,6 +176,7 @@ function AddEntry({ inOut, platforms, trains, id, addSchedule, active, setActive
         else{
 
         }
+
     }
     // const [selectLine,setSelectLine]=useState(0);
     // useEffect(()=>{
@@ -194,6 +198,7 @@ function AddEntry({ inOut, platforms, trains, id, addSchedule, active, setActive
     }
 
     return (
+
 
         <div className={active ? 'popup active' : 'popup'} onClick={() => setActive(false)}>
             <div className='popupBody' onClick={e => e.stopPropagation()}>
@@ -271,6 +276,7 @@ function AddEntry({ inOut, platforms, trains, id, addSchedule, active, setActive
                 </div>
                 <div className='popupClose' onClick={() => setActive(false)}>x</div>
             </div>
+
         </div>
 
 

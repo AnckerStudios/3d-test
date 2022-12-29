@@ -35,9 +35,33 @@ function TopologyEditorPage() {
               });
         },[])
     function save(){
+      let copy = Object.assign([],mtrx);
+      for(let i = 0; i < copy.length; i++){
+        for(let j = 0; j < copy[0].length; j++){
+          if(copy[i][j]?.type === 'plate'){
+            let dir = copy[i][j].state.dir;
+            let dx = dir ? 0 : 1;
+            let dy = dir ? 1 : 0;
+            let arr = []; 
+            if(i-dx > 0 && j-dy > 0){
+              if(copy[i-dx][j-dy].type === "rail" && copy[i-dx][j-dy].state[dir ? "x" : "y"] === true){
+                arr.push({x: i-dx, y: j-dy, number: copy[i][j].state?.number*2});
+              }
+            }
+            if(i+dx < copy.length && j+dy < copy[i].length){
+              if(copy[i+dx][j+dy].type === "rail" && copy[i+dx][j+dy].state[dir ? "x" : "y"] === true){
+                arr.push({x: i+dx, y: j+dy, number: copy[i][j].state?.number*2+1});
+              }
+            }
+            copy[i][j].state={...copy[i][j].state , lines: arr};
+          }
+        }
+      }
+      console.log("copy", mtrx)
+      console.log("copy", copy)
             axios.post('http://localhost:8080/api/topology', {
                 title: name,
-                body: mtrx
+                body: copy
               },{params:{
                 idTopology: id
               }})

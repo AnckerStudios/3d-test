@@ -8,7 +8,7 @@ import Train from "./Train";
 import TrainsController from "./TrainsController";
 
 
-function Modeling({mtrx=[], ways=[], timer=0,setErr}) {
+function Modeling({mtrx=[], ways=[], timer=0, setErr}) {
   let objSettings = {x:mtrx.length, y:mtrx[0].length}
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const handleMouse = (event) => {

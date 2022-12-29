@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 
-function Text({ children, position, opacity, color = 'black', fontSize = 125 }) {
+function Text({ children, position, opacity, color = 'black', fontSize = 120 }) {
 
 
 
@@ -20,14 +20,14 @@ function Text({ children, position, opacity, color = 'black', fontSize = 125 }) 
       context.lineWidth = borderThickness;
 
       context.fillStyle = color
-      context.fillText( children, textWidth + (textWidth*0.95), fontsize);
+      context.fillText( children, textWidth*0.1, fontsize);
       return canvas
     }, [children])
 
 
     return (
       <sprite 
-      scale={[2, 1.4, 1.4]} position={position}>
+      scale={[2, 1.4, 2]} position={position}>
         <spriteMaterial attach="material" transparent alphaTest={0.5} >
           <canvasTexture attach="map" image={canvas} />
         </spriteMaterial>

@@ -50,7 +50,7 @@ function ListManagerPage() {
                     <button className='cent'>Добавить</button>
                 </fieldset>
             </div>
-            <a href='http://localhost:3000/admin-menu' className='ex'>x</a>
+            <a href='http://localhost:3000/home' className='ex'>x</a>
         </div>
     );
 }

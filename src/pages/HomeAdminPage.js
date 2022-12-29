@@ -1,11 +1,17 @@
 import '../pagesStyle/AdminMenuPage.css';
 import React from "react";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import AuthService from '../services/auth.service';
 
 
-function HomePage() {
-
-
+function HomeAdminPage() {
+    const navigate = useNavigate();
+    function logout(){
+        AuthService.logout()
+        navigate("/login");
+          
+    }
+    
     return (
 
         <div className='divbig'>
@@ -16,13 +22,17 @@ function HomePage() {
                     <button className='buttonam' >Работа со списком пользователей</button>
                 </Link>
                 <br />
-                <form action=''>
+                <Link to={'/city'}>
                     <button className='buttonam'>Работа с топологиями</button>
-                </form>
+                </Link>
                 <br />
-                <form action='http://localhost:3000/home'>
+                <Link to={'/trains'}>
+                    <button className='buttonam'>Поезда</button>
+                </Link>
+                <br />
+                <div onClick={()=>logout()}>
                     <button className='buttonam'>Выйти из аккаунта</button>
-                </form>
+                </div>
             </div>
         </div>
 
@@ -30,4 +40,4 @@ function HomePage() {
 }
 
 
-export default HomePage; 
+export default HomeAdminPage; 

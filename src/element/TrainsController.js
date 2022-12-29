@@ -36,7 +36,7 @@ function TrainsController({ trains = [], timer = 0, mtrx = [],setErr }) {
   }
   function creareWagons(trains, paths) {
     let arrWagons = [];
-    for (let w = 0; w < 3; w++) { //wagons
+    for (let w = 0; w < trains?.record?.train?.numberOfWagons+1; w++) { //wagons
       arrWagons.push({ next: 1, err:false, pos: { x: paths[0].x - (3 * w * 1), y: paths[0].y - (3 * w * 0), dir: dirSwich(trains.way[0].dir) }, opacity: 0})
     }
     return arrWagons;
@@ -82,6 +82,11 @@ function TrainsController({ trains = [], timer = 0, mtrx = [],setErr }) {
           let m = tarr[1];
 
           let trainTime = spawnTime(tr, ((h * 60 + (+m)) * 100), arr); 
+          let tout = trains[tr].record.departureTime;
+          tout = tout.split(':');
+          let ho = tout[0];
+          let mo = tout[1];
+          let outTime = ((ho * 60 + (+mo)) * 100)
           if (t >= trainTime) {
             if (test2(arr, tr, lights)) {
 
@@ -94,6 +99,10 @@ function TrainsController({ trains = [], timer = 0, mtrx = [],setErr }) {
             if (test(arr, tr)) {
               arr[tr].step = 0;
               arr[tr].isStop = true;
+            }
+            if(t >= outTime && arr[tr].isStop){
+              arr[tr].isStop = false;
+              arr[tr].step = arr[tr].maxStep;
             }
             // if(arr[tr].isStop && t >= trains[tr].timeOtb){
             //   arr[tr].step = 0.1;

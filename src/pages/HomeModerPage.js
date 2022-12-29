@@ -2,7 +2,7 @@ import '../pagesStyle/ManagerMenuPage.css';
 import React from "react";
 
 
-function ManagerMenuPage() {
+function HomeModerPage() {
 
 
     return (
@@ -20,4 +20,4 @@ function ManagerMenuPage() {
 }
 
 
-export default ManagerMenuPage; 
+export default HomeModerPage; 

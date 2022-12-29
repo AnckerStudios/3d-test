@@ -4,7 +4,6 @@ import ScheduleTable from '../components/scheduleComponents/ScheduleTable';
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
-import ModalDateSelector from '../components/scheduleComponents/ModalDateSelector';
 import ScheduleTable2 from '../components/scheduleComponents/ScheduleTable2';
 import Ground from '../element/Ground';
 import Preview from '../element/Preview';
@@ -21,6 +20,7 @@ function ScheduleEditorPage() {
     const [loading, setLoading] = useState(true);
     const [addFlag, setaddFlag] = useState(false);
     const [trains, setTrains] = useState([]);
+    const [city, setCity] = useState();
     const [mtrx, setMtrx] = useState();
     let objSettings = { x: 16, y: 16 }
     const data = [
@@ -50,11 +50,8 @@ function ScheduleEditorPage() {
     const nplat = ['1', '2', '3', '4']
     const nput = ['1', '2', '3', '4']
     const type = ['Пассаж.', 'Груз.', 'Электричка']
-    const sity = [{ city: "Самара" }, { city: "Москва" }, { city: "Санкт-Петербург" }, { city: "Оренбург" },]
-    const sitys = []
-    for (let i = 0; i < sity.length; i++) {
-        sitys.push(<option>{sity[i].city}</option>)
-    }
+
+
     const types = []
     for (let i = 0; i < type.length; i++) {
         types.push(<option>{type[i]}</option>)
@@ -86,14 +83,17 @@ function ScheduleEditorPage() {
                 setPlatforms(res.plates);
                 setInOut(res.inOut);
                 setTrains(res.trains);
+                setCity(res.cities);
                 console.log(response);
                 setLoading(false);
             })
             .catch(function (error) {
                 console.log(error);
+
                 let resPlates = [{ number: 7, dir: true, lines: [{ x: 0, y: 0, number: 1 }] }, { number: 8, dir: true, lines: [{ x: 0, y: 0, number: 3 }, { x: 0, y: 0, number: 4 }] }, { number: 4, dir: true, lines: [{ x: 0, y: 0, number: 5 }, { x: 0, y: 0, number: 6 }] }];
                 let resInOut = [{ x: 0, y: 0, dir: 0, name: "A" }, { x: 15, y: 9, dir: 0, name: "B" }, { x: 0, y: 3, dir: 0, name: "C" }, { x: 4, y: 0, dir: 0, name: "D" }];
                 let trains = [{ idTrain: 56, nameTrain: "333", typeTrain: "Грузовой", numberOfWagons: 3 }]
+
                 setPlatforms(resPlates);
                 setInOut(resInOut);
                 setTrains(trains);
@@ -108,10 +108,12 @@ function ScheduleEditorPage() {
         <>
             <div className='divsep'>
                 <div className='flex flex-col'>
+
                     {loading ? <div>Погоди-погожу</div> :
                         <><ScheduleTable id={id} date={date} setSchedule={setSchedule} schedule={schedule} isCreate={isCreate} />
                             <button onClick={() => setaddFlag(true)}>Добавить</button>
                             {<AddEntry active={addFlag} setActive={setaddFlag} schedule={schedule} inOut={inOut} platforms={platforms} trains={trains} addSchedule={addSchedule} />}</>}
+
                 </div>
                 
                 <div className='flex flex-grow'>
