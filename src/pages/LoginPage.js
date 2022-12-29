@@ -4,20 +4,23 @@ import AuthService from "../services/auth.service";
 import { useNavigate } from "react-router-dom";
 
 function LoginPage() {
+  const [err, setErr] = useState(false);
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   // const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QG1haWwucnUiLCJleHAiOjE2NzU4NTg3NjJ9.bXfQhicCjcLBK3cGB9Xa2D2F4yiqtZ0cKXP8bQPy8Lv8r4-aBdgJHDl0sJQr9Jb32pAYclv7r849jmygTmnAyA';
   function handleLogin() {
+    console.log(login, password);
     AuthService.login(login, password).then(
       () => {
         
         navigate("/home");
       },
       (error) => {
-        localStorage.setItem("user", "Dsafasfgasfwadfsdf");
-        localStorage.setItem("role", "ROLE_ADMIN");
-        navigate("/home");
+        setErr(error.data);
+        // localStorage.setItem("user", "Dsafasfgasfwadfsdf");
+        // localStorage.setItem("role", "ROLE_ADMIN");
+        // navigate("/home");
         
         console.log(error);
       }
@@ -57,7 +60,9 @@ function LoginPage() {
         <button className="but" onClick={() => handleLogin()}>
           Войти
         </button>
+        {err && <div>Ошибка:{err}</div>}
       </div>
+      
     </div>
   );
 }

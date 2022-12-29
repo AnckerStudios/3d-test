@@ -6,15 +6,13 @@ class AuthService {
   login(email, password) {
     return axios
       .post(API_URL + "login", {
-        email,
-        password
+        email: email,
+        password: password
       })
       .then(response => {
-        console.log("resp",response.data);
         if (response.data.token && response.data.role) {
           localStorage.setItem("user", JSON.stringify(response.data));
           localStorage.setItem("role", response.data.role);
-          console.log(localStorage);
         }
         
 

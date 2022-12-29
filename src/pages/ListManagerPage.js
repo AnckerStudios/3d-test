@@ -98,7 +98,7 @@ function ListManagerPage() {
                     <label id='password' className='lbl'>Пароль <input className="add" type="text" minLength="4" maxLength="12" onChange={(e)=>{setAddModer({...addModer, password: e.target.value})}}/></label>
                     <button className='cent' onClick={()=>{add(addModer)}}>Добавить</button>
                 </fieldset>
-                {err && <div>Ошибка записи!</div>}
+                {err && <div>err</div>}
             </div>
             <a href='http://localhost:3000/home' className='ex'>x</a>
         </div>
