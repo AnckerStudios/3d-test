@@ -11,10 +11,12 @@ class AuthService {
       })
       .then(response => {
         console.log("resp",response.data);
-        if (response.data.token) {
+        if (response.data.token && response.data.role) {
           localStorage.setItem("user", JSON.stringify(response.data));
+          localStorage.setItem("role", response.data.role);
           console.log(localStorage);
         }
+        
 
         return response.data;
       });
@@ -33,8 +35,11 @@ class AuthService {
   }
 
   getCurrentUser() {
-    return JSON.parse(localStorage.getItem('user'));;
+    return JSON.parse(localStorage.getItem('user'));
   }
+  
 }
-
+export function getCurRole() {
+  return JSON.parse(localStorage.getItem('role')) === "ROLE_ADMIN";
+}
 export default new AuthService();

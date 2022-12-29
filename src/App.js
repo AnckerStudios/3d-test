@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import Manul from "./pages/Manul";
 import HomeAdminPage from "./pages/HomeAdminPage";
-import HomeModerPage from "./pages/HomeModerPage";
+
 import LoginPage from "./pages/LoginPage";
 import ListManagerPage from "./pages/ListManagerPage";
 import ScheduleEditorPage from "./pages/ScheduleEditorPage";
@@ -14,49 +14,37 @@ import CreateTopologyPage from "./pages/CreateTopologyPage";
 import TopologyEditorPage from "./pages/TopologyEditorPage";
 import TrainsPage from "./pages/TrainsPage";
 import CitysPage from "./pages/CitysPage";
-import CitysModerPageT from "./pages/CitysModerPageT";
-import ManulModerPageT from "./pages/ManulModerPageT";
+
 import { useEffect, useState } from "react";
 import authHeader from "./services/auth-header";
 import axios from "axios";
 import AuthService from "./services/auth.service";
 import { useNavigate } from "react-router-dom";
+import authService from "./services/auth.service";
 
 function App() {
   const [role, setRole] = useState();
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   useEffect(() => {
     if (!localStorage.getItem("user")) {
-      //setRole("ADMIN");
-      //navigate("/");
-
+      navigate("/");
     } else {
-      console.log("token", authHeader());
-      console.log("netoken", AuthService.getCurrentUser());
-      axios
-        .get("http://localhost:8080/api/services/controller/user/getUser", {
-          headers: authHeader(),
-          params: { email: AuthService.getCurrentUser().email },
-        })
-        .then(function (response) {
-          setRole(response.data.role);
-          console.log("res", response);
-          console.log("role", setRole);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+      //setRole(authService.getCurrentRole());
     }
   },[]);
 
   return (
+    <>
+
     <Routes>
       <Route path="/" element={<LoginPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/list-manager" element={<ListManagerPage />} />
-      {role === "ADMIN" ? <Route path="/home" element={<HomeAdminPage />} /> : <Route path="/home" element={<HomeModerPage />} />}
-      <Route path="/cityM" element={<CitysModerPageT />} />
-      <Route path="/cityM/:name" element={<ManulModerPageT />} />
+      
+      <Route path="/home" element={<HomeAdminPage />} />
+  
+
       
       <Route path="/schedule" element={<SchedulePage />} />
 
@@ -87,8 +75,9 @@ function App() {
       <Route path="/city" element={<CitysPage />} />
       <Route path="/city/:name" element={<Manul />} />
 
-      <Route path="/modeling-list" element={<ModelingListPage />} />
+      <Route path="/modeling/:id/:name" element={<ModelingListPage />} />
     </Routes>
+    </>
   );
 }
 

@@ -50,7 +50,7 @@ function ScheduleList({id}) {
             copy.splice(index,1)
             setSchedules(copy);
             console.log(error);
-        });
+        }); 
     }
     const next = () => {
         if (currentIndex < (length - 1)) {

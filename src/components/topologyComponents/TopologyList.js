@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { getCurRole } from "../../services/auth.service";
 import TopologyAddItem from "./TopologyAddItem";
 import TopologyListItem from "./TopologyListItem";
 
@@ -55,7 +56,7 @@ function TopologyList({cityName}) {
             {topologys?.map((topol,index) => {
                 return <TopologyListItem key={index} topol={topol} del={delShedule} index={index}/>
             })}
-            <TopologyAddItem cityName={cityName}/>
+            {getCurRole() && <TopologyAddItem cityName={cityName}/>}
         </div>}
         </>
     );

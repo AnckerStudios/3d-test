@@ -17,7 +17,7 @@ function TrainsList() {
             console.log(response);
         })
         .catch(function (error) {
-            setTrains([{idTrain: 1,nameTrain:"10A",numberOfWagons:2, typeTrain:"Пасажирский"},{idTrain: 1,nameTrain:"10A",numberOfWagons:2, typeTrain:"Пасажирский"},{idTrain: 1,nameTrain:"10A",numberOfWagons:2, typeTrain:"Пасажирский"}]);
+            setTrains([{idTrain: 1,nameTrain:"55",numberOfWagons:2, typeTrain:"Пасажирский"},{idTrain: 1,nameTrain:"10",numberOfWagons:3, typeTrain:"Грузовой"},{idTrain: 1,nameTrain:"121",numberOfWagons:2, typeTrain:"Скоростной"}]);
             setLoading(false);
             console.log(error);
         });

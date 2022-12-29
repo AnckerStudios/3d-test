@@ -11,11 +11,12 @@ function LoginPage() {
   function handleLogin() {
     AuthService.login(login, password).then(
       () => {
+        
         navigate("/home");
-        window.location.reload();
+        //window.location.reload();
       },
       (error) => {
-        navigate("/home");
+        //navigate("/home");
         console.log(error);
       }
     );
