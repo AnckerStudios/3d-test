@@ -15,6 +15,11 @@ import TopologyEditorPage from "./pages/TopologyEditorPage";
 import TrainsPage from "./pages/TrainsPage";
 import CitysPage from "./pages/CitysPage";
 
+import CitysModerPageT from "./pages/CitysModerPageT";
+import ManulModerPageT from "./pages/ManulModerPageT";
+import About from "./pages/About";
+import AboutProgram from "./pages/AboutProgram";
+
 import { useEffect, useState } from "react";
 import authHeader from "./services/auth-header";
 import axios from "axios";
@@ -26,6 +31,7 @@ function App() {
   
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+
   useEffect(() => {
     if (!localStorage.getItem("user")) {
       navigate("/");
@@ -34,12 +40,14 @@ function App() {
     }
   },[]);
 
+
   return (
     <>
 
     <Routes>
-      <Route path="/" element={<LoginPage />} />
+      <Route path="/" element={<About />} />
       <Route path="/login" element={<LoginPage />} />
+      <Route path="/aboutprogram" element={<AboutProgram />} />
       <Route path="/list-manager" element={<ListManagerPage />} />
       
       <Route path="/home" element={<HomeAdminPage />} />
