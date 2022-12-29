@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import '../../pagesStyle/AddEntry.css';
 
 
-
 function AddEntry({ inOut, platforms, trains, id, addSchedule, active, setActive, schedule }) {
 
     const [loading, setLoading] = useState(true);
@@ -44,7 +43,7 @@ function AddEntry({ inOut, platforms, trains, id, addSchedule, active, setActive
 
     //если форма не валидна, то запись не добавляется
     useEffect(() => {
-        if (cityError || cityArrError || timeArrError || timeDepError || numberOfTrainError) {
+        if (cityError || cityArrError || timeArrError || timeDepError) {
             setFormValid(false);
         }
         else { setFormValid(true); }
@@ -152,8 +151,13 @@ function AddEntry({ inOut, platforms, trains, id, addSchedule, active, setActive
     function duplicate() {
         let i = 0;
         while (i < schedule.length && flag) {
-            if ((entry.arrivalTime == schedule[i].arrivalTime && entry.plate == schedule[i].plate) || entry.trainName == schedule[i].trainName) {
-                setEntryError("Запись с данными полями существует");
+            if ((entry.arrivalTime == schedule[i].arrivalTime && entry.plate == schedule[i].plate)) {
+                setEntryError("Запись с данным временем прибытия на платформу существует");
+                flag = false;
+            }
+            else if( entry.trainName == schedule[i].trainName)
+            {
+                setEntryError("Запись с данным поездом существует");
                 flag = false;
             }
             i++;
@@ -162,16 +166,11 @@ function AddEntry({ inOut, platforms, trains, id, addSchedule, active, setActive
 
 
     function Add() {
-
         setEntryError('');
         duplicate();
 
         if (flag) {
             addSchedule(entry);
-            numberOfTrain.value = '';
-        }
-        else {
-            console.log('че это')
         }
 
     }

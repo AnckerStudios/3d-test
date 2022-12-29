@@ -26,7 +26,7 @@ function App() {
   useEffect(() => {
     if (!localStorage.getItem("user")) {
       //setRole("ADMIN");
-      navigate("/");
+      //navigate("/");
 
     } else {
       console.log("token", authHeader());

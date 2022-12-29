@@ -4,7 +4,7 @@ import close from "../../images/closeGray.png"
 
 
 function TrainAddModal({submin, exit}) {
-    const [train, setTrain] = useState({nameTrain:undefined,numberOfWagons:undefined, typeTrain:{idType: 1, typeTrain: "Пасажирский"}});
+    const [train, setTrain] = useState({nameTrain:undefined,numberOfWagons:undefined, typeTrain:"Пасажирский"});
     const [err, setErr] = useState({status:false, title:""});
     const type = [1,2,3];
     function getType(type){
@@ -20,7 +20,7 @@ function TrainAddModal({submin, exit}) {
             <div className="w-[500px] p-5 rounded-xl bg-orange-200 absolute top-10 left-1/2 -translate-x-1/2 flex flex-col gap-4 items-center">
                 <div className="flex flex-grow gap-2">
                     <input className=" border rounded-lg p-2" type="text" onChange={(e)=>setTrain({...train, nameTrain: e.target.value})}/>
-                    <select className = "border rounded-lg" onChange={(e)=>setTrain({...train, typeTrain: {idType: type[e.target.value], typeTrain: getType(type[e.target.value])}})}>
+                    <select className = "border rounded-lg" onChange={(e)=>setTrain({...train, typeTrain: getType(type[e.target.value])})}>
                         {type?.map((io,index) => {
                             return <option key={index} value={index}>{getType(io)}</option>
                         })}

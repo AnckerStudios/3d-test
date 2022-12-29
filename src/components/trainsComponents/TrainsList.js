@@ -17,7 +17,7 @@ function TrainsList() {
             console.log(response);
         })
         .catch(function (error) {
-            setTrains([{idTrain: 1,nameTrain:"10A",numberOfWagons:2, typeTrain:{idType: 1, typeTrain: "Пасажирский"}},{idTrain: 1,nameTrain:"10A",numberOfWagons:2, typeTrain:{idType: 1, typeTrain: "Пасажирский"}},{idTrain: 1,nameTrain:"10A",numberOfWagons:2, typeTrain:{idType: 1, typeTrain: "Пасажирский"}}]);
+            setTrains([{idTrain: 1,nameTrain:"10A",numberOfWagons:2, typeTrain:"Пасажирский"},{idTrain: 1,nameTrain:"10A",numberOfWagons:2, typeTrain:"Пасажирский"},{idTrain: 1,nameTrain:"10A",numberOfWagons:2, typeTrain:"Пасажирский"}]);
             setLoading(false);
             console.log(error);
         });
@@ -45,6 +45,7 @@ function TrainsList() {
     }
 
     function addTrain(train){
+        console.log("sefgsdh", train)
         axios.post('http://localhost:8080/api/train', train 
         )
         .then(function (response) {
