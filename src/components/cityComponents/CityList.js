@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { getCurRole } from "../../services/auth.service";
 import CityAddModal from "./CityAddModal";
 import CityListItem from "./CityListItem";
 
@@ -34,8 +35,8 @@ function CityList() {
             {citys?.map((city,index) => {
                 return <CityListItem key={index} city={city}/>
             })}
-            <div className=" bg-slate-300 rounded-xl aspect-square w-3/12 flex justify-center font-bold items-center hover:bg-orange-300" onClick={()=>setAddFlag(true)}>+</div>
-            {addFlag && <CityAddModal/>}
+            {getCurRole() && <div className=" bg-slate-300 rounded-xl aspect-square w-3/12 flex justify-center font-bold items-center hover:bg-orange-300" onClick={()=>setAddFlag(true)}>+</div>}
+            {addFlag && getCurRole() && <CityAddModal/>}
         </div>}
         </>
     );

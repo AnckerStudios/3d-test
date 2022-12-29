@@ -76,9 +76,9 @@ function Editor({mtrx=[],setMtrx, view=true, tool='cursor', flag}) {
       if(clickedCell.second != undefined && placeErr === false){
         setMtrx(joinMtrx(mtrx, previewMtrx));
         clearPreview();
-        if(tool.name === 'plate'){
-          setPlates((plates) => plates+1);
-        }
+        // if(tool.name === 'plate'){
+        //   setPlates((plates) => plates+1);
+        // }
       }
     }
 

@@ -10,11 +10,11 @@ function ScheduleTable2({schedule = [], loading = true}) {
         items.push( <tr key={i} className=' border'>
             <td className=" text-center">{schedule[i]?.record?.plate}</td>
             <td className=" text-center">{schedule[i]?.record?.plateLine?.number}</td>
-            <td className=" text-center">{schedule[i]?.record?.train.nameTrain}</td>
+            <td className=" text-center">{schedule[i]?.record?.train?.nameTrain}</td>
             <td className=" text-center">{schedule[i]?.record?.arrivalTime}</td>
             <td className=" text-center">{schedule[i]?.record?.departureTime}</td>
-            <td className=" text-center">{schedule[i]?.record?.departureCity}-{schedule[i]?.record?.arrivalCity}</td>
-            <td className=" text-center">{schedule[i]?.record?.train.typeTrain}</td>
+            <td className=" text-center">{schedule[i]?.record?.departureCity?.cityName}-{schedule[i]?.record?.arrivalCity?.cityName}</td>
+            <td className=" text-center">{schedule[i]?.record?.train?.typeTrain}</td>
         </tr>)  
     }
     

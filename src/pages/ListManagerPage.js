@@ -1,23 +1,73 @@
 import '../pagesStyle/ListManagerPage.css';
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from 'axios';
 
 
 function ListManagerPage() {
+    const [moder, setModer] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [addModer, setAddModer] = useState({id: null});
+    const [err,setErr] = useState(false);
+    useEffect(()=>{
+        setLoading(true);
+        axios.get('http://localhost:8080/api/services/controller/user/allmod')
+        .then(function (response) {
+            setModer(response.data);
+            console.log(response);
+            setLoading(false);
+        })
+        .catch(function (error) {
+            setModer([{id: 1, name: "ы", email: "hhh@gmail.com", role: "MODER"},{id: 1, name: "Kolya", email: "hhh@gmail.com", role: "MODER"},{id: 1, name: "лох", email: "hhh@gmail.com", role: "MODER"}]);
+            console.log(error);
+            setLoading(false);
+        });
+    },[])
 
-    const data = [
-        { name: "Вася", login: "vasya", password: "3333" },
-        { name: "Артём", login: "geller", password: "4444" },
-        { name: "Тори", login: "tort", password: "5555" },
-        { name: "Илья", login: "anker", password: "6666" },
-        { name: "Румия", login: "akirovarm", password: "7777" }
-    ]
+    function del(index){
+
+        axios.delete('http://localhost:8080/api/services/controller/user', {
+            params: {
+              idAccount: moder[index].id,
+              
+            }
+        })
+        .then(function (response) {
+            let copy = Object.assign([], moder);
+            // let index = copy.findIndex(item => item.idSchedule == idSchedule);
+            copy.splice(index,1)
+            setModer(copy);
+            console.log(response);
+        })
+        .catch(function (error) {
+            let copy = Object.assign([], moder);
+            // let index = copy.findIndex(item => item.idSchedule == idSchedule);
+            copy.splice(index,1)
+            setModer(copy);
+            console.log(error.data);
+        }); 
+    }
+
+    function add(addItem){
+        axios.post('http://localhost:8080/api/services/controller/user/register', addItem 
+        )
+        .then(function (response) {
+            let copy = Object.assign([], moder);
+            copy.push(addItem)
+            setModer(copy);
+            console.log(response);
+        })
+        .catch(function (error) {
+            console.log(error);
+            setErr(error.data);
+        });
+    }
     const items = []
-    for (let i = 0; i < data.length; i++) {
+    for (let i = 0; i < moder.length; i++) {
         items.push(<tr>
             <td>{i + 1}</td>
-            <td>{data[i].name}</td>
-            <td>{data[i].login}</td>
-            <td>{data[i].password}</td>
+            <td>{moder[i].name}</td>
+            <td ><div className=' flex justify-around items-center'> <div>{moder[i].email}</div><button className=' px-2 bg-pink-300 rounded-xl shadow-xl hover:bg-red-500' onClick={()=>del(i)}>X</button></div></td>
+        
         </tr>)
     }
     return (
@@ -30,12 +80,11 @@ function ListManagerPage() {
                         <tr>
                             <th>N#</th>
                             <th>Имя</th>
-                            <th>Логин</th>
-                            <th>Пароль</th>
+                            <th>Email</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {items}
+                        {loading ? <div>Loading...</div>: items}
                     </tbody>
                 </table>
 
@@ -44,11 +93,12 @@ function ListManagerPage() {
             <div className='Myform'>
                 <fieldset>
                     <legend>Добавить менеджера</legend>
-                    <label id='name' className='lbl'>Имя <input className="add" type="text" maxLength="15"/></label>
-                    <label id='login' className='lbl'>Логин <input className="add" type="text" minLength="4" maxLength="12"/></label>
-                    <label id='password' className='lbl'>Пароль <input className="add" type="text" minLength="4" maxLength="12"/></label>
-                    <button className='cent'>Добавить</button>
+                    <label id='name' className='lbl'>Имя <input className="add" type="text" maxLength="15" onChange={(e)=>{setAddModer({...addModer, name: e.target.value})}}/></label>
+                    <label id='login' className='lbl'>Email <input className="add" type="text" minLength="4" maxLength="50" onChange={(e)=>{setAddModer({...addModer, email: e.target.value})}}/></label>
+                    <label id='password' className='lbl'>Пароль <input className="add" type="text" minLength="4" maxLength="12" onChange={(e)=>{setAddModer({...addModer, password: e.target.value})}}/></label>
+                    <button className='cent' onClick={()=>{add(addModer)}}>Добавить</button>
                 </fieldset>
+                {err && <div>err</div>}
             </div>
             <a href='http://localhost:3000/home' className='ex'>x</a>
         </div>

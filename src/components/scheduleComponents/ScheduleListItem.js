@@ -10,8 +10,8 @@ function ScheduleListItem({schedule, index, del, idTopology}) {
             <Link className=" bg-slate-300 rounded-xl w-full h-full flex justify-center font-bold items-center hover:bg-orange-300 shadow-lg text-center relative snap-start " to={`/schedule-editor/${idTopology}/${schedule.timetableDate}`}>
                 {schedule.timetableDate}
                 <div className=" absolute bottom-1 right-3 flex items-center gap-3 ">
-                    <div>avtor</div>
-                    <div className={`h-3 w-3 rounded-full ${schedule?.status ? "bg-pink-400":"bg-red-600"} shadow-xl`}/>
+                <div>{schedule?.status ? "корректна" : "не корректна"}</div>
+                    <div className={`h-3 w-3 rounded-full ${schedule?.status ? "bg-green-400":"bg-red-600"} shadow-xl`}/>
                 </div>
             </Link>
             <div className=" absolute top-1 right-1 z-10" onClick={()=>del(index)}>

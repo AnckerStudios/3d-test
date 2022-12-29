@@ -2,10 +2,11 @@ import '../pagesStyle/HomePage.css';
 import React, { useState } from "react";
 import TopologyEditor from '../element/TopologyEditor';
 import TopologyModal from '../components/topologyComponents/TopologyModal';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { createMtrx } from '../logic/EditorLogic';
 import { data } from 'autoprefixer';
 import axios from 'axios';
+import authService from '../services/auth.service';
 
 
 function CreateTopologyPage() {
@@ -13,14 +14,40 @@ function CreateTopologyPage() {
     const [mtrx, setMtrx] = useState();
     const [flag, setFlag] = useState(false);
     const [name, setName] = useState()
+
     function save(){
+      let copy = Object.assign([],mtrx);
+      let numberPlate = 0;
+      for(let i = 0; i < copy.length; i++){
+        for(let j = 0; j < copy[0].length; j++){
+          if(copy[i][j]?.type === 'plate'){
+            let dir = copy[i][j].state.dir;
+            let dx = dir ? 0 : 1;
+            let dy = dir ? 1 : 0;
+            let arr = []; 
+            if(i-dx > 0 && j-dy > 0){
+              if(copy[i-dx][j-dy].type === "rail" && copy[i-dx][j-dy].state[dir ? "x" : "y"] === true){
+                arr.push({x: i-dx, y: j-dy, number: numberPlate*2});
+              }
+            }
+            if(i+dx < copy.length && j+dy < copy[i].length){
+              if(copy[i+dx][j+dy].type === "rail" && copy[i+dx][j+dy].state[dir ? "x" : "y"] === true){
+                arr.push({x: i+dx, y: j+dy, number: numberPlate*2+1});
+              }
+            }
+            copy[i][j].state={...copy[i][j].state , lines: arr, number: numberPlate};
+            numberPlate++;
+          }
+        }
+      }
+      console.log(authService.getCurrentUser())
         axios.post('http://localhost:8080/api/topology/create', {
             title: name,
-            body: mtrx
+            body: copy
           },{
             params: {
                 topologyName: name,
-                accountName: "ilya",
+                accountName: authService.getCurrentUser().email,
                 city: cityname
             }
         })

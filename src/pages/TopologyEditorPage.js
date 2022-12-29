@@ -36,6 +36,7 @@ function TopologyEditorPage() {
         },[])
     function save(){
       let copy = Object.assign([],mtrx);
+      let numberPlate = 0;
       for(let i = 0; i < copy.length; i++){
         for(let j = 0; j < copy[0].length; j++){
           if(copy[i][j]?.type === 'plate'){
@@ -45,15 +46,16 @@ function TopologyEditorPage() {
             let arr = []; 
             if(i-dx > 0 && j-dy > 0){
               if(copy[i-dx][j-dy].type === "rail" && copy[i-dx][j-dy].state[dir ? "x" : "y"] === true){
-                arr.push({x: i-dx, y: j-dy, number: copy[i][j].state?.number*2});
+                arr.push({x: i-dx, y: j-dy, number: numberPlate*2});
               }
             }
             if(i+dx < copy.length && j+dy < copy[i].length){
               if(copy[i+dx][j+dy].type === "rail" && copy[i+dx][j+dy].state[dir ? "x" : "y"] === true){
-                arr.push({x: i+dx, y: j+dy, number: copy[i][j].state?.number*2+1});
+                arr.push({x: i+dx, y: j+dy, number: numberPlate*2+1});
               }
             }
-            copy[i][j].state={...copy[i][j].state , lines: arr};
+            copy[i][j].state={...copy[i][j].state , lines: arr, number: numberPlate};
+            numberPlate++;
           }
         }
       }

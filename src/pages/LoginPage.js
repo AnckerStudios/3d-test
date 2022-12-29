@@ -2,23 +2,31 @@ import "../pagesStyle/HomePage.css";
 import React, { useState } from "react";
 import AuthService from "../services/auth.service";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function LoginPage() {
+  const [err, setErr] = useState(false);
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   // const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QG1haWwucnUiLCJleHAiOjE2NzU4NTg3NjJ9.bXfQhicCjcLBK3cGB9Xa2D2F4yiqtZ0cKXP8bQPy8Lv8r4-aBdgJHDl0sJQr9Jb32pAYclv7r849jmygTmnAyA';
   function handleLogin() {
-    AuthService.login(login, password).then(
-      () => {
-        navigate("/home");
-        window.location.reload();
-      },
-      (error) => {
-        navigate("/home");
+    console.log(login, password);
+    axios.post("http://localhost:8080/api/services/controller/user/login", {
+      email: login,
+      password: password
+    })
+    .then(function (response) {
+        if (response.data.token && response.data.role) {
+          localStorage.setItem("user", JSON.stringify(response.data));
+          localStorage.setItem("role", response.data.role);
+          navigate("/home");
+        }
+    })
+    .catch(function (error) {
+        setErr(error.data);
         console.log(error);
-      }
-    );
+    });
   }
 
   return (
@@ -31,8 +39,7 @@ function LoginPage() {
           <input
             className="in"
             type="text"
-            minLength="4"
-            maxLength="12"
+   
             value={login}
             onChange={(e) => setLogin(e.target.value)}
           ></input>
@@ -44,8 +51,7 @@ function LoginPage() {
           <input
             className="in"
             type="password"
-            minLength="4"
-            maxLength="12"
+            
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           ></input>
@@ -54,7 +60,9 @@ function LoginPage() {
         <button className="but" onClick={() => handleLogin()}>
           Войти
         </button>
+        {err && <div>Ошибка:{err}</div>}
       </div>
+
     </div>
   );
 }

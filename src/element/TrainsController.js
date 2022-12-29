@@ -37,7 +37,7 @@ function TrainsController({ trains = [], timer = 0, mtrx = [],setErr }) {
   function creareWagons(trains, paths) {
     let arrWagons = [];
     for (let w = 0; w < trains?.record?.train?.numberOfWagons+1; w++) { //wagons
-      arrWagons.push({ next: 1, err:false, pos: { x: paths[0].x - (3 * w * 1), y: paths[0].y - (3 * w * 0), dir: dirSwich(trains.way[0].dir) }, opacity: 0})
+      arrWagons.push({ next: 1, err:false, pos: { x: paths[0].x - (3 * w * 1), y: paths[0].y - (3 * w * 0), dir: dirSwich(trains.way[0].dir) }, opacity: 0, type: trains?.record?.train?.typeTrain})
     }
     return arrWagons;
   }
@@ -231,7 +231,7 @@ function TrainsController({ trains = [], timer = 0, mtrx = [],setErr }) {
     return Math.sqrt(Math.pow(c.x - n.x, 2) + Math.pow(c.y - n.y, 2));
   }
   function newPoint(c, n, dist, st) {
-    return { x: c.x + (((n.x - c.x) * st) / dist), y: c.y + (((n.y - c.y) * st) / dist), dir: c.dir + (((n.dir - c.dir) * st) / dist) };
+    return { x: c.x + (((n.x - c.x) * st) / dist), y: c.y + (((n.y - c.y) * st) / dist), dir: n.dir };
   }
 
 

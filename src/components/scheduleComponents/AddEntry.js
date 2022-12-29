@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import '../../pagesStyle/AddEntry.css';
 
@@ -12,9 +13,23 @@ function AddEntry({ inOut, platforms, trains, id, addSchedule, active, setActive
     const [planeIndex, setPlaneIndex] = useState(0);
 
     const type = ['Пассаж.', 'Груз.', 'Электричка'];
-    const [entry, setEntry] = useState({ plate: platforms[0].number, plateLine: platforms[0].lines[lineIndex], arrivalTime: "00:00", departureTime: "00:00", in: inOut[0], out: inOut[0], typeTrain: type[0] });
-
-    const sity = [{ city: "Самара" }, { city: "Москва" }, { city: "Санкт-Петербург" }, { city: "Оренбург" },]
+    const [entry, setEntry] = useState({ plate: platforms[0].number, plateLine: platforms[0].lines[lineIndex], train: trains[0], arrivalTime: "00:00", departureTime: "00:00", in: inOut[0], out: inOut[0] });
+    const [sity, setSity] = useState([]);
+    const [loadingSity, setSityLoading] = useState(true);
+    useEffect(()=>{
+        setSityLoading(true);
+        axios.get('http://localhost:8080/api/city')
+        .then(function (response) {
+            setSity(response.data);
+            console.log(response);
+            setSityLoading(false);
+        })
+        .catch(function (error) {
+            setSity([{ cityName: "Самара" }, { cityName: "Москва" }, { cityName: "Санкт-Петербург" }, { cityName: "Оренбург" },]);
+            console.log(error);
+            setSityLoading(false);
+        });
+    },[])
     const sitys = []
 
     const [city, setCity] = useState(''); //значение инпута город отправления
@@ -143,7 +158,7 @@ function AddEntry({ inOut, platforms, trains, id, addSchedule, active, setActive
 
 
     for (let i = 0; i < sity.length; i++) {
-        sitys.push(<option key={i}>{sity[i].city}</option>)
+        sitys.push(<option key={i}>{sity[i].cityName}</option>)
     }
 
     let flag = true;
@@ -220,7 +235,7 @@ function AddEntry({ inOut, platforms, trains, id, addSchedule, active, setActive
                             </label>
                             <br />
                             <label>Выберите поезд
-                                <select className="addsep" onChange={(e) => { setEntry({ ...entry, trainName: trains[e.target.value].nameTrain }) }}>
+                                <select className="addsep" onChange={(e) => { setEntry({ ...entry, train: trains[e.target.value].nameTrain }) }}>
                                     {trains?.map((pl, index) => {
                                         return <option key={index} value={index}>{`№${pl.nameTrain} ${pl.typeTrain}`}</option>
                                     })}

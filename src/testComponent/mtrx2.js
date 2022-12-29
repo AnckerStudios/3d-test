@@ -4092,7 +4092,7 @@ export function rec(){
                     "y": 18,
                     "number": 0
                 },
-                "train": {idTrain: 56, nameTrain:"333", typeTrain:"Грузовой", numberOfWagons:10},
+                "train": {idTrain: 56, nameTrain:"333", typeTrain:"Пасажирский", numberOfWagons:10},
                 "arrivalTime": "04:50:00",
                 "departureTime": "05:00:00",
                 "departureCity": {cityName: "Самара"},

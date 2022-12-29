@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import Manul from "./pages/Manul";
 import HomeAdminPage from "./pages/HomeAdminPage";
-import HomeModerPage from "./pages/HomeModerPage";
+
 import LoginPage from "./pages/LoginPage";
 import ListManagerPage from "./pages/ListManagerPage";
 import ScheduleEditorPage from "./pages/ScheduleEditorPage";
@@ -14,30 +14,45 @@ import CreateTopologyPage from "./pages/CreateTopologyPage";
 import TopologyEditorPage from "./pages/TopologyEditorPage";
 import TrainsPage from "./pages/TrainsPage";
 import CitysPage from "./pages/CitysPage";
+
 import CitysModerPageT from "./pages/CitysModerPageT";
 import ManulModerPageT from "./pages/ManulModerPageT";
 import About from "./pages/About";
 import AboutProgram from "./pages/AboutProgram";
+
 import { useEffect, useState } from "react";
 import authHeader from "./services/auth-header";
 import axios from "axios";
 import AuthService from "./services/auth.service";
 import { useNavigate } from "react-router-dom";
+import authService from "./services/auth.service";
 
 function App() {
-  const [role, setRole] = useState();
-  const navigate = useNavigate();
   
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!localStorage.getItem("user")) {
+      navigate("/");
+    } else {
+      
+    }
+  },[]);
+
 
   return (
+    <>
+
     <Routes>
       <Route path="/" element={<About />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/aboutprogram" element={<AboutProgram />} />
       <Route path="/list-manager" element={<ListManagerPage />} />
-      {role === "ADMIN" ? <Route path="/home" element={<HomeAdminPage />} /> : <Route path="/home" element={<HomeModerPage />} />}
-      <Route path="/cityM" element={<CitysModerPageT />} />
-      <Route path="/cityM/:name" element={<ManulModerPageT />} />
+      
+      <Route path="/home" element={<HomeAdminPage />} />
+  
+
       
       <Route path="/schedule" element={<SchedulePage />} />
 
@@ -68,8 +83,9 @@ function App() {
       <Route path="/city" element={<CitysPage />} />
       <Route path="/city/:name" element={<Manul />} />
 
-      <Route path="/modeling-list" element={<ModelingListPage />} />
+      <Route path="/modeling/:id/:name" element={<ModelingListPage />} />
     </Routes>
+    </>
   );
 }
 

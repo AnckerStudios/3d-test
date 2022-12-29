@@ -50,7 +50,7 @@ function ScheduleList({id}) {
             copy.splice(index,1)
             setSchedules(copy);
             console.log(error);
-        });
+        }); 
     }
     const next = () => {
         if (currentIndex < (length - 1)) {
@@ -64,7 +64,6 @@ function ScheduleList({id}) {
         }
     }
     return (
-
         <div className=" w-full relative">
             <div className=" w-full flex overflow-hidden">
                 {loading ? <div>Loading...</div>:
