@@ -2,28 +2,28 @@
 	border: 1px solid #eee;
     vertical-align: bottom;
     max-width: 700px;
+    max-height: 700px;
     width: 750px;
-
-    
-
+    margin: 20px;
 }
 .table2 th{
 	background: rgba(255, 244, 255, 0.808);
 	border: 1px solid #dddddd;
     padding: 8px;
+    font-size: 10px;
     
 }
 .table2 th+th+th+th{
-	padding: 10px 20px;
+	padding: 7px 5px;
 }
 
 
 .table2 td {
-	padding: 10px;
+	padding: 5px;
 	border: 1px solid rgb(222, 180, 226);
     text-align: center;
-    height: 20px;
-    font-size: 15px;
+    height: 30px;
+    font-size: 12px;
 }
 .table2 caption{
     text-align: left;
@@ -41,8 +41,6 @@
 .divsep{
     display: flex;
     flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: center;
     height: 100vh;
     width: 100%;
     background-color: rgb(234, 211, 255);
@@ -51,21 +49,25 @@
 
 
 .formsep{
-
-    width: 500px;
-    height: 530px;
-    padding-left: 60px;
+    max-height: 100vh;
+    width: 420px;
+    height: fit-content;
+    padding-left: 25px;
     padding-right: 30px;
-    margin: 50px;
+    margin-top: 10px;
     border-radius: 10px;
-    background-color: rgba(116, 91, 139, 0.33);
+    color: #36022f;
+    background-color: rgba(211, 179, 241, 0.982);
     font-size: 17px;
+
 }
 .formsep legend{
     position: relative;
     top: -45px;
-    left: -25px;
+    left: 50px;
     font-size: 30px;
+    font-weight: 500;
+    color: #f9f9f9;
 }
 .formsep label{
     position: relative;
@@ -74,6 +76,7 @@
 #firstlab{
     position: relative;
 }
+
 .addsep{
     width: 160px;
     display: flex;
@@ -134,12 +137,15 @@
     left: 30%;
 }
 .centr:hover{
-    color:rgba(255, 244, 255, 0.808);
+    color:rgb(251, 247, 251);
     
 }
 .centr:active{
     color:rgba(35, 24, 35, 0.808);
     
+}
+.centr:disabled{
+    color: #d02436;
 }
 .ex{
     font-size: 300%;
@@ -148,4 +154,9 @@
 }
 .ex:active{
     color:rgb(213, 184, 184);
+}
+.eradd{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
 }
