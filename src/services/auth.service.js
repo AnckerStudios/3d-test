@@ -40,6 +40,6 @@ class AuthService {
   
 }
 export function getCurRole() {
-  return JSON.parse(localStorage.getItem('role')) === "ROLE_ADMIN";
+  return localStorage.getItem('role') === "ROLE_ADMIN";
 }
 export default new AuthService();

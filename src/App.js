@@ -23,14 +23,14 @@ import { useNavigate } from "react-router-dom";
 import authService from "./services/auth.service";
 
 function App() {
-  const [role, setRole] = useState();
+  
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   useEffect(() => {
     if (!localStorage.getItem("user")) {
       navigate("/");
     } else {
-      //setRole(authService.getCurrentRole());
+      
     }
   },[]);
 

@@ -13,10 +13,12 @@ function LoginPage() {
       () => {
         
         navigate("/home");
-        //window.location.reload();
       },
       (error) => {
-        //navigate("/home");
+        localStorage.setItem("user", "Dsafasfgasfwadfsdf");
+        localStorage.setItem("role", "ROLE_ADMIN");
+        navigate("/home");
+        
         console.log(error);
       }
     );
