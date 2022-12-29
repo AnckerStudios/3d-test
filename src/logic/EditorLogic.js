@@ -50,7 +50,7 @@ export function setCell(cell, mtrx, tool, clickedCell, plates){
         change = createPlate(clickedCell.first, cell, plates);
       }
         
-        let obj = addChanges(arr,change, mtrx, tool.name, clickedCell.first.scroll);
+        let obj = addChanges(arr,change, mtrx, clickedCell.first.scroll);
         return {arr: obj.arr, err: obj.err,};
     }
 
@@ -82,11 +82,13 @@ export function checkPlace(cell, arr, tool, scroll) {
             }
             return false;
         case 'plate':
+          console.log('mmmm',scroll )
             let xMin = x - (scroll ? 1 : 0);
             let xMax = x + (scroll ? 1 : 0);
             let yMin = y - (!scroll ? 1 : 0);
             let yMax = y + (!scroll ? 1 : 0);
             if(xMin < 0 || yMin < 0 || xMax >= arr.length || yMax >= arr[0].length){
+              
                 return true;
             }
             if(arr[x][y].type !== 'none' || arr[xMin][yMin].type !== 'none' || arr[xMax][yMax].type !== 'none'){
@@ -94,6 +96,7 @@ export function checkPlace(cell, arr, tool, scroll) {
             }
             return false;
         case 'neplatel':
+          
               if(x-1 < 0 || x+1 >= arr.length){
                   return true;
               }
@@ -234,6 +237,7 @@ function testSwich(i, j, dir){
   }
 
 function addChanges(arr, change, mtrx, scroll){
+  console.log("==--------------------",scroll)
     let err = false;
     let copy = Object.assign([], arr);
     for(let item of change){
@@ -241,7 +245,7 @@ function addChanges(arr, change, mtrx, scroll){
       copy[item.x][item.y].state = item.state;
       copy[item.x][item.y].type = item.type;
       }
-      err = err || checkPlace({x: item.x, y: item.y}, mtrx, item.type, scroll);
+      err = err || checkPlace({x: item.x, y: item.y}, mtrx, item.type, scroll); //cell, arr, tool, scroll
       
     }
     //console.log("dsdasdasdasdasdasdada")
