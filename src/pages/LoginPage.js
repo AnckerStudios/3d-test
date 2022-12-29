@@ -2,6 +2,7 @@ import "../pagesStyle/HomePage.css";
 import React, { useState } from "react";
 import AuthService from "../services/auth.service";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function LoginPage() {
   const [err, setErr] = useState(false);
@@ -11,20 +12,21 @@ function LoginPage() {
   // const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QG1haWwucnUiLCJleHAiOjE2NzU4NTg3NjJ9.bXfQhicCjcLBK3cGB9Xa2D2F4yiqtZ0cKXP8bQPy8Lv8r4-aBdgJHDl0sJQr9Jb32pAYclv7r849jmygTmnAyA';
   function handleLogin() {
     console.log(login, password);
-    AuthService.login(login, password).then(
-      () => {
-        
-        navigate("/home");
-      },
-      (error) => {
+    axios.post("http://localhost:8080/api/services/controller/user/login", {
+      email: login,
+      password: password
+    })
+      .then(function (response) {
+        if (response.data.token && response.data.role) {
+          localStorage.setItem("user", JSON.stringify(response.data));
+          localStorage.setItem("role", response.data.role);
+          navigate("/home");
+        }
+      })
+      .catch(function (error) {
         setErr(error.data);
-        // localStorage.setItem("user", "Dsafasfgasfwadfsdf");
-        // localStorage.setItem("role", "ROLE_ADMIN");
-        // navigate("/home");
-        
         console.log(error);
-      }
-    );
+      });
   }
 
   return (
@@ -62,7 +64,7 @@ function LoginPage() {
         </button>
         {err && <div>Ошибка:{err}</div>}
       </div>
-      
+
     </div>
   );
 }

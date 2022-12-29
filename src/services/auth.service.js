@@ -1,7 +1,8 @@
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const API_URL = "http://localhost:8080/api/services/controller/user/";
-
+const navigate = useNavigate();
 class AuthService {
   login(email, password) {
     return axios
@@ -9,15 +10,19 @@ class AuthService {
         email: email,
         password: password
       })
-      .then(response => {
+      .then(function (response) {
         if (response.data.token && response.data.role) {
           localStorage.setItem("user", JSON.stringify(response.data));
           localStorage.setItem("role", response.data.role);
+          navigate("/home");
         }
-        
+        })
+        .catch(function (error) {
+            setCitys([{cityName:"testCity", countTopology: 2},{cityName:"testCity 2", countTopology: 5}]);
+            setLoading(false);
+            console.log(error);
+        });
 
-        return response.data;
-      });
   }
 
   logout() {
