@@ -16,7 +16,7 @@ function ListManagerPage() {
             setLoading(false);
         })
         .catch(function (error) {
-            setModer([{id: 1, name: "Kolya", email: "hhh@gmail.com", role: "MODER"},{id: 1, name: "Kolya", email: "hhh@gmail.com", role: "MODER"},{id: 1, name: "Kolya", email: "hhh@gmail.com", role: "MODER"}]);
+            setModer([{id: 1, name: "ы", email: "hhh@gmail.com", role: "MODER"},{id: 1, name: "Kolya", email: "hhh@gmail.com", role: "MODER"},{id: 1, name: "лох", email: "hhh@gmail.com", role: "MODER"}]);
             console.log(error);
             setLoading(false);
         });
@@ -24,9 +24,9 @@ function ListManagerPage() {
 
     function del(index){
 
-        axios.delete('http://localhost:8080/api/schedule', {
+        axios.delete('http://localhost:8080/api/services/controller/user', {
             params: {
-              //idTopology: id,
+              idAccount: moder[index].idAccount,
               
             }
         })
@@ -66,7 +66,7 @@ function ListManagerPage() {
         items.push(<tr>
             <td>{i + 1}</td>
             <td>{moder[i].name}</td>
-            <td>{moder[i].email}</td>
+            <td ><div className=' flex justify-around items-center'> <div>{moder[i].email}</div><button className=' px-2 bg-pink-300 rounded-xl shadow-xl hover:bg-red-500' onClick={()=>del(i)}>X</button></div></td>
         
         </tr>)
     }

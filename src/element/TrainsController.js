@@ -231,7 +231,7 @@ function TrainsController({ trains = [], timer = 0, mtrx = [],setErr }) {
     return Math.sqrt(Math.pow(c.x - n.x, 2) + Math.pow(c.y - n.y, 2));
   }
   function newPoint(c, n, dist, st) {
-    return { x: c.x + (((n.x - c.x) * st) / dist), y: c.y + (((n.y - c.y) * st) / dist), dir: c.dir + (((n.dir - c.dir) * st) / dist) };
+    return { x: c.x + (((n.x - c.x) * st) / dist), y: c.y + (((n.y - c.y) * st) / dist), dir: n.dir };
   }
 
 
