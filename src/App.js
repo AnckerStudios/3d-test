@@ -16,6 +16,8 @@ import TrainsPage from "./pages/TrainsPage";
 import CitysPage from "./pages/CitysPage";
 import CitysModerPageT from "./pages/CitysModerPageT";
 import ManulModerPageT from "./pages/ManulModerPageT";
+import About from "./pages/About";
+import AboutProgram from "./pages/AboutProgram";
 import { useEffect, useState } from "react";
 import authHeader from "./services/auth-header";
 import axios from "axios";
@@ -25,34 +27,13 @@ import { useNavigate } from "react-router-dom";
 function App() {
   const [role, setRole] = useState();
   const navigate = useNavigate();
-  useEffect(() => {
-    if (!localStorage.getItem("user")) {
-      //setRole("ADMIN");
-      //navigate("/");
-
-    } else {
-      console.log("token", authHeader());
-      console.log("netoken", AuthService.getCurrentUser());
-      axios
-        .get("http://localhost:8080/api/services/controller/user/getUser", {
-          headers: authHeader(),
-          params: { email: AuthService.getCurrentUser().email },
-        })
-        .then(function (response) {
-          setRole(response.data.role);
-          console.log("res", response);
-          console.log("role", setRole);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    }
-  },[]);
+  
 
   return (
     <Routes>
-      <Route path="/" element={<LoginPage />} />
+      <Route path="/" element={<About />} />
       <Route path="/login" element={<LoginPage />} />
+      <Route path="/aboutprogram" element={<AboutProgram />} />
       <Route path="/list-manager" element={<ListManagerPage />} />
       {role === "ADMIN" ? <Route path="/home" element={<HomeAdminPage />} /> : <Route path="/home" element={<HomeModerPage />} />}
       <Route path="/cityM" element={<CitysModerPageT />} />
