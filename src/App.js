@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import Manul from "./pages/Manul";
 import HomeAdminPage from "./pages/HomeAdminPage";
+import HomeModerPage from "./pages/HomeModerPage";
 import LoginPage from "./pages/LoginPage";
 import ListManagerPage from "./pages/ListManagerPage";
 import ScheduleEditorPage from "./pages/ScheduleEditorPage";
@@ -23,8 +24,10 @@ function App() {
   const [role, setRole] = useState();
   const navigate = useNavigate();
   useEffect(() => {
-    if (localStorage.getItem("user") == null) {
-      return (<Route path="/" element={<LoginPage />} />)
+    if (!localStorage.getItem("user")) {
+      setRole("ADMIN");
+      //navigate("/");
+
     } else {
       console.log("token", authHeader());
       console.log("netoken", AuthService.getCurrentUser());
@@ -42,14 +45,15 @@ function App() {
           console.log(error);
         });
     }
-  });
+  },[]);
 
   return (
     <Routes>
       <Route path="/" element={<LoginPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/list-manager" element={<ListManagerPage />} />
-      <Route path="/home" element={<HomeAdminPage />} />
+      {role === "ADMIN" ? <Route path="/home" element={<HomeAdminPage />} /> : <Route path="/home" element={<HomeModerPage />} />}
+      
       <Route path="/schedule" element={<SchedulePage />} />
 
       <Route

@@ -14,7 +14,6 @@ function Plate({ arr = [], color = 'white'}) {
             console.log("plate",item)
             testArr.push(
                 <>
-                <Text opacity={1} position={[item.x,item.y, 1]} color='black'>{item.number}</Text>
                 <mesh
                 position={[item.x,item.y,0]}
                 rotation={[0,0,item.rot.z]}

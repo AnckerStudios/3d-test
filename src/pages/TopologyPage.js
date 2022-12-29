@@ -28,15 +28,15 @@ function TopologyPage() {
                     </h4>
                 </div>
                 <div className=" w-full flex flex-col md:flex-row gap-y-2 md:gap-y-0 gap-x-4 p-2">
-                    <div className=" bg-slate-300 rounded-xl h-96 w-full"></div>
-                    <div className=" bg-slate-300 rounded-xl h-96 w-full  md:w-1/3 flex flex-col justify-between">
-                        <div className="m-2 ">
-                            Enim et commodo culpa aliqua ullamco sit ut duis occaecat. Ex aliqua reprehenderit anim quis veniam mollit eiusmod incididunt aliqua commodo mollit voluptate ut. Nulla do sit commodo commodo. Irure id dolore ipsum id consectetur ex nulla nisi culpa voluptate quis consequat enim.                             
-                        </div>
+                    <div className=" bg-slate-300 rounded-xl h-96 w-full flex items-center justify-center">
 
-                            <Link className=" border hover:bg-white rounded-xl  m-2 flex justify-center" to={`/topology-editor/${id}/${name}`}>button</Link>
-                        
+                    <Link className=" border bg-slate-200 hover:bg-slate-400 rounded-xl  p-2 flex justify-center" to={`/topology-editor/${id}/${name}`}>Редактировать</Link>
                     </div>
+
+                    
+                            
+                        
+                 
             
             
                 </div>
