@@ -1,18 +1,11 @@
-/* html{
-    font-size: 25px;
-    font-family: "Montserrat";
-    font-weight: medium;
-} */
 .buttonam{
-    background-color:rgb(211 115 33);
+    background-color:#2f4371;
     width: 400px;
     height: 54px;
     border-radius: 5px;
     font-size: 20px;
     font-weight: medium;
     color:azure;
-    position: relative;
-    left:15%;
     }
 .buttonam:hover{
     border-width: 3px;
@@ -24,10 +17,9 @@
 }
 .buttonam:active {
     top:1px;
-    background:#f5d496;
-    box-shadow:1px 1px 2px rgba(0,0,0,0.4) inset;
-    border-color: rgb(243, 154, 10);
-    color: rgb(243, 154, 10);
+    background:#afa5ff;
+    border-color: #020221;
+    color: #0e1d03;
    }
 .txtadmin{
     font-size: 500%;
@@ -35,17 +27,16 @@
 
 }
 .div2{
-
     display: flex;
     flex-direction: column;
-    position: absolute;
-    top: 20%;
-    color:#5c3f0d;
+    justify-content: center;
+    text-align: center;
 }
 .divbig{
     height: 100vh;
     width: 100vw;
-    background-color: #f7e6c8;
+    background-color: #e6f1f5;
+    color: #002a3f;
     display: flex;
     justify-content: center;
 

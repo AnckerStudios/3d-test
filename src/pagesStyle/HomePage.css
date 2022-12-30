@@ -1,15 +1,16 @@
 .divhome{
     height: 100vh;
     width: 100vw;
-    background-color: #f0f9e0;
-    color: #132b02;
+    background-color: #e6f1f5;
+    color: #002a3f;
     display: flex;
     flex-direction: row;
     justify-content: center;
+    text-align: center;
     
 }
 .but{
-    background-color:#5e9400;
+    background-color:#2f4371;
     width: 350px;
     height: 50px;
     margin-top: 30px;
@@ -27,8 +28,8 @@
     outline-color: #4b4a49;
 }
 .but:active {
-    background:#dcf9aa;
-    border-color: #2c4618;
+    background:#afa5ff;
+    border-color: #020221;
     color: #0e1d03;
 }
 .in{

@@ -76,8 +76,8 @@ function ScheduleList({id}) {
                 
                 
             </div> 
-            <button className=" absolute z-10 w-16 h-16 top-12 -left-8 bg-slate-200 hover:bg-orange-300 shadow-lg rounded-full" onClick={prev}>prev</button>
-            <button className=" absolute z-10 w-16 h-16 top-12 -right-8 bg-slate-200 hover:bg-orange-300 shadow-lg rounded-full" onClick={next}>next</button>
+            <button className=" absolute z-10 w-16 h-16 top-12 -left-8 bg-blue-200 hover:bg-orange-300 shadow-lg rounded-full" onClick={prev}>prev</button>
+            <button className=" absolute z-10 w-16 h-16 top-12 -right-8 bg-blue-200 hover:bg-orange-300 shadow-lg rounded-full" onClick={next}>next</button>
         </div>
 
     );

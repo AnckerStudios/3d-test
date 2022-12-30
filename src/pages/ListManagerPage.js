@@ -66,7 +66,7 @@ function ListManagerPage() {
         items.push(<tr>
             <td>{i + 1}</td>
             <td>{moder[i].name}</td>
-            <td ><div className=' flex justify-around items-center'> <div>{moder[i].email}</div><button className=' px-2 bg-pink-300 rounded-xl shadow-xl hover:bg-red-500' onClick={()=>del(i)}>X</button></div></td>
+            <td ><div className=' flex justify-around items-center'> <div>{moder[i].email}</div><button className=' px-2 bg-blue-300 rounded-xl shadow-xl hover:bg-red-500' onClick={()=>del(i)}>X</button></div></td>
         
         </tr>)
     }

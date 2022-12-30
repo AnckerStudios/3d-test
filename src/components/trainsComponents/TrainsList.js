@@ -64,13 +64,13 @@ function TrainsList() {
     }
 
     return (
-        <div className=" bg-orange-300 rounded-xl max-h-full relative overflow-auto">
+        <div className=" bg-blue-200 rounded-xl max-h-full relative overflow-auto">
             <div className=" flex justify-around p-1 px-5 w-full">
                 <div className="  w-1/4 font-bold text-lg  flex items-center justify-center">Номер</div>
-                <div className=" w-1/4 font-bold text-lg text-orange-900 flex items-center justify-center">Тип</div>
+                <div className=" w-1/4 font-bold text-lg text-slate-900 flex items-center justify-center">Тип</div>
                 <div className=" w-1/4 font-bold text-lg text-slate-900 flex items-center justify-center">Вагонов</div>
                 <div className=" w-1/6 flex justify-center">
-                <button onClick={()=> {setAddFlag(true); setAddErr({flag: false, mes: ""})}} className=" font-bold text-lg rounded-xl bg-orange-900 px-2  text-orange-200">+</button>
+                <button onClick={()=> {setAddFlag(true); setAddErr({flag: false, mes: ""})}} className=" font-bold text-lg rounded-xl bg-blue-900 px-2  text-white">+</button>
                 </div>
                 
             </div>

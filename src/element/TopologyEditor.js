@@ -52,14 +52,14 @@ function TopologyEditor({mtrx=[], setMtrx, saveFunk}) {
   }
   return (
     <div className="w-full h-screen flex p-4">
-        <div className=" w-full h-full rounded-xl bg-slate-300 shadow-md relative">
+        <div className=" w-full h-full rounded-xl bg-blue-200 shadow-md relative">
             <Editor mtrx={mtrx} setMtrx={setMtrx} view={view} tool={tool} flag= {flag}/>
             <ToolList setTool={setTool}/>
             <ViewSwitcher setView={setView}/>
-            <button className=" w-24 h-15 absolute  rounded-xl bottom-4 right-4 bg-slate-200 flex shadow-md justify-center font-bold p-1 hover:bg-slate-400" onClick={() => saveFunk()}>
+            <button className=" w-24 h-15 absolute  rounded-xl bottom-4 right-4 bg-blue-400 flex shadow-md justify-center font-bold p-1 hover:bg-blue-600" onClick={() => saveFunk()}>
                 Save
             </button>
-            <button className=" w-24 h-15 absolute  rounded-xl bottom-24 right-4 bg-slate-200 flex shadow-md justify-center font-bold p-1 hover:bg-slate-400" onClick={() => clear()}>
+            <button className=" w-24 h-15 absolute  rounded-xl bottom-24 right-4 bg-blue-400 flex shadow-md justify-center font-bold p-1 hover:bg-blue-600" onClick={() => clear()}>
                 x
             </button>
 
