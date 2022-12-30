@@ -35,7 +35,11 @@ function ScheduleTable({id,date,setSchedule, schedule, isCreate}) {
     }
   }, [])
 
-
+  function del(index){
+    let copy = Object.assign([], schedule);
+    copy.splice(index,1)
+    setSchedule(copy);
+}
 
   return (
     <>
@@ -64,7 +68,7 @@ function ScheduleTable({id,date,setSchedule, schedule, isCreate}) {
                   <td className=" text-center">{sch?.arrivalTime}</td>
                   <td className=" text-center">{sch?.departureTime}</td>
                   <td className=" text-center">{sch?.departureCity}-{sch?.arrivalCity}</td>
-                  <td className=" text-center">{sch?.train?.typeTrain}</td>
+                  <td className=" text-center"> <div className=' flex justify-around items-center'> <div>{sch?.train?.typeTrain}</div><button className=' px-2 bg-pink-300 rounded-xl shadow-xl hover:bg-red-500' onClick={()=>del(index)}>X</button></div></td>
                 </tr>
               })}
 

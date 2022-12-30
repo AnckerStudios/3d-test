@@ -41,7 +41,7 @@ function App() {
 
   return (
     <>
-    <Link className=" absolute top-4 right-4" to="/home">Home</Link>
+    <Link className=" absolute top-4 right-4 z-50" to="/home">Home</Link>
     <Routes>
       <Route path="/" element={<About />} />
       <Route path="/login" element={<LoginPage />} />

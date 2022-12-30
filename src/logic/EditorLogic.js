@@ -29,7 +29,9 @@ export function cellFree(cell, mtrx, tool, plates) {
           arr[cell.x][cell.y].type = tool.name;
           arr[cell.x][cell.y].state = {light: true};
           return {arr: arr, err: err};
-
+        case 'eraser':
+          arr[cell.x][cell.y].type = tool.name;
+          return {arr: arr, err: err};
         default:
             return {arr: arr, err: err};
     }

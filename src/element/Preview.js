@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Cell from "./Cell";
+import Eraser from "./RailsTypes/Eraser";
 import Light from "./RailsTypes/Light";
 import Plate from "./RailsTypes/Plate";
 
@@ -17,6 +18,7 @@ function Preview({ mtrx = [], objSet = { x: 16, y: 16 }, prev = true, err = fals
     const [changesTypeR, setChangesTypeR] = useState([]);
     const [changesPlate, setChangesPlate] = useState([]);
     const [changesLight, setChangesLight] = useState([]);
+    const [changesEraser, setChangesEraser] = useState([]);
 
 
     useEffect(() => {
@@ -25,6 +27,7 @@ function Preview({ mtrx = [], objSet = { x: 16, y: 16 }, prev = true, err = fals
         let changesR = [];
         let changesP = [];
         let chanLight = [];
+        let chanEr = [];
         for (let row of mtrx) {
             for (let item of row) {
                 if (item.type === 'plate') {
@@ -38,7 +41,9 @@ function Preview({ mtrx = [], objSet = { x: 16, y: 16 }, prev = true, err = fals
                     changesP.push({ x: item.x, y: item.y, rot: { x: 0, y: 0, z: Math.PI / 2 }});
                 }else if(item.type === 'neplatel'){
                     changesP.push({ x: item.x, y: item.y, rot: { x: 0, y: 0, z: 0 }});
-                } else if (item.type === 'rail') {
+                } else if(item.type === 'eraser'){
+                    chanEr.push({ x: item.x, y: item.y});
+                }else{
                     for (let state in item.state) {
 
                         switch (state) {
@@ -104,6 +109,7 @@ function Preview({ mtrx = [], objSet = { x: 16, y: 16 }, prev = true, err = fals
         setChangesTypeR(changesR);
         setChangesPlate(changesP);
         setChangesLight(chanLight);
+        setChangesEraser(chanEr);
     }, [mtrx])
 
     return (
@@ -112,6 +118,7 @@ function Preview({ mtrx = [], objSet = { x: 16, y: 16 }, prev = true, err = fals
             <RailR arr={changesTypeR} count={objSet.x * objSet.y * (prev ? 1 : 8)} color={prev ? (err ? 'red' : 'lime') : 'white'} prev={prev} />
             <Plate arr={changesPlate} color={prev ? (err ? 'red' : 'lime') : 'white'} prev={prev} />
             <Light arr={changesLight} color={prev ? (err ? 'red' : 'lime') : 'white'} prev={prev} />
+            <Eraser arr={changesEraser} prev={true} />
             <RailD arr={changesTypeD} count={objSet.x * objSet.y * (prev ? 1 : 2)} color={prev ? (err ? 'red' : 'lime') : 'white'} prev={prev} />
         </>
     );
