@@ -19,7 +19,7 @@ function TrainsListItem({ train, del, index }) {
         <div className="  w-1/4 font-bold text-2xl  flex items-center justify-center">
           {train?.nameTrain}
         </div>
-        <div className=" w-3/4 font-bold text-2xl text-orange-900 flex items-center justify-center">
+        <div className=" w-3/4 font-bold text-2xl text-blue-900 flex items-center justify-center">
           {train?.typeTrain}
         </div>
         <div className=" w-1/4 font-bold text-2xl text-slate-900 flex items-center justify-center">

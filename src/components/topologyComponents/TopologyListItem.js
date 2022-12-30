@@ -8,7 +8,7 @@ import { getCurRole } from "../../services/auth.service";
 function TopologyListItem({topol, del, index}) {
     return (
         <div className=" h-64 w-64 flex relative ">
-            <Link className=" bg-slate-300 rounded-xl flex justify-center font-bold items-center hover:bg-orange-300 w-full h-full shadow-lg text-center relative snap-start " to={`/${getCurRole() ? 'topology' : 'modeling'}/${topol?.idTopology}/${topol?.topologyName}`}>
+            <Link className=" bg-blue-200 rounded-xl flex justify-center font-bold items-center hover:bg-orange-300 w-full h-full shadow-lg text-center relative snap-start " to={`/${getCurRole() ? 'topology' : 'modeling'}/${topol?.idTopology}/${topol?.topologyName}`}>
                 {topol?.topologyName}
             </Link>
             <div className=" absolute bottom-1 right-3 flex items-center gap-3 ">

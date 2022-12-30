@@ -2,7 +2,7 @@
     width: 100vW;
     height: 100vh;
     display: flex;
-    background-color: rgb(245, 253, 254);
+    background-color: #e6f1f5;
     color: rgb(2, 12, 52);
     flex-direction: row;
     justify-content: end;
