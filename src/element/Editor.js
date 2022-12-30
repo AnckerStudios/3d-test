@@ -97,38 +97,24 @@ function Editor({mtrx=[],setMtrx, view=true, tool='cursor', flag}) {
     if(sel.x >= 0 && sel.y >= 0 && sel.x < mtrx.length && sel.y < mtrx[0].length){
       if(copy[sel.x][sel.y].type === 'plate'){
         console.log("copy[sel.x][sel.y].state.dir",copy[sel.x][sel.y].state.dir)
-        let i = 1;
-        while(!copy[sel.x][sel.y].state.dir ? sel.x - i*3 >= 0 && copy[sel.x - i*3][sel.y].type !== 'plate' : sel.y - i*3 >= 0 && copy[sel.x][sel.y - i*3].type !== 'plate'){
-          !copy[sel.x][sel.y].state.dir ? copy[sel.x-i*3][sel.y].type = "none" : copy[sel.x][sel.y-i*3].type = "none";
-          copy[sel.x][sel.y].state = {};
-        if(!copy[sel.x][sel.y].state.dir ? sel.x-i*3-1 >= 0 : sel.y-i*3-1 >= 0){
-          !copy[sel.x][sel.y].state.dir ? copy[sel.x-i*3-1][sel.y].type = "none" : copy[sel.x][sel.y-i*3-1].type = "none";
-        }
-        if(!copy[sel.x][sel.y].state.dir ? sel.x-i*3+1 < mtrx.length : sel.y-i*3+1 < mtrx[0].length){
-          !copy[sel.x][sel.y].state.dir ? copy[sel.x-i*3+1][sel.y].type = "none" : copy[sel.x][sel.y-i*3+1].type = "none";
-        }
-        i++;
-        }
-        i = 1;
-        while(!copy[sel.x][sel.y].state.dir ? sel.x + i*3 < mtrx.length &&  copy[sel.x + i*3][sel.y].type !== 'plate' : sel.y + i*3 < mtrx[0].length && copy[sel.x][sel.y + i*3].type !== 'plate'){
-          copy[sel.x][sel.y].type = "none";
-          copy[sel.x][sel.y].state = {};
-        if(!copy[sel.x][sel.y].state.dir ? sel.x+i*3-1 >= 0 : sel.y+i*3-1 >= 0){
-          !copy[sel.x][sel.y].state.dir ? copy[sel.x+i*3-1][sel.y].type = "none" : copy[sel.x][sel.y+i*3-1].type = "none";
-        }
-        if(!copy[sel.x][sel.y].state.dir ? sel.x+i*3+1 < mtrx.length : sel.y+i*3+1 < mtrx[0].length){
-          !copy[sel.x][sel.y].state.dir ? copy[sel.x+i*3+1][sel.y].type = "none" : copy[sel.x][sel.y+i*3+1].type = "none";
-        }
-        i++;
-        }
         copy[sel.x][sel.y].type = "none";
         copy[sel.x][sel.y].state = {};
-        if(!copy[sel.x][sel.y].state.dir ? sel.x-1 >= 0 : sel.y-1 >= 0){
-          !copy[sel.x][sel.y].state.dir ? copy[sel.x-1][sel.y].type = "none" : copy[sel.x][sel.y-1].type = "none";
+        if(!copy[sel.x][sel.y].state.dir){
+          if(sel.x-1 >= 0){
+            copy[sel.x-1][sel.y].type = "none";
+          }
+          if( sel.x+1 < mtrx.length){
+            copy[sel.x+1][sel.y].type = "none";
+          }
+        }else{
+          if(sel.y-1 >= 0){
+            copy[sel.x][sel.y-1].type = "none";
+          }
+          if( sel.y+1 < mtrx.length){
+            copy[sel.x][sel.y+1].type = "none";
+          }
         }
-        if(!copy[sel.x][sel.y].state.dir ? sel.x+1 < mtrx.length : sel.y+1 < mtrx[0].length){
-          !copy[sel.x][sel.y].state.dir ? copy[sel.x+1][sel.y].type = "none" : copy[sel.x][sel.y+1].type = "none";
-        }
+        
       }else if(copy[sel.x][sel.y].type === 'neplatel'){
         copy[sel.x][sel.y].type = "none";
         copy[sel.x][sel.y].state = {};

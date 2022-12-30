@@ -24,8 +24,8 @@
 }
 .table th{
 	font-weight: bold;
-	background: #92c5d8;
-	border: 1px solid #b8e0ef;
+    background: #6da6dc;
+    border: 1px solid #badaff;
     height: 50px;
     
 }
@@ -44,10 +44,10 @@
     font-size: 30px;
 }
 .table tbody tr:nth-child(odd){
-	background: #c9ebf8;
+	background: #cdebff;
 }
 .table tbody tr:nth-child(even){
-	background: #74b6cecd;
+	background: #6da6dc
 }
 
 .Myform{

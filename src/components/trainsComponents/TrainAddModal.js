@@ -39,10 +39,11 @@ function TrainAddModal({submin, exit, addErr}) {
                 </div>
                 {addErr?.flag && <div className=" w-full p-5 font-bold text-xl flex items-center justify-center text-red-800">Ошибка создания: {addErr.mes}</div>}
                 <button className=" rounded-lg bg-blue-400 p-2 w-1/4" onClick={()=> {submin(train)}}>ok</button>
-            </div>
-            <div className=" absolute top-2 right-2 z-30" onClick={()=>exit(false)}>
+                <div className=" absolute top-2 right-2 z-30" onClick={()=>exit(false)}>
                 <img src={close} className=" w-7 h-7"></img>
             </div>
+            </div>
+            
             
         </div>
         </>

@@ -25,7 +25,9 @@ function CityList() {
         });
 
     },[])
+    function exit(){
 
+    }
     return (
         <>
         {loading ? <div>Loading...</div> :
@@ -36,7 +38,7 @@ function CityList() {
                 return <CityListItem key={index} city={city}/>
             })}
             {getCurRole() && <div className=" bg-blue-100 rounded-xl aspect-square w-3/12 flex justify-center font-bold items-center hover:bg-orange-300" onClick={()=>setAddFlag(true)}>+</div>}
-            {addFlag && getCurRole() && <CityAddModal/>}
+            {addFlag && getCurRole() && <CityAddModal exit={setAddFlag}/>}
         </div>}
         </>
     );
