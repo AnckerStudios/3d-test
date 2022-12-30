@@ -4095,8 +4095,8 @@ export function rec(){
                 "train": {idTrain: 56, nameTrain:"333", typeTrain:"Пасажирский", numberOfWagons:10},
                 "arrivalTime": "04:50:00",
                 "departureTime": "05:00:00",
-                "departureCity": {cityName: "Самара"},
-                "arrivalCity": {cityName: "Самара"},
+                "departureCity": "Самара",
+                "arrivalCity": "Самара",
                 
                 "in": {
                     "id": 340,
