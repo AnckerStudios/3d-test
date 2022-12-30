@@ -5,10 +5,11 @@
     max-height: 700px;
     width: 750px;
     margin: 20px;
+    font-weight: 500;
 }
 .table2 th{
-	background: rgba(255, 244, 255, 0.808);
-	border: 1px solid #dddddd;
+	background: #6da6dc;
+	border: 1px solid #badaff;
     padding: 8px;
     font-size: 10px;
     
@@ -20,7 +21,7 @@
 
 .table2 td {
 	padding: 5px;
-	border: 1px solid rgb(222, 180, 226);
+	border: 1px solid #60a1dd;
     text-align: center;
     height: 30px;
     font-size: 12px;
@@ -30,10 +31,10 @@
     font-size: 30px;
 }
 .table2 tbody tr:nth-child(odd){
-	background: rgba(116, 91, 139, 0.33);
+	background: #cdebff;
 }
 .table2 tbody tr:nth-child(even){
-	background: rgba(255, 244, 255, 0.808);
+	background: #6da6dc
 }
 .trtab{
     font-size: small;
@@ -43,8 +44,8 @@
     flex-direction: row;
     height: 100vh;
     width: 100%;
-    background-color: rgb(234, 211, 255);
-    color: rgb(23, 1, 44);
+    background-color: #e6f1f5;
+    color: #002a3f;;
 }
 
 .eradd{
@@ -61,8 +62,8 @@
     padding-right: 30px;
     margin-top: 10px;
     border-radius: 10px;
-    color: #36022f;
-    background-color: rgba(211, 179, 241, 0.982);
+    color: #01151f;
+    background-color:  #7cb2e5eb;
     font-size: 17px;
 
 }
@@ -72,7 +73,7 @@
     left: 50px;
     font-size: 30px;
     font-weight: 500;
-    color: #f9f9f9;
+    color:#fdfefe
 }
 .formsep label{
     position: relative;

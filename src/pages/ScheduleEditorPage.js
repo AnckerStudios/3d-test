@@ -117,17 +117,17 @@ function ScheduleEditorPage() {
                 </div>
                 
                 <div className='flex flex-grow'>
-                    <div className=" w-full h-full rounded-xl bg-slate-300 shadow-md relative">
+                    <div className=" w-full h-full rounded-xl bg-blue-100 shadow-md relative">
 
                         {loading ? <div>Loading...</div> : <TopologyView id={id} inOut={inOut} platforms={platforms} />}
                     </div>
 
 
                 </div>
-                <button className=" w-24 h-15 absolute  rounded-xl bottom-4 right-4 bg-slate-200 flex shadow-md justify-center font-bold p-1 hover:bg-slate-400" onClick={() => Save()}>
+                <button className=" w-24 h-15 absolute  rounded-xl bottom-4 right-4 bg-blue-300 flex shadow-md justify-center font-bold p-1 hover:bg-slate-400" onClick={() => Save()}>
                     save
                 </button>
-                <Link className=" w-24 h-15 absolute  rounded-xl bottom-24 right-4 bg-slate-200 flex shadow-md justify-center font-bold p-1 hover:bg-slate-400" to={`/modelirovanie/${id}/${date}`}>
+                <Link className=" w-24 h-15 absolute  rounded-xl bottom-24 right-4 bg-blue-300 flex shadow-md justify-center font-bold p-1 hover:bg-slate-400" to={`/modelirovanie/${id}/${date}`}>
                     model
                 </Link>
 
