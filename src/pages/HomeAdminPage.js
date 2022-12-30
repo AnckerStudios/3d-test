@@ -24,6 +24,10 @@ function HomeAdminPage() {
                     <button className='buttonam'>{getCurRole() ?  'Работа с топологиями' : 'Моделирование'}</button>
                 </Link>
                 <br />
+                <Link to={'/about'}>
+                    <button className='buttonam'>О программе</button>
+                </Link>
+                <br />
                 {getCurRole() && <>
                 <Link to={'/list-manager'}>
                     <button className='buttonam' >Работа со списком пользователей</button>

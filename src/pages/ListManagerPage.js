@@ -7,7 +7,7 @@ function ListManagerPage() {
     const [moder, setModer] = useState([]);
     const [loading, setLoading] = useState(true);
     const [addModer, setAddModer] = useState({id: null});
-    const [err,setErr] = useState(false);
+    const [errAdd,setErrAdd] = useState({flag: false, mes: ""});
     useEffect(()=>{
         setLoading(true);
         axios.get('http://localhost:8080/api/services/controller/user/allmod')
@@ -57,8 +57,8 @@ function ListManagerPage() {
             console.log(response);
         })
         .catch(function (error) {
-            console.log(error);
-            setErr(error.data);
+            console.log("sdadsadsada",errAdd);
+            setErrAdd({flag: true, mes: error.response.data?.message || "Неполучилось добавить"});
         });
     }
     const items = []
@@ -97,10 +97,10 @@ function ListManagerPage() {
                     <label id='login' className='lbl'>Email <input className="add" type="text" minLength="4" maxLength="50" onChange={(e)=>{setAddModer({...addModer, email: e.target.value})}}/></label>
                     <label id='password' className='lbl'>Пароль <input className="add" type="text" minLength="4" maxLength="12" onChange={(e)=>{setAddModer({...addModer, password: e.target.value})}}/></label>
                     <button className='cent' onClick={()=>{add(addModer)}}>Добавить</button>
+                    
                 </fieldset>
-                {err && <div>err</div>}
+                {errAdd.flag && <div className='lbl'>{errAdd.mes}</div>}
             </div>
-            <a href='http://localhost:3000/home' className='ex'>x</a>
         </div>
     );
 }

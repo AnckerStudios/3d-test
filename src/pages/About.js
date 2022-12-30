@@ -17,7 +17,7 @@ function About() {
                     <img className='img2' src='./picture/photo_tori.jpg' /><Link to={'//vk.com/tori_tih'} target="_blank">Бэкендер на пол ставки - Тори</Link>
                 </span>
                 <span className='namePhoto'>
-                    <img className='img2' src='./picture/photo_vasya.jpg' /><Link to={'//vk.com/akirova_rm'} target="_blank">Просто Вася</Link>
+                    <img className='img2' src='./picture/photo_vasya.jpg' /><Link to={'//vk.com/v.koscheeva'} target="_blank">Просто Вася</Link>
                 </span>
                 <span className='namePhoto'>
                     <img className='img2' src='./picture/photo_rumia.jpg' /><Link to={'//vk.com/akirova_rm'} target="_blank">Редактор - Румия</Link>
@@ -38,7 +38,7 @@ function About() {
                 </div>
 
             </div>
-            <div className='exbuttonaboutz'><Link to={'/home'}><button>X</button></Link></div>
+           
 
 
 

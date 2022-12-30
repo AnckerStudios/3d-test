@@ -170,11 +170,11 @@ function AddEntry({ inOut, platforms, trains, id, addSchedule, active, setActive
                 setEntryError("Запись с данным временем прибытия на платформу существует");
                 flag = false;
             }
-            else if( entry.trainName == schedule[i].trainName)
-            {
-                setEntryError("Запись с данным поездом существует");
-                flag = false;
-            }
+            // else if( entry.train.trainName === schedule[i].train.trainName)
+            // {
+            //     setEntryError("Запись с данным поездом существует");
+            //     flag = false;
+            // }
             i++;
         }
     }
@@ -235,7 +235,7 @@ function AddEntry({ inOut, platforms, trains, id, addSchedule, active, setActive
                             </label>
                             <br />
                             <label>Выберите поезд
-                                <select className="addsep" onChange={(e) => { setEntry({ ...entry, train: trains[e.target.value].nameTrain }) }}>
+                                <select className="addsep" onChange={(e) => { setEntry({ ...entry, train: trains[e.target.value] }) }}>
                                     {trains?.map((pl, index) => {
                                         return <option key={index} value={index}>{`№${pl.nameTrain} ${pl.typeTrain}`}</option>
                                     })}

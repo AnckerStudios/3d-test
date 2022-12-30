@@ -56,8 +56,8 @@ function TrainsList() {
             console.log(response);
             setAddFlag(false);
         })
-        .catch(function (error) {
-            setAddErr({flag: true, mes: error?.message || "Неполучилось добавить"})
+        .catch((error) => {
+            setAddErr({flag: true, mes: error.response.data?.message || "Неполучилось добавить"})
             console.log(error);
             
         });

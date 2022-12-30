@@ -92,11 +92,11 @@ function ScheduleEditorPage() {
 
                 let resPlates = [{ number: 7, dir: true, lines: [{ x: 0, y: 1, number: 1 }] }, { number: 8, dir: true, lines: [{ x: 0, y: 4, number: 3 }, { x: 0, y: 6, number: 4 }] }, { number: 4, dir: true, lines: [{ x: 10, y: 5, number: 5 }, { x: 12, y: 5, number: 6 }] }];
                 let resInOut = [{ x: 0, y: 0, dir: 0, name: "A" }, { x: 15, y: 9, dir: 0, name: "B" }, { x: 0, y: 3, dir: 0, name: "C" }, { x: 4, y: 0, dir: 0, name: "D" }];
-                let trains = [{ idTrain: 56, nameTrain: "333", typeTrain: "Грузовой", numberOfWagons: 3 }, { idTrain: 56, nameTrain: "23", typeTrain: "Грузовой", numberOfWagons: 3 }]
+                let train = [{ idTrain: 56, nameTrain: "333", typeTrain: "Грузовой", numberOfWagons: 3 }, { idTrain: 56, nameTrain: "23", typeTrain: "Грузовой", numberOfWagons: 3 }]
 
                 setPlatforms(resPlates);
                 setInOut(resInOut);
-                setTrains(trains);
+                setTrains(train);
                 setLoading(false);
             });
     }, [])
